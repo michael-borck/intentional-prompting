@@ -1,0 +1,39 @@
+# Quarto output files
+/_book/
+/_site/
+/.quarto/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+
+# Log files
+*.log
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# R files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Node modules (if using Node.js for any reason)
+node_modules/
+
+# Scratch files
+_notes/

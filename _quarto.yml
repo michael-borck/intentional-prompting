@@ -1,0 +1,56 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Intentional Prompting: Mastering the Human-AI Development Process"
+  author: "Michael Borck"
+  date: "today"
+  chapters:
+    - index.qmd
+    - part: "Foundations"
+      chapters:
+        - chapters/01-introduction.qmd
+        - chapters/02-ai-revolution.qmd
+        - chapters/03-intentional-prompting-principles.qmd
+    - part: "Methodology"
+      chapters:
+        - chapters/04-six-step-methodology.qmd
+        - chapters/05-restate-and-identify.qmd
+        - chapters/06-work-by-hand.qmd
+        - chapters/07-pseudocode.qmd
+        - chapters/08-convert-to-code.qmd
+        - chapters/09-test-with-data.qmd
+    - part: "Patterns & Practices"
+      chapters:
+        - chapters/10-intentional-prompting-patterns.qmd
+        - chapters/11-debugging-with-ai.qmd
+        - chapters/12-refactoring-strategies.qmd
+        - chapters/13-case-studies.qmd
+    - part: "Advanced Topics"
+      chapters:
+        - chapters/14-scaling-complexity.qmd
+        - chapters/15-teaching-learning.qmd
+        - chapters/16-future-directions.qmd
+    - references.qmd
+  appendices:
+    - appendices/prompt-templates.qmd
+    - appendices/common-pitfalls.qmd
+    - appendices/ai-tool-comparison.qmd
+    - appendices/glossary.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    cover-image: images/cover.png
+    css: styles.css
+  pdf:
+    documentclass: scrreprt
+    include-in-header: 
+      text: |
+        \usepackage{xcolor}
+        \usepackage{listings}
+  epub:
+    cover-image: images/cover.png

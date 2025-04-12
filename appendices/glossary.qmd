@@ -1,0 +1,61 @@
+# Glossary
+
+This glossary provides definitions for key terms used throughout "Intentional Prompting."
+
+## AI-Related Terms
+
+**AI Coding Assistant**: Software tools that use artificial intelligence to help programmers write, understand, and debug code. Examples include GitHub Copilot, Amazon CodeWhisperer, and conversational AI models like Claude and ChatGPT when used for programming tasks.
+
+**Chain-of-Thought Prompting**: A technique that encourages AI to break down complex reasoning into intermediate steps, producing more comprehensive and accurate outputs.
+
+**Few-Shot Prompting**: Providing an AI with examples of the desired input-output behavior before presenting the actual task, helping guide the model's response format and approach.
+
+**Foundation Model**: Large AI models trained on vast datasets that serve as the basis for more specialized applications, including coding assistants.
+
+**Large Language Model (LLM)**: AI systems trained on massive text datasets that can generate human-like text and code based on prompts.
+
+**Prompt Engineering**: The practice of crafting effective instructions for AI systems to produce desired outputs, involving specific techniques and patterns.
+
+**Zero-Shot Prompting**: Asking an AI to perform a task without providing examples, relying on the model's pre-existing knowledge.
+
+## Intentional Prompting Concepts
+
+**Intentional Prompting**: A deliberate approach to programming that leverages AI tools while maintaining human control over the development process. It focuses on understanding, guiding AI through structured methodology, using AI as a learning tool, and maintaining the human developer as the architect and decision-maker.
+
+**Six-Step Methodology**: The structured approach at the core of intentional prompting:
+1. Restate the problem
+2. Identify input and output
+3. Work the problem by hand
+4. Write pseudocode
+5. Convert to code
+6. Test with data
+
+**Challenge Prompts**: Deliberately introducing programming challenges to test understanding and explore potential issues.
+
+**Clarification Prompts**: Questions that refine requirements and explore edge cases before implementation.
+
+**Foundation Prompts**: Initial prompts that establish baseline requirements for a programming task.
+
+**Refinement Prompts**: Prompts that push for code improvements based on best practices and efficiency considerations.
+
+**Scaffolding Prompts**: Prompts that support learning by breaking down complex concepts into understandable components.
+
+## Programming Concepts
+
+**Code Smell**: Patterns in code that may indicate deeper problems or potential for improvement.
+
+**Edge Case**: A problem or situation that occurs only at an extreme operating parameter, often requiring special handling in code.
+
+**Pseudocode**: A simplified, high-level description of a computer program or algorithm, using structural conventions of programming languages but intended for human reading rather than machine reading.
+
+**Refactoring**: The process of restructuring existing code without changing its external behavior, typically to improve non-functional attributes like readability, reduce complexity, or improve maintainability.
+
+**Technical Debt**: The implied cost of additional rework caused by choosing an easy (but limited) solution now instead of using a better approach that would take longer.
+
+## Teaching and Learning Terms
+
+**AI-Proof Assignment**: Assignments designed to be difficult for AI coding assistants to solve directly, often focusing on conceptual understanding or novel problems.
+
+**Documentation-First Methodology**: An approach where students create detailed specifications and documentation before writing any code, using AI to evaluate completeness and clarity.
+
+**Process-Based Assessment**: Evaluating students based on their problem-solving approach and understanding rather than just the final code output.

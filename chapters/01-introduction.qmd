@@ -1,0 +1,58 @@
+# Introduction
+
+## A New Era of Software Development
+
+The landscape of software development is undergoing a profound transformation. With the introduction of advanced AI assistants like GitHub Copilot, Amazon CodeWhisperer, and conversational models like Claude and ChatGPT, developers now have powerful tools that can generate code, explain concepts, debug problems, and assist with software design.
+
+These tools have ignited debates about the future of programming: Will AI replace programmers? Should we resist AI-generated code? Is programming fundamentally changing?
+
+This book proposes a different perspective: **Intentional Prompting**, a paradigm that positions AI as a collaborative partner in the development process rather than either a threat or a magical solution.
+
+## What is Intentional Prompting?
+
+Intentional prompting is a deliberate approach to programming that leverages AI tools while maintaining human control over the development process. Rather than simply asking AI for complete solutions, intentional prompting focuses on:
+
+1. Understanding programming concepts well enough to evaluate AI-generated code
+2. Guiding AI through a structured development methodology
+3. Using AI as a tool for learning and exploration rather than just output
+4. Maintaining the human developer as the architect and decision-maker
+
+This approach recognizes that the most powerful development workflow combines human creativity, judgment, and domain knowledge with AI's ability to handle routine coding tasks, suggest implementations, and provide contextual information.
+
+## Why Intentional Prompting Matters
+
+As AI coding assistants become increasingly capable, there's a risk that developers might:
+
+- Become overly dependent on AI suggestions without understanding them
+- Lose skills in fundamental programming concepts
+- Accept sub-optimal solutions because they're quick and easy
+
+Intentional prompting addresses these concerns by providing a framework that helps developers use AI effectively while continuing to grow their own skills and understanding.
+
+For students learning to code, this approach is particularly valuable. Rather than seeing AI as either a shortcut to avoid learning or a forbidden tool, intentional prompting teaches students to use AI as a learning partner that enhances their educational journey.
+
+## The Six-Step Methodology
+
+At the heart of intentional prompting is a structured methodology that guides the development process:
+
+1. **Restate the problem** in your own words
+2. **Identify input and output** requirements
+3. **Work the problem by hand** with concrete examples
+4. **Write pseudocode** to outline the solution strategy
+5. **Convert to code** (with AI assistance as appropriate)
+6. **Test with a variety of data**, especially edge cases
+
+This methodology works both with and without AI assistance, but becomes particularly powerful when combined with intentional prompting techniques that guide AI tools effectively.
+
+## Who Should Read This Book
+
+This book is designed for:
+
+- Professional developers adapting to AI-assisted workflows
+- Students learning programming in an AI-enabled world
+- Educators teaching programming in the age of AI
+- Technical managers developing best practices for AI integration
+
+No matter where you are in your programming journey, intentional prompting offers a framework for leveraging AI tools effectively while continuing to develop your own skills and understanding.
+
+In the following chapters, we'll explore the principles of intentional prompting in depth, examine the six-step methodology with practical examples, and develop patterns for effective collaboration between human developers and AI assistants.

@@ -1,0 +1,384 @@
+# Restate and Identify (Steps 1-2)
+
+The first two steps of the six-step methodology—restating the problem and identifying inputs and outputs—set the foundation for everything that follows. This critical preparation phase ensures you fully understand what you're trying to solve before diving into implementation.
+
+## Techniques for Problem Restatement
+
+### Why Restatement Matters
+
+Restating a problem in your own words serves several important purposes:
+
+1. **Clarifies understanding:** The process of reformulating forces you to grapple with the problem's core elements
+2. **Identifies ambiguities:** Areas you struggle to restate clearly often reveal hidden assumptions or unclear requirements
+3. **Provides ownership:** Restating moves you from passive recipient to active problem-solver
+4. **Creates a reference point:** Your restatement becomes a touchstone to check your solution against
+
+### Effective Restatement Approaches
+
+#### The ELI5 Method (Explain Like I'm Five)
+
+Simplify the problem to its most fundamental elements, as if explaining to someone with no technical background:
+
+**Original:** "Implement a function to find the shortest path between two nodes in a weighted directed graph using Dijkstra's algorithm."
+
+**ELI5 Restatement:** "I need to find the fastest route between two points on a map where some routes are quicker than others."
+
+#### The Components Breakdown
+
+Identify and separate the main components of the problem:
+
+**Original:** "Build a cache that stores the results of expensive function calls and returns the cached result when the same inputs occur again."
+
+**Components Restatement:**
+- "I need to store function results along with their inputs"
+- "When a function is called, I need to check if we've seen these inputs before"
+- "If we have seen the inputs, return the stored result instead of recalculating"
+- "If we haven't seen the inputs, calculate, store, and return the result"
+
+#### The Constraints Highlight
+
+Explicitly call out all constraints and requirements:
+
+**Original:** "Create a username validation function for a web form."
+
+**Constraints Restatement:**
+- "Usernames must be 3-20 characters long"
+- "Only alphanumeric characters, hyphens, and underscores are allowed"
+- "Cannot start or end with a hyphen or underscore"
+- "Must be case-insensitive (uppercase/lowercase doesn't matter)"
+- "Cannot contain reserved keywords from this list..."
+
+#### The Inverse Problem
+
+State what the solution is NOT supposed to do:
+
+**Original:** "Implement user authentication for the application."
+
+**Inverse Restatement:**
+- "This is NOT about creating user accounts or registration"
+- "This is NOT about password reset functionality"
+- "This is NOT about authorization (what users can do)"
+- "This IS about verifying a user's identity based on credentials"
+
+### Using AI to Enhance Restatement
+
+AI assistants can help refine your problem restatements in several ways:
+
+#### Restatement Verification
+
+After restating the problem yourself, ask the AI to verify your understanding:
+
+```
+I'm working on this problem: [original problem statement]
+
+I've restated it as: [your restatement]
+
+Have I missed anything important or misunderstood any aspect of the problem?
+```
+
+#### Assumptions Identification
+
+AI can help uncover hidden assumptions in the problem:
+
+```
+What assumptions might I be making about this problem that aren't explicitly stated?
+```
+
+#### Edge Case Exploration
+
+AI can help identify boundary conditions and special cases:
+
+```
+What edge cases should I consider for this problem?
+```
+
+#### Domain-Specific Context
+
+For problems in unfamiliar domains, AI can provide context:
+
+```
+Could you explain any domain-specific considerations I should keep in mind when solving this problem?
+```
+
+## Clearly Defining Inputs and Outputs
+
+The second step of the methodology focuses on establishing precise expectations for what goes into your solution and what comes out.
+
+### Why Input/Output Specification Matters
+
+Clearly defining inputs and outputs:
+
+1. **Creates a contract:** Establishes exactly what your solution promises to deliver
+2. **Guides testing:** Forms the basis for comprehensive test cases
+3. **Simplifies debugging:** Makes it clear when the solution is working incorrectly
+4. **Facilitates integration:** Makes it easier to incorporate your solution into larger systems
+
+### Elements of Complete I/O Specifications
+
+#### For Inputs:
+
+- **Data types:** The expected types of each input parameter
+- **Value ranges:** Acceptable ranges or constraints for input values
+- **Required vs. optional:** Which inputs can be omitted with default values
+- **Format requirements:** Any specific formatting expected (e.g., date formats)
+- **Size constraints:** Limitations on input size (e.g., maximum string length)
+
+#### For Outputs:
+
+- **Return type:** The data type of the returned value
+- **Success indicators:** How successful operation is communicated
+- **Error handling:** How errors are communicated (exceptions, error codes, etc.)
+- **Special values:** Any special return values and their meaning
+- **Side effects:** Any state changes or external effects besides the return value
+
+### Documenting I/O With Examples
+
+Examples can clarify I/O specifications better than abstract descriptions:
+
+```
+Function: calculate_shipping_cost(weight, distance, express=False)
+
+Inputs:
+- weight: A positive float representing item weight in kilograms
+- distance: A positive float representing distance in kilometers
+- express: Optional boolean flag for express shipping (default: False)
+
+Outputs:
+- A float representing the shipping cost in dollars
+- If input parameters are invalid, raises ValueError
+
+Examples:
+- calculate_shipping_cost(2.5, 100) → 12.50
+- calculate_shipping_cost(2.5, 100, express=True) → 25.00
+- calculate_shipping_cost(-1, 100) → ValueError("Weight must be positive")
+```
+
+### Using AI to Explore Edge Cases
+
+AI assistants excel at identifying edge cases and boundary conditions that might affect your I/O specification.
+
+#### Input Edge Cases
+
+Ask the AI to help identify input edge cases:
+
+```
+What are potential edge cases for these inputs?
+- weight: A positive float representing item weight in kilograms
+- distance: A positive float representing distance in kilometers
+- express: Optional boolean flag for express shipping
+```
+
+This might reveal considerations like:
+- Zero weight or distance
+- Extremely large weights or distances
+- Non-numeric inputs
+- Negative values
+- Special shipping conditions
+
+#### Output Edge Cases
+
+Similarly, explore edge cases for outputs:
+
+```
+What are potential edge cases for the output of this shipping cost calculator?
+```
+
+This might reveal considerations like:
+- Minimum shipping costs
+- Free shipping thresholds
+- Rounding rules
+- Currency formatting
+- Maximum possible costs
+
+#### Error Condition Exploration
+
+Use AI to explore potential error conditions:
+
+```
+What error conditions should I handle in this shipping cost calculator?
+```
+
+This might reveal considerations like:
+- Invalid input types
+- Values outside acceptable ranges
+- Unavailable shipping routes
+- Rate limit restrictions
+
+## Prompting Techniques for Requirement Clarification
+
+When requirements are unclear or incomplete, AI can help explore the problem space through directed prompting.
+
+### The Five Whys Technique
+
+Repeatedly ask "why" to dig deeper into requirements:
+
+```
+The requirement is to "implement a user profile page."
+
+Why does the user need a profile page?
+[AI response]
+
+Why is that important for the user?
+[AI response]
+
+Why can't we achieve that with the existing functionality?
+```
+
+This technique helps uncover the underlying goals behind requirements.
+
+### Stakeholder Perspective Prompting
+
+Ask the AI to consider requirements from different perspectives:
+
+```
+How might different users view this profile page requirement differently?
+
+- From an end user's perspective: ...
+- From an administrator's perspective: ...
+- From a security perspective: ...
+- From a performance perspective: ...
+```
+
+### Requirement Expansion
+
+Ask the AI to expand terse requirements into detailed specifications:
+
+```
+The requirement is: "Add sorting functionality to the user table."
+
+Can you expand this into a comprehensive specification including:
+- Which columns should be sortable
+- Default sort order
+- How sort state should be preserved
+- Performance considerations for large datasets
+- UI indicators for sort direction
+```
+
+### Comparative Analysis
+
+Use AI to compare different interpretations of ambiguous requirements:
+
+```
+The requirement "ensure the application is responsive" could be interpreted in two ways:
+1. The UI should adapt to different screen sizes
+2. The application should respond quickly to user interactions
+
+Can you compare these interpretations and their implications for implementation?
+```
+
+## Practical Exercise: Restate and Identify in Action
+
+Let's apply Steps 1 and 2 to a sample problem:
+
+> Original Requirement: "Create a function that converts dates between different formats."
+
+### Step 1: Restate the Problem
+
+**Using Components Breakdown:**
+
+- "I need to parse dates from various input formats"
+- "I need to convert parsed dates into specified output formats"
+- "I need to handle potential errors in the input formats"
+- "I need to ensure the conversion preserves the same date and time"
+
+**Using Constraints Highlight:**
+
+- "The function should accept a string representing a date"
+- "The function should accept a source format specification"
+- "The function should accept a target format specification"
+- "The function should return the date in the target format"
+- "The function should raise appropriate errors for invalid inputs"
+
+**AI Verification Prompt:**
+```
+I'm working on a function that converts dates between different formats.
+
+I've restated it as:
+- A function that takes a date string, source format, and target format
+- Parses the date according to the source format
+- Returns the same date formatted according to the target format
+- Handles errors for invalid dates or formats
+
+Have I missed anything important in my restatement?
+```
+
+**AI Response:**
+> Your restatement covers the main aspects well, but here are a few additional considerations:
+> 
+> - Time zones: How should the function handle time zone information? Should it preserve, convert, or ignore time zones?
+> - Locale-specific formatting: Dates can be formatted differently in different locales (e.g., month names in different languages)
+> - Ambiguous dates: How to handle dates like "01/02/2023" which could be January 2nd or February 1st depending on region
+> - Partial dates: Should the function support dates with missing components (e.g., year only, month and year only)?
+> - Format specifications: Will you use standard format strings (like those in Python's datetime), or custom specifications?
+> 
+> These considerations can greatly affect the scope and complexity of your function.
+
+### Step 2: Identify Input and Output
+
+**Input Specification:**
+- `date_str`: A string representing a date in the source format
+- `source_format`: A string specifying the format of the input date
+- `target_format`: A string specifying the desired output format
+- `timezone`: (Optional) A string representing the timezone of the input date
+
+**Output Specification:**
+- On success: A string representing the same date in the target format
+- On error: Raises appropriate exceptions with clear error messages
+
+**Examples:**
+- `convert_date("2023-04-01", "%Y-%m-%d", "%m/%d/%Y")` → `"04/01/2023"`
+- `convert_date("April 1, 2023", "%B %d, %Y", "%Y-%m-%d")` → `"2023-04-01"`
+- `convert_date("invalid", "%Y-%m-%d", "%m/%d/%Y")` → `ValueError("Unable to parse date")`
+
+**Edge Case Exploration Prompt:**
+```
+What edge cases should I consider for a date format conversion function with these inputs?
+- date_str: A string representing a date
+- source_format: The format of the input date
+- target_format: The desired output format
+```
+
+**AI Response:**
+> Here are important edge cases to consider:
+> 
+> **Input Date String Edge Cases:**
+> - Empty string
+> - Dates with two-digit years (ambiguity between centuries)
+> - Dates with missing components (e.g., no year specified)
+> - Dates with extra information (whitespace, additional text)
+> - Dates with time components when only date is expected
+> 
+> **Format Specification Edge Cases:**
+> - Empty format strings
+> - Invalid format specifiers
+> - Format requires information not present in the input date
+> - Mismatched formats (e.g., time format for date-only string)
+> 
+> **Calendar/Time Edge Cases:**
+> - Leap years and February 29
+> - Daylight saving time transitions
+> - Dates before the Unix epoch
+> - Very old or future dates
+> - Non-existent dates (e.g., November 31)
+> - Dates from different calendar systems
+> 
+> **Locale-Specific Edge Cases:**
+> - Month/day order ambiguity (MM/DD vs DD/MM)
+> - Language-specific month and day names
+> - Different separators in different locales
+> 
+> **Technical Edge Cases:**
+> - Performance with very large dates
+> - Thread safety if applicable
+> - Memory usage concerns
+
+## Moving Forward
+
+With a clear problem restatement and detailed input/output specifications, you've built a solid foundation for the remaining steps of the methodology. You can now:
+
+1. Work through examples by hand with confidence that you understand the problem
+2. Develop pseudocode that addresses the complete requirements
+3. Implement a solution that handles all identified edge cases
+4. Test against the comprehensive I/O specification you've developed
+
+In the next chapter, we'll explore Step 3: Working the problem by hand with concrete examples.

@@ -1,0 +1,42 @@
+# Preface {.unnumbered}
+
+Welcome to "Intentional Prompting: Mastering the Human-AI Development Process." This book explores a new paradigm for software development in the age of AI assistants.
+
+## Why This Book?
+
+The rapid integration of AI into software development workflows has fundamentally changed how we write code. Yet most programming education still focuses either on traditional coding techniques or on prompt engineering for AI tools, with little guidance on how to effectively combine human expertise with AI capabilities.
+
+This book aims to bridge that gap by presenting a structured methodology for "intentional prompting" - an approach that leverages AI tools while ensuring the human developer remains the architect and decision-maker in the development process.
+
+## Who This Book Is For
+
+This book is designed for:
+
+- Software developers looking to integrate AI tools effectively into their workflow
+- Educators teaching programming in an AI-assisted world
+- Students learning to code alongside AI assistants
+- Tech leaders developing best practices for AI-augmented development teams
+
+You don't need to be an expert programmer to benefit from this book, but basic familiarity with programming concepts will help you get the most out of the examples and exercises.
+
+## How This Book Is Organized
+
+The book is divided into four parts:
+
+1. **Foundations**: Core concepts of intentional prompting and the human-AI partnership
+2. **Methodology**: The six-step programming methodology adapted for AI collaboration
+3. **Patterns & Practices**: Effective prompting patterns and practical coding examples
+4. **Advanced Topics**: Scaling to complex projects and future directions
+
+Each chapter includes practical examples, exercises, and reflections to help you apply these concepts in your own work.
+
+## A New Programming Paradigm
+
+Programming with AI isn't just about getting code written faster—it's about thinking differently about the development process itself. By mastering intentional prompting techniques, you'll be able to:
+
+- Direct AI tools with precision and purpose
+- Maintain control over code quality and architecture
+- Deepen your understanding of programming concepts
+- Solve complex problems more effectively
+
+Let's begin this journey together, exploring how human intellect and artificial intelligence can combine to create a programming partnership greater than the sum of its parts.

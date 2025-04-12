@@ -1,0 +1,488 @@
+# The Six-Step Programming Methodology
+
+## Overview of the Methodology
+
+The six-step programming methodology provides a structured approach to solving problems that works both with and without AI assistance. This methodology focuses on understanding before implementation and ensures that programmers maintain control of the development process.
+
+![Six-Step Methodology Diagram](../images/simplified-methodology.png)
+
+As shown in the diagram, the methodology divides programming into two distinct phases:
+
+### Design (Thinking) Phase - Steps 1-4
+
+This phase focuses on understanding and planning before any actual coding begins:
+
+1. **Restate the problem** in your own words
+2. **Identify input and output** requirements
+3. **Work the problem by hand** with concrete examples
+4. **Write pseudocode** to outline the solution strategy
+
+### Coding (Doing) Phase - Steps 5-6
+
+Only after completing the design phase do we move to implementation:
+
+5. **Convert to code** (with AI assistance as appropriate)
+6. **Test with a variety of data**, especially edge cases
+
+This clear separation between thinking and doing is crucial. The pseudocode created in Step 4 serves as a bridge between these phases, transforming into comments that guide implementation in Step 5.
+
+### The Hidden Structure of the Methodology
+
+While the six steps appear sequential, the methodology contains several important hidden elements:
+
+1. **Meaningful Divisions**: The separation between Design and Coding reflects different modes of thinking - first conceptual, then practical.
+
+2. **Bridging Elements**: Pseudocode serves as both the final product of the design phase and the starting framework for the coding phase.
+
+3. **Feedback Loops**: The methodology is inherently iterative, with testing potentially sending you back to earlier steps for refinement.
+
+4. **Understanding to Doing**: The methodology follows a natural progression from abstract understanding to concrete implementation.
+
+This methodology isn't revolutionary on its own—it draws from established problem-solving approaches and computational thinking practices like Waterfall, Agile, and Test-Driven Development. What makes it valuable in the age of AI is how it provides a framework for intentional prompting and collaboration with AI assistants while maintaining human understanding and control.
+
+### Adapting to Your Preferred Methodology
+
+It's important to note that we're presenting this simplified methodology as a concrete example of how to structure AI-assisted development, not as the only valid approach. The six-step methodology serves as a template that demonstrates key principles of intentional prompting, which you can adapt to your preferred development methodology or domain.
+
+#### Integration with Other Development Approaches
+
+These principles can be integrated into various development methodologies:
+
+- **Agile**: Use the problem understanding and design steps during sprint planning, with implementation and testing occurring within sprint cycles
+- **Test-Driven Development**: Enhance the TDD cycle by adding explicit problem restatement and planning before writing tests
+- **Domain-Driven Design**: Incorporate intentional prompting to help define the ubiquitous language and domain models
+
+#### Customizing for Your Context
+
+When adapting these concepts to your situation, consider:
+
+1. **Identify key decision points** where human understanding and direction are crucial
+2. **Establish clear boundaries** for AI assistance within your workflow
+3. **Create explicit steps** for critical evaluation of AI outputs
+4. **Define integration points** where AI-generated components connect with human-directed architecture
+
+The core value proposition—maintaining human understanding while leveraging AI capabilities—remains valid regardless of which specific methodology you prefer. What's most important is having a structured approach to human-AI collaboration rather than following these exact six steps verbatim.
+
+Use this methodology as inspiration to develop your own intentional prompting workflow that aligns with your team's practices, domain requirements, and development philosophy while preserving the principles of human direction and understanding.
+
+## How AI Changes the Process
+
+AI coding assistants change the dynamics of this methodology in several important ways:
+
+### Acceleration and Exploration
+
+AI can accelerate many steps in the process, allowing for:
+- Rapid exploration of problem variations (Step 1)
+- Comprehensive consideration of edge cases (Step 2)
+- Verification of manual solutions (Step 3)
+- Generation of alternative pseudocode approaches (Step 4)
+- Quick implementation of solutions (Step 5)
+- Comprehensive test case generation (Step 6)
+
+### The Temptation to Skip Steps
+
+With powerful AI tools, there's a temptation to skip directly to implementation (Step 5). This is the core challenge that intentional prompting addresses—maintaining a disciplined approach even when AI makes shortcuts possible.
+
+### New Capabilities and Responsibilities
+
+AI introduces new capabilities at each step:
+- Discussing problem nuances in natural language
+- Generating edge cases you might not have considered
+- Checking your manual approach for errors
+- Suggesting implementation strategies you might not know
+- Implementing complex algorithms efficiently
+- Testing boundary conditions systematically
+
+These capabilities create new responsibilities for the programmer:
+- Critically evaluating AI suggestions
+- Maintaining awareness of the problem's full context
+- Verifying that AI-generated code meets requirements
+- Understanding the code that ultimately gets deployed
+
+## Benefits of a Structured Approach
+
+Following a structured methodology with AI assistance offers several important benefits:
+
+### Better Code Quality
+
+By working through all six steps rather than jumping straight to implementation:
+- Architectural issues are identified earlier
+- Edge cases are handled more comprehensively
+- Solutions are more robust and maintainable
+- The development process becomes more consistent
+
+### Enhanced Learning
+
+The structured approach promotes deeper learning:
+- You develop a habit of understanding problems before coding
+- You practice computational thinking independent of specific languages
+- You build transferable problem-solving skills
+- You learn to evaluate solutions critically
+
+### Appropriate AI Integration
+
+The methodology creates natural integration points for AI assistance:
+- Each step has clear inputs and outputs for AI collaboration
+- The division of responsibility between human and AI is clarified
+- You maintain control over the development process
+- AI complements rather than replaces your thinking
+
+### Reduced Technical Debt
+
+Following all six steps helps avoid the accumulation of technical debt:
+- Solutions are designed rather than just implemented
+- Edge cases are addressed proactively
+- Code is tested systematically
+- Implementations are understood rather than just accepted
+
+## Case Study: Solving a Problem With and Without AI
+
+To illustrate the methodology in action, let's consider a practical programming problem:
+
+> Create a function that finds the longest palindromic substring in a given string.
+
+### Approach 1: Delegating to AI (Without Methodology)
+
+A common approach is to simply ask the AI directly:
+
+```
+"Write a function to find the longest palindromic substring in a string."
+```
+
+The AI might produce this solution:
+
+```python
+def longest_palindromic_substring(s):
+    if not s:
+        return ""
+    
+    start = 0
+    max_len = 1
+    
+    for i in range(len(s)):
+        # Check for even length palindromes
+        left, right = i, i + 1
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            if right - left + 1 > max_len:
+                start = left
+                max_len = right - left + 1
+            left -= 1
+            right += 1
+        
+        # Check for odd length palindromes
+        left, right = i - 1, i + 1
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            if right - left + 1 > max_len:
+                start = left
+                max_len = right - left + 1
+            left -= 1
+            right += 1
+    
+    return s[start:start + max_len]
+```
+
+This code may work, but:
+- Do you understand how it works?
+- Could you modify it if requirements changed?
+- Are you confident it handles all edge cases?
+- Do you know its performance characteristics?
+
+### Approach 2: The Six-Step Methodology with AI Assistance
+
+#### Step 1: Restate the Problem
+
+**Human prompt:**
+```
+I need to write a function that finds the longest palindromic substring in a given string. 
+Let me restate this problem to make sure I understand it correctly:
+
+I need to find the longest continuous sequence of characters within a string that reads 
+the same forward and backward. For example, in "babad", the longest palindromic substring 
+would be "bab" or "aba" (both are valid since they're the same length).
+
+Is this understanding correct? Are there any edge cases I should consider?
+```
+
+**AI response:**
+> Your understanding is correct! The function should find the longest substring that is a palindrome.
+> 
+> Edge cases to consider:
+> - Empty strings
+> - Strings with no palindromes longer than 1 character
+> - Strings where the entire string is a palindrome
+> - Strings with multiple palindromic substrings of the same length
+> - Very long strings (performance considerations)
+> - Case sensitivity (usually palindromes are case-sensitive)
+
+#### Step 2: Identify Inputs and Outputs
+
+**Human prompt:**
+```
+Let me specify the input and output for this function:
+
+Input:
+- A string of characters (possibly empty)
+
+Output:
+- The longest palindromic substring within the input string
+- If there are multiple palindromic substrings with the same maximum length, returning any one of them is acceptable
+- If the string is empty, return an empty string
+- If there are no palindromes longer than 1 character, return the first character of the string
+
+Do these input and output specifications cover all the necessary cases?
+```
+
+**AI response:**
+> Those specifications are good, but let me suggest a small clarification:
+> 
+> For the case where there are no palindromes longer than 1 character, technically every individual character is a palindrome by itself. So returning the first character would be correct, but it might be clearer to explicitly state "return any single character" since any character is a palindrome of length 1.
+> 
+> With that clarification, your input and output specifications cover all the necessary cases!
+
+#### Step 3: Work the Problem by Hand
+
+**Human work:**
+
+Let's manually trace through a simple example: the string "babad".
+
+To find palindromes:
+1. Start with each position as potential center of palindrome
+2. Expand outward while characters match
+
+For "babad":
+- Center at 'b' (index 0): Just 'b' (length 1)
+- Center at 'a' (index 1): 'bab' (length 3)
+- Center at 'b' (index 2): 'bab' (length 3)
+- Center at 'a' (index 3): 'aba' (length 3)
+- Center at 'd' (index 4): Just 'd' (length 1)
+
+Also check even-length palindromes:
+- Between 'b' and 'a' (0-1): None
+- Between 'a' and 'b' (1-2): None
+- Between 'b' and 'a' (2-3): None
+- Between 'a' and 'd' (3-4): None
+
+Longest palindromes: "bab" or "aba" (both length 3)
+
+**Human prompt:**
+```
+I've worked through the example "babad" by hand and found that the longest palindromic 
+substrings are "bab" and "aba", both of length 3.
+
+My approach was to check each position as a potential center of a palindrome and expand 
+outward while the characters match. I also checked for even-length palindromes that have 
+their center between two characters.
+
+Does this approach seem correct and efficient? Are there any algorithmic improvements 
+I should consider?
+```
+
+**AI response:**
+> Your approach is correct and is actually the standard solution for this problem with O(n²) time complexity and O(1) space complexity.
+> 
+> The two key components you've identified are essential:
+> 1. Checking odd-length palindromes (with a single character as the center)
+> 2. Checking even-length palindromes (with the center between two characters)
+> 
+> There are some more complex algorithms like Manacher's algorithm that can solve this in O(n) time, but they're significantly more complex and typically unnecessary unless you're dealing with very long strings where performance is critical.
+> 
+> Your approach is intuitive and efficient for most practical purposes!
+
+#### Step 4: Write Pseudocode
+
+**Human prompt:**
+```
+Based on my manual approach, let me write pseudocode for finding the longest palindromic substring:
+
+```
+function longestPalindromicSubstring(string s):
+    if s is empty, return ""
+    
+    start = 0  // Start index of longest palindrome
+    maxLength = 1  // Length of longest palindrome
+    
+    // Helper function to expand around center
+    function expandAroundCenter(left, right):
+        while left >= 0 and right < length of s and s[left] equals s[right]:
+            if (right - left + 1) > maxLength:
+                maxLength = right - left + 1
+                start = left
+            left = left - 1
+            right = right + 1
+    
+    // Check each position as potential palindrome center
+    for i from 0 to length of s - 1:
+        // Odd length palindromes
+        expandAroundCenter(i, i)
+        
+        // Even length palindromes
+        expandAroundCenter(i, i + 1)
+    
+    return substring of s from start to start + maxLength
+```
+
+Does this pseudocode correctly implement the approach we discussed?
+```
+
+**AI response:**
+> Your pseudocode looks correct and implements the approach we discussed! It handles both odd and even length palindromes by expanding around different centers.
+> 
+> There's just one small detail to be careful about: in your expandAroundCenter function, when you update maxLength and start, make sure you're considering the current palindrome (not a future one). So you should check if (right - left + 1) > maxLength before expanding further.
+> 
+> Other than that, this pseudocode correctly captures the solution and is ready to be converted to actual code!
+
+#### Step 5: Convert to Code
+
+**Human prompt:**
+```
+Now I'll convert my pseudocode to Python:
+
+```python
+def longest_palindromic_substring(s):
+    if not s:
+        return ""
+    
+    start = 0
+    max_length = 1
+    
+    def expand_around_center(left, right):
+        nonlocal start, max_length
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            current_length = right - left + 1
+            if current_length > max_length:
+                max_length = current_length
+                start = left
+            left -= 1
+            right += 1
+    
+    for i in range(len(s)):
+        # Odd length palindromes
+        expand_around_center(i, i)
+        
+        # Even length palindromes
+        expand_around_center(i, i+1)
+    
+    return s[start:start + max_length]
+```
+
+Can you review this code for correctness and suggest any improvements?
+```
+
+**AI response:**
+> Your Python implementation looks correct and follows your pseudocode closely! It will find the longest palindromic substring as required.
+> 
+> A few small observations:
+> 
+> 1. You've correctly used `nonlocal` to update the `start` and `max_length` variables from within the nested function.
+> 
+> 2. The algorithm handles both odd and even length palindromes properly by starting from different center positions.
+> 
+> 3. The time complexity is O(n²) and space complexity is O(1), which is efficient for most inputs.
+> 
+> 4. Your code handles the empty string case correctly.
+> 
+> The implementation is clean and efficient. The only possible optimization would be implementing Manacher's algorithm for linear time complexity, but that's typically unnecessary unless you're dealing with extremely large strings.
+
+#### Step 6: Test with Data
+
+**Human prompt:**
+```
+Let's test my function with various test cases:
+
+1. Normal case: "babad" → Should return "bab" or "aba"
+2. Entire string is a palindrome: "racecar" → Should return "racecar"
+3. Empty string: "" → Should return ""
+4. Single character: "a" → Should return "a"
+5. No palindromes longer than 1: "abc" → Should return "a" (or "b" or "c")
+6. Multiple palindromes of same length: "aabbaa" → Should return "aabbaa"
+7. Even-length palindrome: "abba" → Should return "abba"
+
+Can you help me verify if my implementation handles all these cases correctly?
+```
+
+**AI response:**
+> Let's trace through your implementation for each test case:
+> 
+> 1. `"babad"`:
+>    - For center at 'b' (index 0): Just 'b' (length 1)
+>    - For center at 'a' (index 1): 'bab' (length 3)
+>    - For center at 'b' (index 2): 'bab' (length 3)
+>    - For center at 'a' (index 3): 'aba' (length 3)
+>    - For center at 'd' (index 4): Just 'd' (length 1)
+>    - The first palindrome of length 3 found is "bab" ✓
+> 
+> 2. `"racecar"`:
+>    - Expands from middle 'e' to full string "racecar" ✓
+> 
+> 3. `""`:
+>    - Immediate return of empty string ✓
+> 
+> 4. `"a"`:
+>    - Single character is a palindrome of length 1 ✓
+> 
+> 5. `"abc"`:
+>    - No palindromes longer than 1, returns first character "a" ✓
+> 
+> 6. `"aabbaa"`:
+>    - Full string is palindrome ✓
+> 
+> 7. `"abba"`:
+>    - Checking even centers finds "abba" ✓
+> 
+> Your implementation handles all these test cases correctly! It will return the expected outputs for each scenario.
+
+### Comparing the Approaches
+
+The six-step approach with AI assistance:
+- Built a clear understanding of the problem
+- Identified edge cases explicitly
+- Traced through examples manually
+- Developed the solution systematically
+- Resulted in a function the programmer fully understands
+- Verified handling of important test cases
+
+This approach might take more time initially, but it produces:
+- A deeper understanding of the problem
+- Confidence in the solution's correctness
+- The ability to modify the solution when needed
+- A stronger foundation for solving similar problems in the future
+
+## The Methodology in Daily Practice
+
+While the full six-step methodology is valuable for learning and complex problems, it can be adapted for daily use:
+
+### Quick Reference Version
+
+1. **Restate:** What am I really trying to solve?
+2. **I/O:** What goes in, what comes out?
+3. **Example:** Try a simple case by hand
+4. **Plan:** Outline the solution strategy
+5. **Code:** Implement with appropriate AI assistance
+6. **Test:** Verify with varied test cases
+
+### When to Be More Thorough
+
+Apply the full methodology more carefully when:
+- Learning new concepts
+- Solving complex problems
+- Implementing critical components
+- Working with performance-sensitive code
+- Teaching or mentoring others
+
+### When to Streamline
+
+For familiar or simpler problems, you might:
+- Combine steps 1 and 2 into a quick problem analysis
+- Skip step 3 for very familiar problem patterns
+- Use AI to help generate pseudocode more quickly
+- Focus more heavily on thorough testing
+
+## Key Takeaways
+
+The six-step methodology provides:
+- A structured framework for problem-solving
+- Natural integration points for AI assistance
+- Maintenance of human understanding and control
+- A balance between efficiency and depth
+
+In the next six chapters, we'll explore each step of the methodology in detail, examining how AI assistance can be effectively integrated into each part of the process.

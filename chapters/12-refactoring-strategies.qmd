@@ -1,0 +1,558 @@
+# Refactoring Strategies
+
+Refactoring—improving code structure without changing its external behavior—is a critical skill for maintaining healthy, adaptable software. AI assistants can be powerful allies in identifying refactoring opportunities and implementing improvements. This chapter explores intentional approaches to refactoring with AI assistance.
+
+## When and Why to Refactor
+
+### Recognizing Refactoring Opportunities
+
+Refactoring is most valuable in specific situations:
+
+1. **Code smells** - Patterns in code that indicate deeper problems
+2. **Technical debt** - Accumulated design or implementation shortcuts
+3. **Changing requirements** - Evolving needs that strain existing designs
+4. **Performance bottlenecks** - Areas where optimization is needed
+5. **Duplication** - Repeated code that could be consolidated
+6. **Complexity** - Overly complicated logic that's difficult to understand
+
+AI assistants excel at identifying these opportunities, especially when prompted to look for specific issues.
+
+**Example prompt:**
+```
+Here's a section of our codebase that's becoming difficult to maintain:
+
+```python
+def process_customer_data(customer):
+    # Calculate base price
+    if customer.tier == 'premium':
+        base_price = 99.99
+    elif customer.tier == 'standard':
+        base_price = 49.99
+    elif customer.tier == 'basic':
+        base_price = 19.99
+    else:
+        base_price = 29.99
+    
+    # Apply discounts
+    if customer.years > 5:
+        discount = 0.15
+    elif customer.years > 2:
+        discount = 0.10
+    elif customer.is_first_responder:
+        discount = 0.20
+    elif customer.is_teacher:
+        discount = 0.10
+    else:
+        discount = 0
+    
+    # Calculate final price
+    final_price = base_price * (1 - discount)
+    
+    # Generate output data
+    result = {
+        'customer_id': customer.id,
+        'name': customer.name,
+        'email': customer.email,
+        'price': final_price,
+        'discount': discount,
+        'tier': customer.tier,
+    }
+    
+    return result
+```
+
+Can you identify refactoring opportunities in this code? What code smells do you notice?
+```
+
+### The Business Case for Refactoring
+
+Refactoring is sometimes seen as unnecessary by non-technical stakeholders. AI can help articulate the business value:
+
+**Example prompt:**
+```
+I need to make a case to my manager for refactoring our payment processing module. 
+The current code works, but it's difficult to maintain and extend.
+
+How can I effectively communicate the business value of this refactoring effort? 
+What specific metrics or outcomes should I highlight?
+```
+
+## AI-Assisted Code Improvements
+
+### Identifying Refactoring Targets
+
+AI can analyze code to identify specific improvement opportunities:
+
+**Example prompt:**
+```
+Could you analyze this function and suggest potential refactoring improvements? 
+Focus on maintainability, readability, and adherence to best practices.
+
+```java
+public List<Transaction> getTransactions(String userId, Date startDate, Date endDate, 
+                                        String category, String merchantName, 
+                                        Double minAmount, Double maxAmount, 
+                                        boolean includeDeclined, String sortBy, 
+                                        String sortDirection, int pageSize, int pageNum) {
+    List<Transaction> results = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    
+    try {
+        conn = dataSource.getConnection();
+        StringBuilder sql = new StringBuilder("SELECT * FROM transactions WHERE user_id = ?");
+        
+        List<Object> params = new ArrayList<>();
+        params.add(userId);
+        
+        if (startDate != null) {
+            sql.append(" AND transaction_date >= ?");
+            params.add(startDate);
+        }
+        
+        if (endDate != null) {
+            sql.append(" AND transaction_date <= ?");
+            params.add(endDate);
+        }
+        
+        // 30+ more lines of similar parameter handling...
+        
+        // Pagination and sorting logic
+        // More database handling code...
+        
+        while (rs.next()) {
+            // Transform ResultSet to Transaction objects
+            // 20+ lines of mapping code...
+            results.add(transaction);
+        }
+    } catch (SQLException e) {
+        logger.error("Database error", e);
+    } finally {
+        // Close resources
+        if (rs != null) {
+            try { rs.close(); } catch (SQLException e) { logger.error("Error closing ResultSet", e); }
+        }
+        if (stmt != null) {
+            try { stmt.close(); } catch (SQLException e) { logger.error("Error closing Statement", e); }
+        }
+        if (conn != null) {
+            try { conn.close(); } catch (SQLException e) { logger.error("Error closing Connection", e); }
+        }
+    }
+    
+    return results;
+}
+```
+```
+
+### Suggesting Improved Designs
+
+AI can propose architectural improvements:
+
+**Example prompt:**
+```
+I have a monolithic class that handles user authentication, profile management, and notification preferences. It's become unwieldy at 500+ lines.
+
+Based on the SOLID principles, how should I refactor this into more focused classes? What would the new class structure look like?
+```
+
+### Implementing Specific Refactorings
+
+AI can implement common refactoring patterns:
+
+**Example prompt:**
+```
+I'd like to apply the "Extract Method" refactoring to this code:
+
+```javascript
+function calculateTotalPrice(items, customer) {
+  let subtotal = 0;
+  for (const item of items) {
+    subtotal += item.price * item.quantity;
+  }
+  
+  let tax = 0;
+  if (customer.state === 'CA') {
+    tax = subtotal * 0.0725;
+  } else if (customer.state === 'NY') {
+    tax = subtotal * 0.045;
+  } else if (customer.state === 'TX') {
+    tax = subtotal * 0.0625;
+  } else {
+    tax = subtotal * 0.05;
+  }
+  
+  let shipping = 0;
+  if (subtotal >= 100) {
+    shipping = 0;
+  } else if (customer.isPremium) {
+    shipping = 5.99;
+  } else {
+    shipping = 10.99;
+  }
+  
+  return subtotal + tax + shipping;
+}
+```
+
+Please extract methods for calculating the subtotal, tax, and shipping.
+```
+
+## Measuring Impact of Refactoring
+
+Refactoring should produce measurable improvements. AI can help identify metrics and assess results.
+
+### Quantitative Metrics
+
+**Example prompt:**
+```
+I'm planning to refactor our API request handling code. What quantitative metrics should I measure before and after refactoring to demonstrate the impact?
+```
+
+AI might suggest:
+
+- **Performance metrics**: Response time, throughput, resource utilization
+- **Code metrics**: Cyclomatic complexity, lines of code, method length
+- **Testing metrics**: Test coverage, test execution time
+- **Maintenance metrics**: Time to implement new features, bug fix duration
+- **Error rates**: Exceptions, crashes, incorrect results
+
+### Qualitative Assessment
+
+**Example prompt:**
+```
+Beyond quantitative metrics, what qualitative factors should I consider when evaluating the success of my refactoring efforts?
+```
+
+AI might suggest:
+
+- **Developer feedback**: Team assessment of code clarity and maintainability
+- **Onboarding impact**: How quickly new team members understand the code
+- **Flexibility**: Ease of implementing new requirements
+- **Documentation needs**: Reduction in necessary explanation
+- **Knowledge distribution**: Less reliance on specific team members
+
+## Maintaining Functionality During Refactoring
+
+One of the most critical aspects of refactoring is preserving existing behavior.
+
+### Test-Driven Refactoring
+
+**Example prompt:**
+```
+I want to refactor this payment processing function, but I need to ensure I don't break existing functionality. What testing approach would you recommend?
+
+Here's the current function:
+
+```python
+def process_payment(order_id, card_details, amount):
+    # Implementation details...
+```
+
+What types of tests should I write before refactoring, and how should I structure the refactoring process to minimize risk?
+```
+
+### Incremental Refactoring Approaches
+
+**Example prompt:**
+```
+I need to refactor a large legacy class (800+ lines) that handles multiple responsibilities. What's the most effective step-by-step approach to break this down safely?
+```
+
+AI might suggest:
+
+1. **Create a comprehensive test suite** first
+2. **Identify clear boundaries** between responsibilities
+3. **Extract one responsibility at a time**, starting with the most independent
+4. **Introduce interfaces** to define clear contracts
+5. **Refactor clients** to use the new interfaces
+6. **Run tests after each incremental change**
+
+## Case Studies
+
+### Case Study 1: Simplifying Complex Conditionals
+
+**Original Code:**
+
+```javascript
+function calculateDiscount(customer, order) {
+  let discount = 0;
+  
+  if (customer.type === 'regular') {
+    if (order.total > 100) {
+      if (customer.years > 2) {
+        discount = 0.15;
+      } else {
+        discount = 0.10;
+      }
+    } else if (order.total > 50) {
+      if (customer.years > 2) {
+        discount = 0.10;
+      } else {
+        discount = 0.05;
+      }
+    }
+  } else if (customer.type === 'premium') {
+    if (order.total > 100) {
+      discount = 0.20;
+    } else if (order.total > 50) {
+      discount = 0.15;
+    } else {
+      discount = 0.10;
+    }
+  } else if (customer.type === 'vip') {
+    discount = 0.25;
+  }
+  
+  if (order.items.length > 10) {
+    discount += 0.05;
+  }
+  
+  return discount;
+}
+```
+
+**Refactoring Request:**
+
+**Human prompt:**
+```
+This discount calculation function has become difficult to understand and maintain due to nested conditionals. How would you refactor it to improve readability and maintainability?
+```
+
+**AI response:**
+> I'll refactor this function to simplify the nested conditionals using a few strategies:
+>
+> 1. Use early returns for special cases
+> 2. Extract specialized functions for different customer types
+> 3. Use lookup tables for rules-based logic
+> 4. Implement a more declarative approach
+>
+> Here's the refactored version:
+>
+> ```javascript
+> function calculateDiscount(customer, order) {
+>   // Start with base discount and add volume discount later if applicable
+>   const baseDiscount = calculateBaseDiscount(customer, order);
+>   const volumeDiscount = order.items.length > 10 ? 0.05 : 0;
+>   
+>   return baseDiscount + volumeDiscount;
+> }
+> 
+> function calculateBaseDiscount(customer, order) {
+>   // Special case for VIP customers
+>   if (customer.type === 'vip') {
+>     return 0.25;
+>   }
+>   
+>   // Use lookup table for discount rules
+>   const discountRules = {
+>     regular: {
+>       tier1: { threshold: 100, loyal: 0.15, new: 0.10 },
+>       tier2: { threshold: 50, loyal: 0.10, new: 0.05 },
+>       tier3: { threshold: 0, loyal: 0, new: 0 }
+>     },
+>     premium: {
+>       tier1: { threshold: 100, discount: 0.20 },
+>       tier2: { threshold: 50, discount: 0.15 },
+>       tier3: { threshold: 0, discount: 0.10 }
+>     }
+>   };
+>   
+>   // Handle regular customers
+>   if (customer.type === 'regular') {
+>     const isLoyal = customer.years > 2;
+>     const customerRates = discountRules.regular;
+>     
+>     if (order.total > customerRates.tier1.threshold) {
+>       return isLoyal ? customerRates.tier1.loyal : customerRates.tier1.new;
+>     } else if (order.total > customerRates.tier2.threshold) {
+>       return isLoyal ? customerRates.tier2.loyal : customerRates.tier2.new;
+>     }
+>     return 0;
+>   }
+>   
+>   // Handle premium customers
+>   if (customer.type === 'premium') {
+>     const premiumRates = discountRules.premium;
+>     
+>     if (order.total > premiumRates.tier1.threshold) {
+>       return premiumRates.tier1.discount;
+>     } else if (order.total > premiumRates.tier2.threshold) {
+>       return premiumRates.tier2.discount;
+>     }
+>     return premiumRates.tier3.discount;
+>   }
+>   
+>   // Default case - no discount
+>   return 0;
+> }
+> ```
+>
+> Benefits of this refactoring:
+>
+> 1. **Improved readability**: The main function is now much shorter and clearer
+> 2. **Separation of concerns**: Different discount calculations are separated
+> 3. **Configurability**: Discount rules are organized in a data structure that could easily be moved to a configuration file
+> 4. **Maintainability**: Adding new customer types or rules is more straightforward
+> 5. **Testability**: Each function can be tested independently
+>
+> For even further improvement, you could refactor this to use a more object-oriented approach with strategy patterns, or use a rules engine for complex discount logic.
+
+### Case Study 2: Reducing Duplication
+
+**Original Code:**
+
+```python
+class UserService:
+    def get_user_by_id(self, user_id):
+        connection = database.connect()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        
+        if result:
+            return {
+                'id': result[0],
+                'username': result[1],
+                'email': result[2],
+                'created_at': result[3]
+            }
+        return None
+    
+    def get_user_by_email(self, email):
+        connection = database.connect()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        
+        if result:
+            return {
+                'id': result[0],
+                'username': result[1],
+                'email': result[2],
+                'created_at': result[3]
+            }
+        return None
+    
+    def get_user_by_username(self, username):
+        connection = database.connect()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+        
+        if result:
+            return {
+                'id': result[0],
+                'username': result[1],
+                'email': result[2],
+                'created_at': result[3]
+            }
+        return None
+```
+
+**Refactoring Request:**
+
+**Human prompt:**
+```
+This UserService class has significant duplication in its methods. How would you refactor it to reduce repetition while maintaining the same functionality?
+```
+
+**AI response:**
+> There's significant duplication in this `UserService` class. The three methods follow the same pattern but just differ in the query condition. Let's refactor to eliminate this duplication:
+> 
+> ```python
+> class UserService:
+>     def __get_user_by_query(self, query, params):
+>         """
+>         Private helper method to execute a query and return user data.
+>         
+>         Args:
+>             query: SQL query with placeholders
+>             params: Parameters to substitute in the query
+>             
+>         Returns:
+>             User dict or None if not found
+>         """
+>         connection = None
+>         cursor = None
+>         
+>         try:
+>             connection = database.connect()
+>             cursor = connection.cursor()
+>             cursor.execute(query, params)
+>             result = cursor.fetchone()
+>             
+>             if result:
+>                 return {
+>                     'id': result[0],
+>                     'username': result[1],
+>                     'email': result[2],
+>                     'created_at': result[3]
+>                 }
+>             return None
+>             
+>         finally:
+>             # Ensure resources are closed even if an exception occurs
+>             if cursor:
+>                 cursor.close()
+>             if connection:
+>                 connection.close()
+>     
+>     def get_user_by_id(self, user_id):
+>         """Get a user by their ID."""
+>         return self.__get_user_by_query(
+>             "SELECT * FROM users WHERE id = %s", 
+>             (user_id,)
+>         )
+>     
+>     def get_user_by_email(self, email):
+>         """Get a user by their email address."""
+>         return self.__get_user_by_query(
+>             "SELECT * FROM users WHERE email = %s", 
+>             (email,)
+>         )
+>     
+>     def get_user_by_username(self, username):
+>         """Get a user by their username."""
+>         return self.__get_user_by_query(
+>             "SELECT * FROM users WHERE username = %s", 
+>             (username,)
+>         )
+> ```
+> 
+> Key improvements in this refactoring:
+> 
+> 1. **Extracted common code** into a private helper method `__get_user_by_query`
+> 2. **Improved error handling** with a try/finally block to ensure resources are properly closed
+> 3. **Added docstrings** to improve code documentation
+> 4. **Made public methods concise** and focused on their specific responsibilities
+> 5. **Reduced duplication** significantly - the code is now much more maintainable
+> 
+> Further improvements could include:
+> 
+> - Creating a User model class instead of returning dictionaries
+> - Using a context manager or connection pool for database connections
+> - Adding proper exception handling and logging
+> - Implementing a data access layer or repository pattern
+> 
+> This refactoring maintains exactly the same functionality while making the code much more maintainable.
+
+## Key Takeaways
+
+- Refactoring is about improving code structure without changing functionality
+- AI assistants excel at identifying refactoring opportunities and suggesting improvements
+- Measure the impact of refactoring with both quantitative and qualitative metrics
+- Preserve functionality during refactoring through comprehensive testing
+- Common refactoring patterns like extracting methods and simplifying conditionals can be effectively implemented with AI assistance
+- Incremental, test-driven approaches minimize risk during refactoring
+
+## Moving Forward
+
+In the next chapter, we'll explore case studies that demonstrate the complete intentional prompting methodology in real-world situations, including both debugging and refactoring as part of larger development efforts.

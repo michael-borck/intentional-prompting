@@ -1,0 +1,289 @@
+# Work by Hand (Step 3)
+
+Step 3 of the six-step methodology—working through examples by hand—is often the most tempting to skip, especially with AI assistance. Yet it remains one of the most valuable practices for deeply understanding a problem and its solution.
+
+## The Importance of Manual Examples
+
+### Why Work By Hand?
+
+Working through examples manually before coding serves several critical purposes:
+
+1. **Builds intuition** about how the solution should behave
+2. **Reveals hidden complexity** that might not be apparent in the problem description
+3. **Creates test cases** that can validate your eventual code
+4. **Identifies edge cases** that require special handling
+5. **Provides a reference implementation** against which to check automated solutions
+
+This step is especially important in the age of AI coding assistants. When AI can generate code instantly, manually working through examples becomes the primary way to maintain a deep understanding of the solutions you implement.
+
+### Mental Models vs. Pattern Matching
+
+There are two fundamentally different ways to solve programming problems:
+
+**Pattern matching** involves recognizing a problem as similar to something you've seen before and applying a known solution template. This approach is quick but shallow—it doesn't build transferable understanding.
+
+**Mental modeling** involves constructing a detailed understanding of the problem dynamics and working through how a solution would operate step by step. This approach builds deeper understanding that transfers to novel problems.
+
+AI excels at pattern matching but struggles with novel problems that require creative mental models. By working problems by hand, you develop the mental modeling skills that complement AI's pattern-matching strengths.
+
+## Tracing Algorithms Step by Step
+
+### The Tracing Process
+
+Tracing an algorithm involves simulating its execution with concrete inputs, tracking the state changes at each step:
+
+1. Choose representative input values
+2. Initialize variables as they would be in the algorithm
+3. Follow the logic step by step, recording state changes
+4. Note intermediate values at key points
+5. Verify the final output matches expectations
+
+This process mirrors what a debugger does but happens in your mind or on paper, building a deeper understanding of the algorithm's behavior.
+
+### Visualization Techniques
+
+Different problems benefit from different visualization approaches:
+
+#### Tabular Traces
+
+For iterative algorithms, use a table where:
+- Each row represents one iteration
+- Columns show the values of key variables
+- Special columns can highlight important conditions or state changes
+
+| Iteration | Current Value | Accumulator | Condition Check |
+|-----------|--------------|-------------|-----------------|
+| 1         | 5            | 5           | 5 > 0? Yes      |
+| 2         | 4            | 9           | 4 > 0? Yes      |
+| 3         | 3            | 12          | 3 > 0? Yes      |
+
+#### State Diagrams
+
+For algorithms that manipulate data structures, draw the structure at key points:
+
+```
+Initial array: [5, 3, 8, 2, 1]
+
+After first partition:
+[2, 3, 1] 5 [8]
+
+After recursive calls:
+[1] 2 [3] 5 [8]
+```
+
+#### Flow Traces
+
+For complex conditional logic, trace the path through the algorithm:
+
+```
+Input: x = 5
+1. Is x < 0? No
+2. Is x even? No
+3. Execute odd-number logic...
+4. Return result: 16
+```
+
+## Testing Assumptions
+
+Working by hand is the perfect opportunity to test your assumptions about the problem and solution approach.
+
+### Assumption Categories
+
+Be explicit about testing these types of assumptions:
+
+#### Data Assumptions
+
+- Valid input ranges
+- Expected data formats
+- Special values (null, empty, extreme values)
+- Size limitations
+
+#### Algorithmic Assumptions
+
+- Time and space complexity requirements
+- Order sensitivity (does order matter?)
+- Uniqueness requirements (are duplicates allowed?)
+- Stability expectations (preserving order of equal elements)
+
+#### Output Assumptions
+
+- Expected format of results
+- Handling of error conditions
+- Ties or multiple valid answers
+
+### The "What If?" Technique
+
+For each assumption, ask "What if this assumption is violated?" and trace through an example:
+
+- What if the input is empty?
+- What if values are negative?
+- What if there are duplicate entries?
+- What if the input is already sorted?
+
+This process helps identify edge cases that your solution must handle.
+
+## Sharing Your Manual Work with AI
+
+Although working by hand is a primarily human activity, AI can still play a valuable role in the process.
+
+### Verification of Manual Solutions
+
+After working through examples yourself, use AI to verify your approach:
+
+```
+I've worked through this sorting algorithm example by hand:
+
+Input: [5, 3, 8, 2, 1]
+
+Step 1: Choose pivot 5
+Step 2: Partition into [3, 2, 1] and [8]
+Step 3: Recursively sort [3, 2, 1] -> [1, 2, 3]
+Step 4: Recursively sort [8] -> [8]
+Step 5: Combine into [1, 2, 3, 5, 8]
+
+Did I follow the quicksort algorithm correctly? Are there any mistakes in my manual trace?
+```
+
+### Exploring Alternative Approaches
+
+AI can suggest different ways to approach the manual solution:
+
+```
+I'm solving this graph traversal problem by using depth-first search and manually tracing through the example. Are there other approaches I should consider working through by hand to better understand the problem?
+```
+
+### Identifying Edge Cases
+
+AI can help identify edge cases to trace manually:
+
+```
+I've traced through the standard case for this binary search algorithm. What edge cases should I work through by hand to ensure I understand all aspects of the algorithm?
+```
+
+## Practical Exercise: Working By Hand
+
+Let's apply Step 3 to our ongoing example problem:
+
+> Write a function to find the longest palindromic substring in a given string.
+
+### Chosen Example: "babad"
+
+Let's trace through the process of finding the longest palindromic substring:
+
+1. Start with the input string: "babad"
+2. Examine each potential center position:
+
+For single-character centers (odd-length palindromes):
+- Center at 'b' (index 0):
+  - Check "b" -> palindrome of length 1
+  - Check "ba" -> not a palindrome
+  
+- Center at 'a' (index 1):
+  - Check "a" -> palindrome of length 1
+  - Check "bab" -> palindrome of length 3
+  - Check "babα" (out of bounds) -> stop
+
+- Center at 'b' (index 2):
+  - Check "b" -> palindrome of length 1
+  - Check "aba" -> palindrome of length 3
+  - Check "babα" (out of bounds) -> stop
+
+- Center at 'a' (index 3):
+  - Check "a" -> palindrome of length 1
+  - Check "bad" -> not a palindrome
+
+- Center at 'd' (index 4):
+  - Check "d" -> palindrome of length 1
+  - Check "ad" -> not a palindrome
+
+For two-character centers (even-length palindromes):
+- Between 'b' and 'a' (indices 0-1):
+  - Check "ba" -> not a palindrome
+
+- Between 'a' and 'b' (indices 1-2):
+  - Check "ab" -> not a palindrome
+
+- Between 'b' and 'a' (indices 2-3):
+  - Check "ba" -> not a palindrome
+
+- Between 'a' and 'd' (indices 3-4):
+  - Check "ad" -> not a palindrome
+
+From our manual trace, we can see that the longest palindromic substrings are "bab" and "aba", both of length 3.
+
+### Edge Case: Empty String
+
+Input: ""
+Result: "" (empty string)
+
+### Edge Case: Single Character
+
+Input: "a"
+Result: "a" (the character itself)
+
+### Edge Case: All Same Characters
+
+Input: "aaaaa"
+Result: "aaaaa" (the entire string)
+
+### Edge Case: No Palindromes Longer Than 1
+
+Input: "abcd"
+Result: "a" (any single character)
+
+### Validating Our Approach with AI
+
+**Human prompt:**
+```
+I've manually traced through finding the longest palindromic substring in "babad" by checking each possible center position and expanding outward. I found that "bab" and "aba" are both valid answers with length 3.
+
+I also tried these edge cases:
+- Empty string -> ""
+- Single character "a" -> "a"
+- All same characters "aaaaa" -> "aaaaa"
+- No palindromes longer than 1 "abcd" -> "a" (or any single character)
+
+Does my manual approach seem correct? Am I missing any important edge cases?
+```
+
+**AI response:**
+> Your manual approach of checking each possible center position and expanding outward is exactly right! This is the standard approach for solving this problem efficiently.
+> 
+> Your edge cases are also well-chosen and cover the important scenarios:
+> 
+> - Empty string
+> - Single character
+> - All same characters (a special case where the entire string is a palindrome)
+> - No palindromes longer than 1 character
+> 
+> One additional edge case you might consider:
+> 
+> - Input with even-length palindromes only, like "abba" where the palindrome doesn't have a single center character
+> 
+> But your approach already handles this by checking both single character centers and between-character centers, so it's just a matter of verifying with an example.
+> 
+> Your manual working shows a strong understanding of the problem and solution approach!
+
+## Insights from Working By Hand
+
+By manually tracing through examples, we've gained several key insights:
+
+1. We need to check both odd-length palindromes (single character center) and even-length palindromes (between character center)
+2. The process of expanding outward from a center is the same for both cases
+3. We need to keep track of the longest palindrome found so far
+4. Boundary checking is important to avoid going out of bounds
+5. For strings with multiple palindromes of the same length, returning any one is acceptable
+
+These insights will guide our pseudocode development in the next step.
+
+## Key Takeaways
+
+- Working problems by hand builds a deep understanding that can't be replicated by simply using AI to generate solutions
+- Manual tracing helps identify edge cases and test assumptions
+- Different visualization techniques (tables, diagrams, flow traces) suit different types of problems
+- AI can complement manual work by verifying solutions and suggesting edge cases
+- The insights gained from manual examples inform all subsequent steps of the methodology
+
+## Moving Forward
+
+With a solid understanding of the problem gained through manual examples, we're now ready to develop a structured approach to the solution. In the next chapter, we'll explore Step 4: Writing pseudocode to outline our solution strategy.
