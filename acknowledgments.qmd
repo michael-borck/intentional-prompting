@@ -1,0 +1,28 @@
+# Acknowledgments {.unnumbered}
+
+This book represents a collaborative effort involving both human creativity and artificial intelligence assistance. I would like to acknowledge the contributions of various individuals and tools that made this work possible.
+
+## Author
+
+**Michael Borck** (michael@borck.me) - Lead author and creator of the Intentional Prompting methodology. Michael developed the core concepts, structured the book, and wrote the original content.
+
+## AI Assistance
+
+This book was developed with assistance from several AI tools:
+
+- **Claude by Anthropic** - Provided editorial suggestions, helped refine concepts, and assisted with book structure and content development.
+- **Midjourney AI** - Generated the cover artwork based on prompts describing the book's themes of human-AI collaboration.
+
+## Technical Production
+
+- **Quarto** - Used for document formatting and book generation
+- **GitHub** - Used for version control and collaboration
+- **GitHub Pages** - Hosts the online version of the book
+
+## Special Thanks
+
+Special thanks to the broader AI and programming education community whose ongoing discussions about effective AI collaboration helped shape many of the ideas presented in this book.
+
+---
+
+*Note: While AI tools were used in the production of this book, all content reflects the author's intentions and has been reviewed by humans. The use of AI in creating this book about AI-assisted programming reflects the principles of intentional prompting discussed within.*
