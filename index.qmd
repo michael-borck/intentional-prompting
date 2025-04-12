@@ -1,7 +1,5 @@
 # Preface {.unnumbered}
 
-![](images/cover.png)
-
 Welcome to "Intentional Prompting: Mastering the Human-AI Development Process." This book explores a new paradigm for software development in the age of AI assistants.
 
 ## Why This Book?
