@@ -48,6 +48,7 @@ format:
     theme: cosmo
     cover-image: images/cover.png
     css: styles.css
+    downloads: [pdf, epub]
   pdf:
     documentclass: scrreprt
     include-in-header: 
