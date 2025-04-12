@@ -4,6 +4,8 @@
 
 Effective collaboration with AI assistants requires more than just asking for solutions—it demands a thoughtful approach to crafting prompts that guide the AI toward helpful, educational responses. This chapter explores key patterns for intentional prompting that maximize the learning and development value of AI interactions.
 
+![Intentional Prompting Patterns](../images/intentional-prompting-patterns.png)
+
 ## Prompt Engineering: A Foundational Discipline
 
 Prompt engineering has emerged as a critical field in AI interaction, focusing on how to craft precise instructions that help AI models produce accurate, relevant, and contextually appropriate responses. Beyond casual interaction, it encompasses systematic techniques for improving AI output quality.

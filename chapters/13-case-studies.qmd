@@ -2,6 +2,8 @@
 
 In this chapter, we'll explore comprehensive case studies that demonstrate intentional prompting principles applied to real-world programming scenarios. These case studies illustrate how the six-step methodology and intentional prompting techniques come together to solve complex problems effectively.
 
+![Before and After Case Study](../images/before-after-case-study.png)
+
 ## Case Study 1: Building a Data Analysis Pipeline
 
 ### The Problem

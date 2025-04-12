@@ -4,6 +4,8 @@
 
 Before diving into the core principles of intentional prompting, it's important to understand the broader landscape of approaches to integrating AI into development workflows. These approaches reflect different philosophies about the role of AI and human developers.
 
+![AI-Human Collaboration](../images/ai-human-collaboration.png)
+
 ### Permissive Approach: "Just Take the Answer"
 
 The permissive approach involves accepting AI outputs with minimal human oversight or intervention. In this model, developers largely defer to AI-generated recommendations, content, and decisions.
