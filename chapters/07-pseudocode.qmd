@@ -64,6 +64,28 @@ DISPLAY message
 WRITE data TO file
 ```
 
+### SudoLang: Pseudocode Optimized for LLMs
+
+SudoLang is a specialized pseudocode language designed specifically for communication with large language models, created by Eric Elliott. It provides a structured syntax that bridges the gap between natural language and formal programming languages, optimized for human-AI collaboration.
+
+Key features of SudoLang include:
+
+- **Simplified syntax** that both humans and AI can easily understand
+- **Declarative approach** that focuses on what should happen rather than how
+- **Named parameters** that improve clarity and reduce ambiguity
+- **Native support for modern programming patterns** like functional programming and async operations
+- **Unambiguous structure** that reduces misinterpretation by AI models
+
+A simple example in SudoLang:
+
+```
+function sortUsersByAge({ users }) {
+  return users.sort(by: user => user.age)
+}
+```
+
+When working with AI assistants on complex programming tasks, SudoLang can help create more precise, intentional prompts that result in higher-quality code generation. It's especially valuable when you need to communicate algorithmic intent clearly without getting lost in language-specific syntax details.
+
 ### Pseudocode vs. Comments
 
 Pseudocode differs from code comments in several important ways:
