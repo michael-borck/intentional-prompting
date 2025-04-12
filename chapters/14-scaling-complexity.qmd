@@ -619,7 +619,7 @@ public class OrderProcessor {
     
     // Constructor and other methods...
     
-    @Transactional
+    \\@Transactional
     public OrderResult processOrder(Order order) {
         // Validate order
         if (order == null || order.getItems().isEmpty()) {

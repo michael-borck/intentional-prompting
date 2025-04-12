@@ -1,4 +1,5 @@
 # References {.unnumbered}
 
-::: {#refs}
-:::
+<!-- Comment out references temporarily to fix PDF rendering -->
+<!-- ::: {#refs}
+::: -->

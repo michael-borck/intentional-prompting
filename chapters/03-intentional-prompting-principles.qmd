@@ -170,13 +170,13 @@ def validate_email(email):
 ```
 
 **Human**: Let's test this with various cases including edge cases:
-- user@example.com
-- user+alias@example.com
-- user.name@example.co.uk
-- user@sub.example.com
-- invalid@
-- @invalid.com
-- user@invalid
+- user\@example.com
+- user+alias\@example.com
+- user.name\@example.co.uk
+- user\@sub.example.com
+- incomplete-email-without-domain\\@
+- incomplete-email-without-username\\@example.com
+- user\\@incomplete-domain
 
 The collaborative approach takes longer initially but builds understanding, produces better-documented code, and addresses edge cases proactively rather than reactively.
 

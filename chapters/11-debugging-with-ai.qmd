@@ -482,10 +482,10 @@ How do I make this regex work for validating email addresses?
 **Better approach:**
 ```
 I need to validate email addresses in my application. 
-I tried using this regex: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+$/
+I tried using this regex: /^[a-zA-Z0-9]+\\@[a-zA-Z0-9]+$/
 
 But it doesn't handle cases like:
-- Dots in the local part (john.doe@example.com)
+- Dots in the local part (john.doe\@example.com)
 - Hyphens in domain names (example-site.com)
 - TLDs with more than one segment (.co.uk)
 
