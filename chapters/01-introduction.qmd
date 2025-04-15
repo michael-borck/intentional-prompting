@@ -19,6 +19,28 @@ Intentional prompting is a deliberate approach to programming that leverages AI 
 
 This approach recognizes that the most powerful development workflow combines human creativity, judgment, and domain knowledge with AI's ability to handle routine coding tasks, suggest implementations, and provide contextual information.
 
+### Intentional Prompting vs. Prompt Engineering
+
+It's important to distinguish intentional prompting from the related but distinct field of prompt engineering:
+
+**Prompt Engineering** focuses primarily on crafting effective instructions for AI systems to produce desired outputs. It encompasses techniques like zero-shot and few-shot prompting, chain-of-thought prompting, and role-based prompting. The emphasis is on optimizing the prompt itself to get the best possible output from the AI.
+
+**Intentional Prompting** builds upon prompt engineering but differs in several key ways:
+
+1. **Methodology vs. Technique**: Intentional prompting provides a complete methodology (the six-step approach) rather than just techniques for crafting prompts.
+
+2. **Process vs. Output**: While prompt engineering prioritizes getting optimal outputs, intentional prompting emphasizes the development process itself as the primary value.
+
+3. **Human Agency**: Intentional prompting explicitly maintains the human as the director and decision-maker throughout the development process, not just the prompt creator.
+
+4. **Learning Focus**: Intentional prompting has an explicit educational component, designed to enhance human understanding and skills alongside producing code.
+
+5. **Structured Framework**: Intentional prompting embeds prompt techniques within a systematic framework for approaching programming problems, rather than treating prompting as an isolated activity.
+
+In essence, intentional prompting integrates prompt engineering techniques within a broader methodology that maintains human agency and prioritizes understanding and learning throughout the development process. This distinction becomes especially important as AI capabilities advance toward autonomous coding agents, where maintaining human oversight and understanding becomes increasingly critical.
+
+For a comprehensive comparison of intentional prompting with other approaches to AI-assisted programming—including prompt engineering, pseudocode for LLMs, agentic programming, and vibe coding—see the comparative framework in Appendix C: AI Tool Comparison.
+
 ## Why Intentional Prompting Matters
 
 As AI coding assistants become increasingly capable, there's a risk that developers might:
@@ -30,6 +52,28 @@ As AI coding assistants become increasingly capable, there's a risk that develop
 Intentional prompting addresses these concerns by providing a framework that helps developers use AI effectively while continuing to grow their own skills and understanding.
 
 For students learning to code, this approach is particularly valuable. Rather than seeing AI as either a shortcut to avoid learning or a forbidden tool, intentional prompting teaches students to use AI as a learning partner that enhances their educational journey.
+
+### Beyond Automation: The Case for Human Oversight
+
+The rapid advancement of AI has led to the emergence of agentic programming—where AI agents can autonomously perform complex development tasks with minimal human intervention. While these systems show impressive capabilities in routine coding tasks, they also highlight precisely why methodologies like intentional prompting remain essential.
+
+Research reveals that even the most sophisticated AI agents face fundamental limitations that necessitate human oversight:
+
+1. **Understanding Gap**: AI agents lack true comprehension of problem context and domain requirements. They can pattern-match solutions but miss critical business or user needs that aren't explicitly stated.
+
+2. **Accountability and Ethics**: Humans must bear responsibility for decisions with real-world impacts. Delegating this completely creates accountability gaps when things go wrong.
+
+3. **Novel Problem Solving**: While agents excel at pattern recognition, they struggle with truly novel problems requiring innovative approaches outside their training distribution.
+
+4. **Quality Thresholds**: Agents lack the meta-awareness to know when a solution is "good enough" versus when to keep refining for the specific context.
+
+5. **Creative Direction**: Human value judgments about elegance, maintainability, and design philosophy are subjective but crucial for creating coherent, high-quality systems.
+
+6. **Integration Knowledge**: Humans better understand how code fits into larger systems, organizational constraints, and unstated requirements.
+
+7. **Skill Development**: The learning benefits of intentional programming disappear if fully automated, undermining the educational value essential for long-term developer growth.
+
+Even with sophisticated agent networks, complex programming will likely remain a collaborative process with humans providing critical validation, creative direction, context understanding, and accountability. The intentional prompting methodology provides a structured framework for this collaboration, ensuring that humans maintain control of the development process while leveraging the strengths of AI assistants.
 
 ## The Six-Step Methodology
 

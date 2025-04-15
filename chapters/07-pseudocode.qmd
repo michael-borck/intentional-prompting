@@ -64,9 +64,38 @@ DISPLAY message
 WRITE data TO file
 ```
 
+## Pseudocode and LLMs: A Natural Partnership
+
+Pseudocode plays a particularly important role when working with Large Language Models. It serves as a bridge between natural language ambiguity and the precision of formal programming languages, creating an ideal medium for human-AI collaboration.
+
+### Why Pseudocode Works Well with LLMs
+
+Several factors make pseudocode especially effective for LLM interactions:
+
+1. **Structural alignment with training data** - LLMs have been trained on vast amounts of programming content, including discussions of algorithms that frequently use pseudocode. This training means they have strong internal representations of pseudocode conventions.
+
+2. **Reduced ambiguity** - Pseudocode provides more structure than natural language while remaining flexible, striking an ideal balance that reduces misinterpretations.
+
+3. **Focus on logic** - By emphasizing algorithmic thinking over syntax, pseudocode aligns with LLMs' strengths in reasoning about procedures rather than producing perfect syntax.
+
+4. **Activation of procedural knowledge** - Research shows that LLMs have absorbed procedural knowledge from their training data. Pseudocode effectively activates this latent knowledge by providing clear procedural frameworks.
+
+5. **Medium of iterative refinement** - Pseudocode serves as an excellent medium for progressive disambiguation - the process of gradually transforming ambiguous natural language into precise formal code through multiple rounds of interaction.
+
+### Pseudocode as Disambiguation Tool
+
+One of the most significant challenges when working with LLMs is the inherent ambiguity of natural language. Pseudocode helps address this challenge by:
+
+- Providing clear structure that reduces misinterpretation
+- Creating a shared vocabulary for discussing algorithms
+- Enabling precise references to specific components or steps
+- Facilitating incremental refinement toward formal code
+
+As Dijkstra noted decades ago, "The virtue of formal texts is that their manipulations, in order to be legitimate, need to satisfy only a few simple rules; they are... an amazingly effective tool for ruling out all sorts of nonsense that, when we use our native tongues, are almost impossible to avoid." While pseudocode isn't fully formal, it moves us considerably in that direction.
+
 ### SudoLang: Pseudocode Optimized for LLMs
 
-SudoLang is a specialized pseudocode language designed specifically for communication with large language models, created by Eric Elliott. It provides a structured syntax that bridges the gap between natural language and formal programming languages, optimized for human-AI collaboration.
+SudoLang represents an evolution of pseudocode specifically designed for LLM interaction. Created by Eric Elliott, it provides a structured syntax that bridges the gap between natural language and formal programming languages, optimized for human-AI collaboration.
 
 Key features of SudoLang include:
 
@@ -85,6 +114,20 @@ function sortUsersByAge({ users }) {
 ```
 
 When working with AI assistants on complex programming tasks, SudoLang can help create more precise, intentional prompts that result in higher-quality code generation. It's especially valuable when you need to communicate algorithmic intent clearly without getting lost in language-specific syntax details.
+
+### LLMs as Pseudocode Interpreters
+
+An intriguing aspect of LLMs is their ability to act as "interpreters" for pseudocode. Unlike traditional pseudocode that serves purely as documentation, LLMs can actually process and "execute" pseudocode to generate outputs, transforming it from a planning tool into a functional programming interface.
+
+This capability enables new workflows where:
+
+1. Humans write pseudocode expressing algorithmic intent
+2. LLMs interpret this pseudocode and generate working implementations
+3. Humans review, refine, and integrate these implementations
+
+This process leverages the complementary strengths of both humans and AI: human strategic thinking and algorithm design paired with AI's ability to handle implementation details across various programming languages.
+
+For complex algorithmic challenges, this partnership often produces better results than either pure natural language prompting (too ambiguous) or direct code requests (too focused on immediate implementation rather than understanding).
 
 ### Pseudocode vs. Comments
 

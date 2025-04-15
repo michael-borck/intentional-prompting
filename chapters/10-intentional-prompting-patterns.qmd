@@ -10,6 +10,27 @@ Effective collaboration with AI assistants requires more than just asking for so
 
 Prompt engineering has emerged as a critical field in AI interaction, focusing on how to craft precise instructions that help AI models produce accurate, relevant, and contextually appropriate responses. Beyond casual interaction, it encompasses systematic techniques for improving AI output quality.
 
+### From Prompt Engineering to Intentional Prompting
+
+It's important to understand the relationship between prompt engineering and intentional prompting:
+
+**Prompt engineering** is primarily concerned with getting optimal outputs from AI systems. It focuses on crafting the right words, examples, and instructions to elicit high-quality responses from language models. Prompt engineers develop expertise in understanding model behaviors, leveraging context windows effectively, and using specialized techniques to guide AI outputs.
+
+**Intentional prompting** incorporates prompt engineering techniques but embeds them within a comprehensive methodology for approaching programming tasks. While prompt engineering asks "How can I get the best output from this AI?", intentional prompting asks "How can I use this AI as part of a thoughtful development process that maintains my understanding and control?"
+
+The distinction becomes clearer when considering how each approach would handle a complex programming task:
+
+| Aspect | Prompt Engineering Approach | Intentional Prompting Approach |
+|--------|---------------------------|------------------------------|
+| **Initial Task Analysis** | Optimize prompt for detailed requirements | Follow Steps 1-2: Restate problem and identify inputs/outputs |
+| **Problem Understanding** | Focus on conveying requirements clearly to AI | Follow Step 3: Work through examples by hand to build understanding |
+| **Solution Design** | Craft prompts to generate complete solutions | Follow Step 4: Create pseudocode before implementation |
+| **Code Generation** | Refine prompts until satisfactory code is produced | Follow Step 5: Use AI to implement pseudocode while maintaining understanding |
+| **Verification** | Prompt AI to validate generated code | Follow Step 6: Rigorously test with data, especially edge cases |
+| **Learning Outcome** | Improvement in prompt crafting skills | Improvement in both programming and AI collaboration skills |
+
+Intentional prompting doesn't replace prompt engineering—it integrates its techniques within a broader approach that preserves human agency, understanding, and skill development.
+
 ### Core Prompt Engineering Techniques
 
 #### Zero-Shot Prompting
@@ -248,6 +269,21 @@ Analyze this function using the following template:
 This strategy helps ensure the AI covers all necessary aspects of a problem rather than focusing only on the most obvious elements.
 
 ## Integrating Prompt Engineering with Intentional Prompting
+
+Intentional prompting isn't an alternative to prompt engineering—it's an evolution that incorporates prompt engineering techniques within a more comprehensive methodology. This integration allows us to leverage the power of well-crafted prompts while maintaining the educational and developmental benefits of intentional practice.
+
+### The Symbiotic Relationship
+
+Prompt engineering provides the tactical tools for effective AI interaction, while intentional prompting provides the strategic framework for applying these tools:
+
+| Prompt Engineering Provides | Intentional Prompting Provides |
+|----------------------------|--------------------------------|
+| Techniques for precise AI instructions | Framework for maintaining human agency |
+| Methods for optimizing AI responses | Structure for educational development |
+| Domain-specific prompting strategies | Process that builds understanding |
+| Input formatting best practices | Context for when/how to apply techniques |
+
+This relationship means that becoming skilled at intentional prompting requires developing competence in prompt engineering techniques, but applies those techniques within a thoughtful methodology that prioritizes human understanding and agency.
 
 The intentional prompting patterns we've explored can be integrated into various workflows and methodologies. While they align particularly well with the six-step programming methodology discussed in this book, their application extends far beyond this specific framework.
 

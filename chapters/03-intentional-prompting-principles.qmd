@@ -328,8 +328,68 @@ Intentional prompting includes ethical considerations about the use of AI in the
 - Create intentional learning projects where you limit AI assistance
 - Use AI to stretch beyond your current capabilities rather than stay within them
 
+## Addressing Common Concerns and Resistance to LLMs
+
+Despite their utility, Large Language Models face resistance from many programmers and educators. Some of these concerns have deep historical roots, while others arise from the unique characteristics of modern LLMs. Understanding and addressing these concerns is essential for effective adoption of intentional prompting.
+
+### The Ambiguity of Natural Language
+
+As far back as 1977, computer scientist Edsger W. Dijkstra presented a compelling critique of natural language programming in his essay "On the foolishness of 'natural language programming'". Dijkstra argued that programming fundamentally requires "the care and accuracy that is characteristic for the use of any formal symbolism" and that the inherent ambiguity of natural language made it unsuitable for the precision required in programming.
+
+Dijkstra's concerns were valid for his time, but modern LLM-based approaches offer new possibilities through iterative refinement processes:
+
+- **Progressive disambiguation** - Iterative approaches provide mechanisms to gradually eliminate ambiguities through multiple rounds of interaction, transforming imprecise natural language into precise formal representations
+- **Structured frameworks** - Methodologies like intentional prompting add structure to otherwise ambiguous interactions
+- **Human-in-the-loop validation** - The human programmer validates outputs and maintains final authority over implementation decisions
+
+The intentional prompting methodology directly addresses Dijkstra's concerns by providing a framework that bridges natural language and formal code, using the former as an entry point rather than a replacement for the latter.
+
+### The Non-Deterministic Nature of LLMs
+
+Another significant concern involves the non-deterministic behavior of LLMs—the fact that they can produce different outputs even when given the same input. This unpredictability raises legitimate questions about reliability, especially in mission-critical applications.
+
+Research has documented significant variations in LLM performance across multiple runs, with accuracy varying up to 15% and gaps between best and worst performance reaching as high as 70%. This variability stems from:
+
+1. **Input interpretation variability** - LLMs may interpret the same natural language prompt differently across different runs
+2. **Output generation variability** - Even with the same interpretation, the code generated may vary due to sampling methods
+
+The intentional prompting methodology addresses these concerns through:
+
+- **Structured evaluation** - The methodology provides clear criteria for evaluating generated code
+- **Explicit testing** - Step 6 (Test with Data) ensures thorough validation of any generated solution
+- **Human oversight** - The human programmer maintains control over the development process, reviewing and modifying generated code as needed
+- **Iterative refinement** - The methodology embraces multiple iterations to converge on reliable solutions
+
+### Procedural Knowledge Transfer
+
+Interestingly, LLMs excel at procedural tasks because they've inherited human problem-solving patterns through their training data. Research shows that LLMs have absorbed procedural knowledge through exposure to:
+
+- Error-checking protocols from technical manuals
+- Creative iteration cycles in writing samples
+- Mathematical proof structures in STEM literature
+- Software engineering best practices from code repositories
+
+This explains why models respond well to structured methodologies like intentional prompting—they're activating latent procedural knowledge that mirrors human problem-solving approaches.
+
+The six-step methodology leverages this characteristic by providing a framework that:
+
+- Activates the model's latent understanding of systematic problem-solving
+- Provides clear procedural guidance that aligns with effective human workflows
+- Creates a shared procedural language between human and AI
+
+### Finding the Right Balance
+
+The most effective approach to LLM integration lies in finding the right balance between permissive acceptance and dismissive rejection. The intentional prompting methodology represents this balanced middle ground:
+
+- It acknowledges LLMs' limitations regarding ambiguity and non-determinism
+- It establishes guardrails through a structured methodology
+- It leverages LLMs' strengths in pattern recognition and procedural knowledge
+- It maintains human agency and oversight throughout the development process
+
+By addressing these concerns directly and providing a structured framework for human-AI collaboration, intentional prompting offers a pragmatic approach that captures the benefits of AI assistance while mitigating its risks.
+
 ## Putting Principles Into Practice
 
-These principles—maintaining agency, understanding vs. copying, process over output, the learning mindset, and ethical considerations—form the foundation of intentional prompting.
+These principles—maintaining agency, understanding vs. copying, process over output, the learning mindset, ethical considerations, and addressing common concerns—form the foundation of intentional prompting.
 
 In the next section, we'll explore how these principles are applied through the six-step programming methodology, providing a structured approach to developing software with AI assistance.

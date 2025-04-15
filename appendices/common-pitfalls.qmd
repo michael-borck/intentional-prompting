@@ -288,6 +288,45 @@ Can you help me with the schema design and backend implementation first?
 - Scope broken down into manageable parts
 - Clear starting point specified
 
+## Confusing Prompt Engineering with Intentional Prompting
+
+### Symptoms
+
+- Focusing exclusively on crafting the perfect prompt to get complete solutions
+- Neglecting the manual work and understanding phases of the methodology
+- Measuring success solely by the quality of AI outputs rather than learning outcomes
+- Minimal critical evaluation of AI-generated solutions
+- Skipping the six-step methodology and moving directly to implementation
+
+### Root Causes
+
+- Misconception that intentional prompting is just about creating better prompts
+- Prioritizing short-term efficiency over long-term understanding
+- Not fully grasping the educational purpose of the intentional prompting methodology
+- Confusing the means (good prompts) with the end (developer understanding and growth)
+
+### Solutions
+
+#### Clarify the Distinction
+
+- Remember that prompt engineering is a set of techniques while intentional prompting is a complete methodology
+- Recognize that prompt engineering focuses on getting optimal outputs while intentional prompting focuses on the human development process
+- Understand that prompt engineering is a component of intentional prompting, not a replacement for it
+
+#### Balance Output and Process
+
+- Follow the complete six-step methodology even when it seems faster to skip steps
+- Evaluate success based on both the quality of the solution AND your understanding of it
+- Set aside time specifically for the "Work by Hand" and "Test with Data" steps, which are often neglected
+- Document your learning insights separate from code outputs
+
+#### Adopt a Learning Mindset
+
+- Ask AI to explain its solutions rather than just accepting them
+- Challenge yourself to modify and extend AI-generated code
+- Practice explaining solutions to others without referring to AI explanations
+- Identify gaps in your understanding and use AI to fill them deliberately
+
 ## Key Takeaways
 
 - **Be intentional about balancing AI assistance with skill development** to maintain your capabilities
@@ -296,5 +335,6 @@ Can you help me with the schema design and backend implementation first?
 - **Maintain system-level perspective** when implementing individual components
 - **Address ethical and legal concerns proactively** through documentation and transparent processes
 - **Learn from failures** by analyzing and improving your prompting approach
+- **Distinguish between prompt engineering techniques and the intentional prompting methodology**
 
 By recognizing and addressing these common pitfalls, you can maximize the benefits of AI assistance while avoiding its potential drawbacks.
