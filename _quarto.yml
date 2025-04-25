@@ -38,6 +38,10 @@ book:
     - appendices/common-pitfalls.qmd
     - appendices/ai-tool-comparison.qmd
     - appendices/glossary.qmd
+  
+  downloads: [pdf, epub]
+  repo-url: https://github.com/michael-borck/python-dev-book
+  repo-actions: [edit, issue]
 
 format:
   html:
