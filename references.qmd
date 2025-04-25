@@ -1,5 +1,0 @@
-# References {.unnumbered}
-
-<!-- Comment out references temporarily to fix PDF rendering -->
-<!-- ::: {#refs}
-::: -->

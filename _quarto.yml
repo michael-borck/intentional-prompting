@@ -5,7 +5,7 @@ project:
 book:
   title: "Intentional Prompting: Mastering the Human-AI Development Process"
   author: "Michael Borck"
-  date: "today"
+  date: "last-modified"
   chapters:
     - index.qmd
     - part: "Foundations"
@@ -33,37 +33,38 @@ book:
         - chapters/15-teaching-learning.qmd
         - chapters/16-future-directions.qmd
     - acknowledgments.qmd
-    - references.qmd
   appendices:
     - appendices/prompt-templates.qmd
     - appendices/common-pitfalls.qmd
     - appendices/ai-tool-comparison.qmd
     - appendices/glossary.qmd
 
-# Temporarily disable bibliography to fix PDF rendering
-# bibliography: references.bib
-
 format:
   html:
     theme: cosmo
     cover-image: images/cover.png
     css: styles.css
-    downloads:
-      - pdf
-      - epub
+    downloads: [pdf, epub]
+    code-copy: true
+    highlight-style: github
   pdf:
-    documentclass: scrreprt
-    include-in-header: 
-      text: |
-        \usepackage{xcolor}
-        \usepackage{listings}
-        % Make @ a non-special character in verbatim environments
-        \makeatletter
-        \let\orig@verbatim\verbatim
-        \def\verbatim{%
-          \catcode`\@=12\relax
-          \orig@verbatim
-        }
-        \makeatother
-  epub:
+    documentclass: scrbook
+    colorlinks: true
+    toc: true
+    toc-depth: 3
     cover-image: images/cover.png
+  epub:
+    toc: true
+    toc-depth: 3
+    cover-image: images/cover.png
+
+website:
+  favicon: assets/favicon.png
+  repo-url: https://github.com/michael-borck/intentional-prompting
+  repo-actions: [edit, issue]
+  open-graph: true
+
+execute:
+  enabled: false
+  freeze: auto
+
