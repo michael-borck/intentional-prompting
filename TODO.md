@@ -55,7 +55,6 @@
 - [x] Set up proper citations and bibliography
 - [x] Establish consistent formatting guidelines
 - [ ] Create preview renders of book
-- [ ] Set up CI/CD for book generation
 - [ ] Create PDF/EPUB versions
 
 ## Review Process 📝
