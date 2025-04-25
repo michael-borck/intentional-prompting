@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intentional Prompting: Mastering the Human-AI Development Process - 10&nbsp; Intentional Prompting Patterns</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/11-debugging-with-ai.html" rel="next">
+<link href="../chapters/09-test-with-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/10-intentional-prompting-patterns.html">Patterns &amp; Practices</a></li><li class="breadcrumb-item"><a href="../chapters/10-intentional-prompting-patterns.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Intentional Prompting: Mastering the Human-AI Development Process</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/michael-borck/python-dev-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ai-revolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The AI Revolution in Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-intentional-prompting-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Principles of Intentional Prompting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Methodology</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-six-step-methodology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-restate-and-identify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-work-by-hand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-pseudocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-convert-to-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convert to Code (Step 5)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-test-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Patterns &amp; Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-intentional-prompting-patterns.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-debugging-with-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-refactoring-strategies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-case-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-scaling-complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scaling to Complex Projects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-teaching-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Teaching and Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-future-directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Future Directions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/prompt-templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Prompt Templates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/common-pitfalls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Common Pitfalls and Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/ai-tool-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">AI Tool Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-art-of-guiding-ai" id="toc-the-art-of-guiding-ai" class="nav-link active" data-scroll-target="#the-art-of-guiding-ai"><span class="header-section-number">10.1</span> The Art of Guiding AI</a></li>
+  <li><a href="#prompt-engineering-a-foundational-discipline" id="toc-prompt-engineering-a-foundational-discipline" class="nav-link" data-scroll-target="#prompt-engineering-a-foundational-discipline"><span class="header-section-number">10.2</span> Prompt Engineering: A Foundational Discipline</a>
+  <ul class="collapse">
+  <li><a href="#from-prompt-engineering-to-intentional-prompting" id="toc-from-prompt-engineering-to-intentional-prompting" class="nav-link" data-scroll-target="#from-prompt-engineering-to-intentional-prompting"><span class="header-section-number">10.2.1</span> From Prompt Engineering to Intentional Prompting</a></li>
+  <li><a href="#core-prompt-engineering-techniques" id="toc-core-prompt-engineering-techniques" class="nav-link" data-scroll-target="#core-prompt-engineering-techniques"><span class="header-section-number">10.2.2</span> Core Prompt Engineering Techniques</a></li>
+  </ul></li>
+  <li><a href="#types-of-intentional-prompts" id="toc-types-of-intentional-prompts" class="nav-link" data-scroll-target="#types-of-intentional-prompts"><span class="header-section-number">10.3</span> Types of Intentional Prompts</a>
+  <ul class="collapse">
+  <li><a href="#foundation-prompts" id="toc-foundation-prompts" class="nav-link" data-scroll-target="#foundation-prompts"><span class="header-section-number">10.3.1</span> Foundation Prompts</a></li>
+  <li><a href="#clarification-prompts" id="toc-clarification-prompts" class="nav-link" data-scroll-target="#clarification-prompts"><span class="header-section-number">10.3.2</span> Clarification Prompts</a></li>
+  <li><a href="#scaffolding-prompts" id="toc-scaffolding-prompts" class="nav-link" data-scroll-target="#scaffolding-prompts"><span class="header-section-number">10.3.3</span> Scaffolding Prompts</a></li>
+  <li><a href="#challenge-prompts" id="toc-challenge-prompts" class="nav-link" data-scroll-target="#challenge-prompts"><span class="header-section-number">10.3.4</span> Challenge Prompts</a></li>
+  <li><a href="#refinement-prompts" id="toc-refinement-prompts" class="nav-link" data-scroll-target="#refinement-prompts"><span class="header-section-number">10.3.5</span> Refinement Prompts</a></li>
+  <li><a href="#error-induction-prompts" id="toc-error-induction-prompts" class="nav-link" data-scroll-target="#error-induction-prompts"><span class="header-section-number">10.3.6</span> Error Induction Prompts</a></li>
+  </ul></li>
+  <li><a href="#effective-prompting-patterns" id="toc-effective-prompting-patterns" class="nav-link" data-scroll-target="#effective-prompting-patterns"><span class="header-section-number">10.4</span> Effective Prompting Patterns</a>
+  <ul class="collapse">
+  <li><a href="#the-what-if-pattern" id="toc-the-what-if-pattern" class="nav-link" data-scroll-target="#the-what-if-pattern"><span class="header-section-number">10.4.1</span> The “What If?” Pattern</a></li>
+  <li><a href="#the-incremental-building-pattern" id="toc-the-incremental-building-pattern" class="nav-link" data-scroll-target="#the-incremental-building-pattern"><span class="header-section-number">10.4.2</span> The Incremental Building Pattern</a></li>
+  <li><a href="#the-deliberate-error-pattern" id="toc-the-deliberate-error-pattern" class="nav-link" data-scroll-target="#the-deliberate-error-pattern"><span class="header-section-number">10.4.3</span> The Deliberate Error Pattern</a></li>
+  <li><a href="#the-comparative-analysis-pattern" id="toc-the-comparative-analysis-pattern" class="nav-link" data-scroll-target="#the-comparative-analysis-pattern"><span class="header-section-number">10.4.4</span> The Comparative Analysis Pattern</a></li>
+  </ul></li>
+  <li><a href="#advanced-prompt-engineering-strategies" id="toc-advanced-prompt-engineering-strategies" class="nav-link" data-scroll-target="#advanced-prompt-engineering-strategies"><span class="header-section-number">10.5</span> Advanced Prompt Engineering Strategies</a>
+  <ul class="collapse">
+  <li><a href="#context-enhanced-prompting" id="toc-context-enhanced-prompting" class="nav-link" data-scroll-target="#context-enhanced-prompting"><span class="header-section-number">10.5.1</span> Context-Enhanced Prompting</a></li>
+  <li><a href="#constraint-based-prompting" id="toc-constraint-based-prompting" class="nav-link" data-scroll-target="#constraint-based-prompting"><span class="header-section-number">10.5.2</span> Constraint-Based Prompting</a></li>
+  <li><a href="#template-guided-prompting" id="toc-template-guided-prompting" class="nav-link" data-scroll-target="#template-guided-prompting"><span class="header-section-number">10.5.3</span> Template-Guided Prompting</a></li>
+  </ul></li>
+  <li><a href="#integrating-prompt-engineering-with-intentional-prompting" id="toc-integrating-prompt-engineering-with-intentional-prompting" class="nav-link" data-scroll-target="#integrating-prompt-engineering-with-intentional-prompting"><span class="header-section-number">10.6</span> Integrating Prompt Engineering with Intentional Prompting</a>
+  <ul class="collapse">
+  <li><a href="#the-symbiotic-relationship" id="toc-the-symbiotic-relationship" class="nav-link" data-scroll-target="#the-symbiotic-relationship"><span class="header-section-number">10.6.1</span> The Symbiotic Relationship</a></li>
+  <li><a href="#reinforcing-the-six-step-methodology" id="toc-reinforcing-the-six-step-methodology" class="nav-link" data-scroll-target="#reinforcing-the-six-step-methodology"><span class="header-section-number">10.6.2</span> Reinforcing the Six-Step Methodology</a></li>
+  <li><a href="#beyond-the-six-step-framework-universal-application" id="toc-beyond-the-six-step-framework-universal-application" class="nav-link" data-scroll-target="#beyond-the-six-step-framework-universal-application"><span class="header-section-number">10.6.3</span> Beyond the Six-Step Framework: Universal Application</a></li>
+  <li><a href="#ai-as-a-thoughtful-assistant" id="toc-ai-as-a-thoughtful-assistant" class="nav-link" data-scroll-target="#ai-as-a-thoughtful-assistant"><span class="header-section-number">10.6.4</span> AI as a Thoughtful Assistant</a></li>
+  </ul></li>
+  <li><a href="#measuring-your-progress" id="toc-measuring-your-progress" class="nav-link" data-scroll-target="#measuring-your-progress"><span class="header-section-number">10.7</span> Measuring Your Progress</a></li>
+  <li><a href="#case-study-improving-a-weather-data-function" id="toc-case-study-improving-a-weather-data-function" class="nav-link" data-scroll-target="#case-study-improving-a-weather-data-function"><span class="header-section-number">10.8</span> Case Study: Improving a Weather Data Function</a>
+  <ul class="collapse">
+  <li><a href="#initial-prompt" id="toc-initial-prompt" class="nav-link" data-scroll-target="#initial-prompt"><span class="header-section-number">10.8.1</span> Initial Prompt</a></li>
+  <li><a href="#initial-ai-generated-code" id="toc-initial-ai-generated-code" class="nav-link" data-scroll-target="#initial-ai-generated-code"><span class="header-section-number">10.8.2</span> Initial AI-Generated Code</a></li>
+  <li><a href="#analysis-of-the-initial-code" id="toc-analysis-of-the-initial-code" class="nav-link" data-scroll-target="#analysis-of-the-initial-code"><span class="header-section-number">10.8.3</span> Analysis of the Initial Code</a></li>
+  <li><a href="#follow-up-prompt-with-specific-improvements" id="toc-follow-up-prompt-with-specific-improvements" class="nav-link" data-scroll-target="#follow-up-prompt-with-specific-improvements"><span class="header-section-number">10.8.4</span> Follow-up Prompt with Specific Improvements</a></li>
+  <li><a href="#improved-ai-generated-code" id="toc-improved-ai-generated-code" class="nav-link" data-scroll-target="#improved-ai-generated-code"><span class="header-section-number">10.8.5</span> Improved AI-Generated Code</a></li>
+  <li><a href="#why-this-prompting-strategy-was-effective" id="toc-why-this-prompting-strategy-was-effective" class="nav-link" data-scroll-target="#why-this-prompting-strategy-was-effective"><span class="header-section-number">10.8.6</span> Why This Prompting Strategy Was Effective</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">10.9</span> Key Takeaways</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/michael-borck/python-dev-book/edit/main/chapters/10-intentional-prompting-patterns.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/michael-borck/python-dev-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="the-art-of-guiding-ai" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="the-art-of-guiding-ai"><span class="header-section-number">10.1</span> The Art of Guiding AI</h2>
+<p>Effective collaboration with AI assistants requires more than just asking for solutions—it demands a thoughtful approach to crafting prompts that guide the AI toward helpful, educational responses. This chapter explores key patterns for intentional prompting that maximize the learning and development value of AI interactions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/intentional-prompting-patterns.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Intentional Prompting Patterns</figcaption>
+</figure>
+</div>
+</section>
+<section id="prompt-engineering-a-foundational-discipline" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="prompt-engineering-a-foundational-discipline"><span class="header-section-number">10.2</span> Prompt Engineering: A Foundational Discipline</h2>
+<p>Prompt engineering has emerged as a critical field in AI interaction, focusing on how to craft precise instructions that help AI models produce accurate, relevant, and contextually appropriate responses. Beyond casual interaction, it encompasses systematic techniques for improving AI output quality.</p>
+<section id="from-prompt-engineering-to-intentional-prompting" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="from-prompt-engineering-to-intentional-prompting"><span class="header-section-number">10.2.1</span> From Prompt Engineering to Intentional Prompting</h3>
+<p>It’s important to understand the relationship between prompt engineering and intentional prompting:</p>
+<p><strong>Prompt engineering</strong> is primarily concerned with getting optimal outputs from AI systems. It focuses on crafting the right words, examples, and instructions to elicit high-quality responses from language models. Prompt engineers develop expertise in understanding model behaviors, leveraging context windows effectively, and using specialized techniques to guide AI outputs.</p>
+<p><strong>Intentional prompting</strong> incorporates prompt engineering techniques but embeds them within a comprehensive methodology for approaching programming tasks. While prompt engineering asks “How can I get the best output from this AI?”, intentional prompting asks “How can I use this AI as part of a thoughtful development process that maintains my understanding and control?”</p>
+<p>The distinction becomes clearer when considering how each approach would handle a complex programming task:</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 41%">
+<col style="width: 46%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>Prompt Engineering Approach</th>
+<th>Intentional Prompting Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Initial Task Analysis</strong></td>
+<td>Optimize prompt for detailed requirements</td>
+<td>Follow Steps 1-2: Restate problem and identify inputs/outputs</td>
+</tr>
+<tr class="even">
+<td><strong>Problem Understanding</strong></td>
+<td>Focus on conveying requirements clearly to AI</td>
+<td>Follow Step 3: Work through examples by hand to build understanding</td>
+</tr>
+<tr class="odd">
+<td><strong>Solution Design</strong></td>
+<td>Craft prompts to generate complete solutions</td>
+<td>Follow Step 4: Create pseudocode before implementation</td>
+</tr>
+<tr class="even">
+<td><strong>Code Generation</strong></td>
+<td>Refine prompts until satisfactory code is produced</td>
+<td>Follow Step 5: Use AI to implement pseudocode while maintaining understanding</td>
+</tr>
+<tr class="odd">
+<td><strong>Verification</strong></td>
+<td>Prompt AI to validate generated code</td>
+<td>Follow Step 6: Rigorously test with data, especially edge cases</td>
+</tr>
+<tr class="even">
+<td><strong>Learning Outcome</strong></td>
+<td>Improvement in prompt crafting skills</td>
+<td>Improvement in both programming and AI collaboration skills</td>
+</tr>
+</tbody>
+</table>
+<p>Intentional prompting doesn’t replace prompt engineering—it integrates its techniques within a broader approach that preserves human agency, understanding, and skill development.</p>
+</section>
+<section id="core-prompt-engineering-techniques" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="core-prompt-engineering-techniques"><span class="header-section-number">10.2.2</span> Core Prompt Engineering Techniques</h3>
+<section id="zero-shot-prompting" class="level4" data-number="10.2.2.1">
+<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="zero-shot-prompting"><span class="header-section-number">10.2.2.1</span> Zero-Shot Prompting</h4>
+<p>Zero-shot prompting instructs an AI to perform a task without providing examples within the prompt. This technique leverages the model’s pre-existing knowledge to generate responses to novel tasks.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Write a function that validates email addresses using regular expressions.</code></pre>
+<p>Zero-shot prompting works well for common tasks where the AI has extensive training data, but may struggle with specialized or complex tasks.</p>
+</section>
+<section id="few-shot-prompting" class="level4" data-number="10.2.2.2">
+<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="few-shot-prompting"><span class="header-section-number">10.2.2.2</span> Few-Shot Prompting</h4>
+<p>This technique provides the model with one or more examples of expected input-output pairs before presenting the actual task. Examples help the model understand the desired format and approach.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Here's an example of validating a phone number:
+
+Input: "555-123-4567"
+Output: Valid (matches pattern XXX-XXX-XXXX)
+
+Input: "5551234567"
+Output: Valid (can be reformatted to XXX-XXX-XXXX)
+
+Input: "555-1234"
+Output: Invalid (too few digits)
+
+Now, write a function that validates phone numbers according to this logic.</code></pre>
+<p>Few-shot prompting is particularly valuable for tasks with specific formatting requirements or uncommon patterns.</p>
+</section>
+<section id="chain-of-thought-prompting" class="level4" data-number="10.2.2.3">
+<h4 data-number="10.2.2.3" class="anchored" data-anchor-id="chain-of-thought-prompting"><span class="header-section-number">10.2.2.3</span> Chain-of-Thought Prompting</h4>
+<p>Chain-of-Thought (CoT) prompting encourages the model to break down complex reasoning into intermediate steps, leading to more comprehensive and accurate outputs. This technique mimics human reasoning processes.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Let's solve this step by step: Write a function that finds the longest common subsequence of two strings. 
+
+First, let's understand what a subsequence is...
+Next, let's think about how to identify common subsequences...
+Then, we'll need an algorithm to find the longest one...</code></pre>
+<p>Chain-of-thought prompting significantly improves performance on problems requiring multi-step reasoning or algorithmic thinking.</p>
+</section>
+<section id="role-based-prompting" class="level4" data-number="10.2.2.4">
+<h4 data-number="10.2.2.4" class="anchored" data-anchor-id="role-based-prompting"><span class="header-section-number">10.2.2.4</span> Role-Based Prompting</h4>
+<p>Role-based prompting assigns a specific professional or character role to the AI, which helps frame its responses within a particular domain of expertise or perspective.</p>
+<p><strong>Example:</strong></p>
+<pre><code>As an experienced software architect, analyze this function and suggest improvements for scalability and performance.</code></pre>
+<p>This technique helps orient the AI toward specific terminology, frameworks, and priorities relevant to the assigned role.</p>
+</section>
+</section>
+</section>
+<section id="types-of-intentional-prompts" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="types-of-intentional-prompts"><span class="header-section-number">10.3</span> Types of Intentional Prompts</h2>
+<section id="foundation-prompts" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="foundation-prompts"><span class="header-section-number">10.3.1</span> Foundation Prompts</h3>
+<p>Foundation prompts establish the baseline requirements for a programming task. Instead of just asking for a solution, these prompts set the stage for a productive dialogue.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"I need to write a Python program that analyzes student grades and calculates statistics."
+
+"Can you help me design a function that validates user input according to these requirements..."
+
+"I'm working on a data structure to represent a family tree. What would be a good approach?"</code></pre>
+<p>Foundation prompts should provide enough context for the AI to understand the goal without being overly prescriptive about implementation details.</p>
+</section>
+<section id="clarification-prompts" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="clarification-prompts"><span class="header-section-number">10.3.2</span> Clarification Prompts</h3>
+<p>Clarification prompts refine requirements and explore edge cases before diving into implementation.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"Should the function handle negative numbers, or can we assume all inputs are positive?"
+
+"What's a better approach for storing this data: a nested dictionary or a custom class?"
+
+"How should we handle the case where a user enters text instead of a number?"</code></pre>
+<p>These prompts encourage thinking about requirements thoroughly before committing to code, a practice that prevents rework and bugs.</p>
+</section>
+<section id="scaffolding-prompts" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="scaffolding-prompts"><span class="header-section-number">10.3.3</span> Scaffolding Prompts</h3>
+<p>Scaffolding prompts support learning by breaking down complex concepts into understandable components.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"Before we implement this recursion, can you explain how the call stack will work in this case?"
+
+"What's happening in this line of code that uses list comprehension? Can you break it down step by step?"
+
+"Can you show me how this algorithm would process this specific input, step by step?"</code></pre>
+<p>These prompts transform the AI from a code generator into a tutor that helps build deeper understanding.</p>
+</section>
+<section id="challenge-prompts" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="challenge-prompts"><span class="header-section-number">10.3.4</span> Challenge Prompts</h3>
+<p>Challenge prompts deliberately introduce programming challenges to test understanding and explore potential issues.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"What happens if the user enters an empty string here?"
+
+"How would this code handle a very large dataset? Would it still be efficient?"
+
+"Is there a potential race condition in this multithreaded approach?"</code></pre>
+<p>Challenge prompts help develop critical thinking about code rather than just accepting first solutions.</p>
+</section>
+<section id="refinement-prompts" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="refinement-prompts"><span class="header-section-number">10.3.5</span> Refinement Prompts</h3>
+<p>Refinement prompts push for code improvements based on best practices and efficiency considerations.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"Can we make this code more efficient in terms of memory usage?"
+
+"Is there a more idiomatic way to write this in Python?"
+
+"How could we refactor this to improve readability while maintaining functionality?"</code></pre>
+<p>These prompts help develop an eye for quality and foster continuous improvement.</p>
+</section>
+<section id="error-induction-prompts" class="level3" data-number="10.3.6">
+<h3 data-number="10.3.6" class="anchored" data-anchor-id="error-induction-prompts"><span class="header-section-number">10.3.6</span> Error Induction Prompts</h3>
+<p>Error induction prompts intentionally guide the AI toward making specific mistakes to explore error handling and debugging processes.</p>
+<p><strong>Examples:</strong></p>
+<pre><code>"Let's use a recursive approach without considering the base case first."
+
+"What if we don't handle the edge case where the input is empty?"
+
+"Let's implement this without worrying about thread safety for now."</code></pre>
+<p>These prompts create valuable learning opportunities by examining potential failure modes.</p>
+</section>
+</section>
+<section id="effective-prompting-patterns" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="effective-prompting-patterns"><span class="header-section-number">10.4</span> Effective Prompting Patterns</h2>
+<section id="the-what-if-pattern" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="the-what-if-pattern"><span class="header-section-number">10.4.1</span> The “What If?” Pattern</h3>
+<ol type="1">
+<li>Get working code from the AI</li>
+<li>Ask “What if [edge case]?”</li>
+<li>Evaluate the AI’s solution against your understanding</li>
+<li>Repeat with increasingly complex edge cases</li>
+</ol>
+<p>This pattern systematically explores the boundaries of a solution, building robustness and understanding.</p>
+</section>
+<section id="the-incremental-building-pattern" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="the-incremental-building-pattern"><span class="header-section-number">10.4.2</span> The Incremental Building Pattern</h3>
+<ol type="1">
+<li>Start with a minimally viable solution</li>
+<li>Add one feature at a time</li>
+<li>Integrate and test after each addition</li>
+</ol>
+<p>This pattern mirrors agile development practices, keeping the development process manageable and focused.</p>
+</section>
+<section id="the-deliberate-error-pattern" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="the-deliberate-error-pattern"><span class="header-section-number">10.4.3</span> The Deliberate Error Pattern</h3>
+<ol type="1">
+<li>Let the AI generate a solution</li>
+<li>Identify a potential issue (even if the AI didn’t make the error)</li>
+<li>Ask: “Is there a problem with how this handles [specific case]?”</li>
+<li>Use the discussion to deepen understanding</li>
+</ol>
+<p>This pattern develops debugging skills and critical evaluation of code.</p>
+</section>
+<section id="the-comparative-analysis-pattern" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="the-comparative-analysis-pattern"><span class="header-section-number">10.4.4</span> The Comparative Analysis Pattern</h3>
+<ol type="1">
+<li>Ask the AI to implement a solution two different ways</li>
+<li>Request a comparison of trade-offs between approaches</li>
+<li>Make an informed decision based on the analysis</li>
+</ol>
+<p>This pattern builds judgment about different implementation strategies.</p>
+</section>
+</section>
+<section id="advanced-prompt-engineering-strategies" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="advanced-prompt-engineering-strategies"><span class="header-section-number">10.5</span> Advanced Prompt Engineering Strategies</h2>
+<p>Beyond the basic techniques described earlier, several advanced prompt engineering strategies can further enhance your interactions with AI coding assistants:</p>
+<section id="context-enhanced-prompting" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="context-enhanced-prompting"><span class="header-section-number">10.5.1</span> Context-Enhanced Prompting</h3>
+<p>This technique involves providing rich background information to help the AI generate more appropriate and contextually relevant responses.</p>
+<p><strong>Example:</strong></p>
+<pre><code>I'm building a web application with React frontend and Django backend. The application needs to handle both authenticated and unauthenticated users. We're using JWT for authentication. 
+
+Now I need to implement a function that checks if a user's token is valid and returns appropriate data based on their permission level.</code></pre>
+<p>Context-enhanced prompting is particularly valuable when working on components of larger systems where architectural decisions and constraints need to be considered.</p>
+</section>
+<section id="constraint-based-prompting" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="constraint-based-prompting"><span class="header-section-number">10.5.2</span> Constraint-Based Prompting</h3>
+<p>By explicitly stating constraints and requirements, you can guide the AI to produce solutions that fit within your project’s specific parameters.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Write a sorting algorithm that:
+- Uses O(n log n) time complexity
+- Uses no more than O(1) extra space
+- Is stable (maintains relative order of equal elements)
+- Works well with partially sorted data</code></pre>
+<p>This approach is especially useful for performance-critical applications or when working within specific technical limitations.</p>
+</section>
+<section id="template-guided-prompting" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="template-guided-prompting"><span class="header-section-number">10.5.3</span> Template-Guided Prompting</h3>
+<p>Template-guided prompting provides a structural framework that the AI should follow in its response. This ensures consistency and completeness.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Analyze this function using the following template:
+1. Time complexity: 
+2. Space complexity:
+3. Edge cases not handled:
+4. Potential optimizations:
+5. Clean code suggestions:</code></pre>
+<p>This strategy helps ensure the AI covers all necessary aspects of a problem rather than focusing only on the most obvious elements.</p>
+</section>
+</section>
+<section id="integrating-prompt-engineering-with-intentional-prompting" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="integrating-prompt-engineering-with-intentional-prompting"><span class="header-section-number">10.6</span> Integrating Prompt Engineering with Intentional Prompting</h2>
+<p>Intentional prompting isn’t an alternative to prompt engineering—it’s an evolution that incorporates prompt engineering techniques within a more comprehensive methodology. This integration allows us to leverage the power of well-crafted prompts while maintaining the educational and developmental benefits of intentional practice.</p>
+<section id="the-symbiotic-relationship" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="the-symbiotic-relationship"><span class="header-section-number">10.6.1</span> The Symbiotic Relationship</h3>
+<p>Prompt engineering provides the tactical tools for effective AI interaction, while intentional prompting provides the strategic framework for applying these tools:</p>
+<table class="table">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prompt Engineering Provides</th>
+<th>Intentional Prompting Provides</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Techniques for precise AI instructions</td>
+<td>Framework for maintaining human agency</td>
+</tr>
+<tr class="even">
+<td>Methods for optimizing AI responses</td>
+<td>Structure for educational development</td>
+</tr>
+<tr class="odd">
+<td>Domain-specific prompting strategies</td>
+<td>Process that builds understanding</td>
+</tr>
+<tr class="even">
+<td>Input formatting best practices</td>
+<td>Context for when/how to apply techniques</td>
+</tr>
+</tbody>
+</table>
+<p>This relationship means that becoming skilled at intentional prompting requires developing competence in prompt engineering techniques, but applies those techniques within a thoughtful methodology that prioritizes human understanding and agency.</p>
+<p>The intentional prompting patterns we’ve explored can be integrated into various workflows and methodologies. While they align particularly well with the six-step programming methodology discussed in this book, their application extends far beyond this specific framework.</p>
+</section>
+<section id="reinforcing-the-six-step-methodology" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="reinforcing-the-six-step-methodology"><span class="header-section-number">10.6.2</span> Reinforcing the Six-Step Methodology</h3>
+<p>Intentional prompting naturally reinforces our six-step programming methodology:</p>
+<ol type="1">
+<li><strong>Restate the problem</strong> → Use foundation prompts and chain-of-thought techniques to clarify the problem</li>
+<li><strong>Identify input/output</strong> → Use clarification prompts and constraint-based prompting to define boundaries</li>
+<li><strong>Work by hand</strong> → Do this yourself, then use few-shot prompting to verify understanding</li>
+<li><strong>Write pseudocode</strong> → Use template-guided prompting for consistent pseudocode structure</li>
+<li><strong>Convert to code</strong> → Apply role-based prompting (e.g., “as an expert Python developer”) for idiomatic code</li>
+<li><strong>Test with data</strong> → Combine challenge prompts with context-enhanced prompting for thorough testing</li>
+</ol>
+<p>By combining formal prompt engineering techniques with intentional prompting patterns within this methodology, you develop a deeper understanding of programming concepts than simply asking for complete solutions.</p>
+</section>
+<section id="beyond-the-six-step-framework-universal-application" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="beyond-the-six-step-framework-universal-application"><span class="header-section-number">10.6.3</span> Beyond the Six-Step Framework: Universal Application</h3>
+<p>While our methodology provides a structured approach, the core principles of intentional prompting apply universally across different development approaches and even beyond programming:</p>
+<section id="in-agile-development" class="level4" data-number="10.6.3.1">
+<h4 data-number="10.6.3.1" class="anchored" data-anchor-id="in-agile-development"><span class="header-section-number">10.6.3.1</span> In Agile Development</h4>
+<ul>
+<li>Use foundation and clarification prompts during sprint planning</li>
+<li>Apply challenge prompts during code reviews</li>
+<li>Leverage refinement prompts during refactoring sprints</li>
+<li>Use template-guided prompting for documentation tasks</li>
+</ul>
+</section>
+<section id="in-domain-specific-development" class="level4" data-number="10.6.3.2">
+<h4 data-number="10.6.3.2" class="anchored" data-anchor-id="in-domain-specific-development"><span class="header-section-number">10.6.3.2</span> In Domain-Specific Development</h4>
+<ul>
+<li><strong>Data Science</strong>: Apply chain-of-thought prompting to break down complex analytical problems</li>
+<li><strong>Front-End Development</strong>: Use visual constraint prompts for UI implementation</li>
+<li><strong>DevOps</strong>: Leverage role-based prompting for security auditing and configuration</li>
+<li><strong>Systems Architecture</strong>: Apply comparative analysis prompts when evaluating design alternatives</li>
+</ul>
+</section>
+<section id="beyond-programming" class="level4" data-number="10.6.3.3">
+<h4 data-number="10.6.3.3" class="anchored" data-anchor-id="beyond-programming"><span class="header-section-number">10.6.3.3</span> Beyond Programming</h4>
+<p>The principles of intentional prompting extend to:</p>
+<ul>
+<li><strong>Technical writing</strong>: Guiding AI to produce clear, structured documentation</li>
+<li><strong>Educational content</strong>: Creating learning materials that build understanding</li>
+<li><strong>Project management</strong>: Breaking down complex tasks and planning workflows</li>
+<li><strong>Problem-solving in any domain</strong>: Applying structured thinking to any challenge</li>
+</ul>
+</section>
+</section>
+<section id="ai-as-a-thoughtful-assistant" class="level3" data-number="10.6.4">
+<h3 data-number="10.6.4" class="anchored" data-anchor-id="ai-as-a-thoughtful-assistant"><span class="header-section-number">10.6.4</span> AI as a Thoughtful Assistant</h3>
+<p>Across all these applications, intentional prompting embraces AI as a thoughtful assistant rather than a replacement for human judgment. This partnership model is based on five key principles:</p>
+<ol type="1">
+<li><strong>Human-led workflows</strong>: The human sets goals, defines parameters, and makes the final decisions</li>
+<li><strong>Critical evaluation</strong>: Thoughtfully evaluating AI suggestions based on expertise and context</li>
+<li><strong>Iterative collaboration</strong>: Engaging in a refinement process where AI suggestions improve through feedback</li>
+<li><strong>Domain-appropriate trust</strong>: Recognizing where AI excels versus where human judgment is essential</li>
+<li><strong>Skill complementarity</strong>: Using AI for appropriate tasks while keeping human focus on creative and strategic aspects</li>
+</ol>
+<p>By applying these principles across any methodology or domain, intentional prompting creates a collaborative relationship that leverages both human and AI strengths while overcoming their respective limitations.</p>
+</section>
+</section>
+<section id="measuring-your-progress" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="measuring-your-progress"><span class="header-section-number">10.7</span> Measuring Your Progress</h2>
+<p>As you practice intentional prompting, you can track your growth:</p>
+<p><strong>Beginner Level:</strong> - You can identify obvious errors in AI-generated code - You depend on the AI to explain most concepts - Your prompts are simple and general</p>
+<p><strong>Intermediate Level:</strong> - You can spot subtle logical errors - You ask about specific programming concepts - Your prompts include anticipated edge cases</p>
+<p><strong>Advanced Level:</strong> - You strategically guide the AI toward teaching moments - You compare multiple solution approaches - Your prompts demonstrate computational thinking - You question efficiency, readability, and best practices</p>
+</section>
+<section id="case-study-improving-a-weather-data-function" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="case-study-improving-a-weather-data-function"><span class="header-section-number">10.8</span> Case Study: Improving a Weather Data Function</h2>
+<p>Let’s examine a practical example of intentional prompting that demonstrates how to guide an AI from a basic implementation to a robust solution.</p>
+<section id="initial-prompt" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="initial-prompt"><span class="header-section-number">10.8.1</span> Initial Prompt</h3>
+<p>A developer starts with a simple request:</p>
+<pre><code>Write a function to retrieve weather data from the wttr.in API for a given location.</code></pre>
+</section>
+<section id="initial-ai-generated-code" class="level3" data-number="10.8.2">
+<h3 data-number="10.8.2" class="anchored" data-anchor-id="initial-ai-generated-code"><span class="header-section-number">10.8.2</span> Initial AI-Generated Code</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_weather(location):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> requests</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f"https://wttr.in/</span><span class="sc">{</span>location<span class="sc">}</span><span class="ss">?format=j1"</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> response.json()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="analysis-of-the-initial-code" class="level3" data-number="10.8.3">
+<h3 data-number="10.8.3" class="anchored" data-anchor-id="analysis-of-the-initial-code"><span class="header-section-number">10.8.3</span> Analysis of the Initial Code</h3>
+<p>The developer analyzes the initial code and identifies several issues:</p>
+<ol type="1">
+<li>No error handling - will crash if the API is down or returns an error</li>
+<li>No input validation for the location parameter</li>
+<li>Returns the raw API response which is complex and includes unnecessary data</li>
+<li>No timeout parameter which could cause the application to hang</li>
+<li>No docstring or comments explaining how to use the function</li>
+</ol>
+</section>
+<section id="follow-up-prompt-with-specific-improvements" class="level3" data-number="10.8.4">
+<h3 data-number="10.8.4" class="anchored" data-anchor-id="follow-up-prompt-with-specific-improvements"><span class="header-section-number">10.8.4</span> Follow-up Prompt with Specific Improvements</h3>
+<p>The developer then crafts a follow-up prompt that addresses each identified issue:</p>
+<pre><code>Thanks for the starting point. I'd like to improve this function with:
+
+1. Error handling for API failures and bad responses
+2. Location input validation
+3. A timeout parameter to prevent hanging
+4. A way to process the response to return only essential weather information
+5. Proper documentation with parameters and return values explained
+
+Also, can you make it handle the forecast_days parameter to allow getting forecast for multiple days?</code></pre>
+</section>
+<section id="improved-ai-generated-code" class="level3" data-number="10.8.5">
+<h3 data-number="10.8.5" class="anchored" data-anchor-id="improved-ai-generated-code"><span class="header-section-number">10.8.5</span> Improved AI-Generated Code</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_weather_data(location, forecast_days<span class="op">=</span><span class="dv">5</span>, timeout<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Retrieve weather data for a specified location from wttr.in API.</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">        location (str): City or location name</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">        forecast_days (int): Number of days to forecast (1-5)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">        timeout (int): Timeout for API request in seconds</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">        dict: Weather data including current conditions and forecast,</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">             or None if an error occurred</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> requests</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Input validation</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> location <span class="kw">or</span> <span class="kw">not</span> <span class="bu">isinstance</span>(location, <span class="bu">str</span>):</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Error: Location must be a non-empty string"</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="dv">1</span> <span class="op">&lt;=</span> forecast_days <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Error: forecast_days must be between 1 and 5"</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        forecast_days <span class="op">=</span> <span class="bu">min</span>(<span class="bu">max</span>(<span class="dv">1</span>, forecast_days), <span class="dv">5</span>)  <span class="co"># Clamp to valid range</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up the location string</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    location <span class="op">=</span> location.strip().replace(<span class="st">" "</span>, <span class="st">"+"</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Make request to wttr.in API</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"https://wttr.in/</span><span class="sc">{</span>location<span class="sc">}</span><span class="ss">?format=j1"</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span>timeout)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        response.raise_for_status()  <span class="co"># Raise exception for HTTP errors</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Parse JSON response</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> response.json()</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Process and extract relevant information</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> {</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">"location"</span>: location.replace(<span class="st">"+"</span>, <span class="st">" "</span>),</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>            <span class="st">"current"</span>: {</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>                <span class="st">"temperature"</span>: {</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"current"</span>: <span class="bu">int</span>(data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"temp_C"</span>]),</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"feels_like"</span>: <span class="bu">int</span>(data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"FeelsLikeC"</span>])</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>                <span class="st">"condition"</span>: data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"weatherDesc"</span>][<span class="dv">0</span>][<span class="st">"value"</span>],</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">"humidity"</span>: <span class="bu">int</span>(data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"humidity"</span>]),</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">"wind"</span>: {</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"speed"</span>: <span class="bu">int</span>(data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"windspeedKmph"</span>]),</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"direction"</span>: data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"winddir16Point"</span>]</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>                <span class="st">"precipitation"</span>: <span class="bu">float</span>(data[<span class="st">"current_condition"</span>][<span class="dv">0</span>][<span class="st">"precipMM"</span>])</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>            },</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"forecast"</span>: []</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add forecast data</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(forecast_days, <span class="bu">len</span>(data[<span class="st">"weather"</span>]))):</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>            day <span class="op">=</span> data[<span class="st">"weather"</span>][i]</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>            forecast_day <span class="op">=</span> {</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>                <span class="st">"date"</span>: day[<span class="st">"date"</span>],</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>                <span class="st">"max_temp"</span>: <span class="bu">int</span>(day[<span class="st">"maxtempC"</span>]),</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>                <span class="st">"min_temp"</span>: <span class="bu">int</span>(day[<span class="st">"mintempC"</span>]),</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>                <span class="st">"condition"</span>: day[<span class="st">"hourly"</span>][<span class="dv">4</span>][<span class="st">"weatherDesc"</span>][<span class="dv">0</span>][<span class="st">"value"</span>],  <span class="co"># Midday condition</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>                <span class="st">"precipitation"</span>: {</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"chance"</span>: <span class="bu">int</span>(day[<span class="st">"hourly"</span>][<span class="dv">4</span>][<span class="st">"chanceofrain"</span>]),</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"amount"</span>: <span class="bu">float</span>(day[<span class="st">"hourly"</span>][<span class="dv">4</span>][<span class="st">"precipMM"</span>])</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>                },</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>                <span class="st">"wind"</span>: {</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"speed"</span>: <span class="bu">int</span>(day[<span class="st">"hourly"</span>][<span class="dv">4</span>][<span class="st">"windspeedKmph"</span>]),</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"direction"</span>: day[<span class="st">"hourly"</span>][<span class="dv">4</span>][<span class="st">"winddir16Point"</span>]</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>            result[<span class="st">"forecast"</span>].append(forecast_day)</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> requests.exceptions.RequestException <span class="im">as</span> e:</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error retrieving weather data: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> (<span class="pp">KeyError</span>, <span class="pp">ValueError</span>, <span class="pp">TypeError</span>) <span class="im">as</span> e:</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error processing weather data: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="why-this-prompting-strategy-was-effective" class="level3" data-number="10.8.6">
+<h3 data-number="10.8.6" class="anchored" data-anchor-id="why-this-prompting-strategy-was-effective"><span class="header-section-number">10.8.6</span> Why This Prompting Strategy Was Effective</h3>
+<p>The follow-up prompt was effective because:</p>
+<ol type="1">
+<li><strong>It identified specific problems</strong> in the initial code rather than just asking for “better code”</li>
+<li><strong>It requested specific improvements</strong> with clear objectives (error handling, validation, etc.)</li>
+<li><strong>It suggested a new feature</strong> (forecast_days parameter) that made the function more useful</li>
+<li><strong>It asked for proper documentation</strong> which resulted in comprehensive docstrings</li>
+</ol>
+<p>This approach guided the AI to generate a much more robust function that:</p>
+<ul>
+<li>Is properly documented</li>
+<li>Validates inputs</li>
+<li>Has comprehensive error handling</li>
+<li>Returns structured, processed data instead of raw API response</li>
+<li>Includes the new forecast functionality requested</li>
+</ul>
+<p>The key to effective prompting was being specific about what needed improvement and why, rather than making vague requests for “better” code.</p>
+</section>
+</section>
+<section id="key-takeaways" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">10.9</span> Key Takeaways</h2>
+<ol type="1">
+<li>The goal is <strong>not</strong> to get a perfect solution from the AI, but to use the interaction to deepen your understanding</li>
+<li>Your programming knowledge is demonstrated by the <strong>quality of your prompts</strong></li>
+<li>Intentionally introducing challenges and constraints leads to better learning outcomes</li>
+<li>The best programmers aren’t those who know all the answers, but those who know how to ask the right questions</li>
+<li>Specific, targeted follow-up prompts yield much better results than vague requests for improvement</li>
+</ol>
+<p>In the next chapter, we’ll explore how these prompting patterns can be applied specifically to debugging tasks, creating a powerful workflow for solving problems in your code.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/09-test-with-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/11-debugging-with-ai.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

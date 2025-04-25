@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intentional Prompting: Mastering the Human-AI Development Process - 11&nbsp; Debugging with AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/12-refactoring-strategies.html" rel="next">
+<link href="../chapters/10-intentional-prompting-patterns.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/10-intentional-prompting-patterns.html">Patterns &amp; Practices</a></li><li class="breadcrumb-item"><a href="../chapters/11-debugging-with-ai.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Intentional Prompting: Mastering the Human-AI Development Process</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/michael-borck/python-dev-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ai-revolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The AI Revolution in Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-intentional-prompting-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Principles of Intentional Prompting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Methodology</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-six-step-methodology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-restate-and-identify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-work-by-hand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-pseudocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-convert-to-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convert to Code (Step 5)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-test-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Patterns &amp; Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-intentional-prompting-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-debugging-with-ai.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-refactoring-strategies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-case-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-scaling-complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scaling to Complex Projects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-teaching-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Teaching and Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-future-directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Future Directions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/prompt-templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Prompt Templates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/common-pitfalls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Common Pitfalls and Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/ai-tool-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">AI Tool Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#common-debugging-scenarios" id="toc-common-debugging-scenarios" class="nav-link active" data-scroll-target="#common-debugging-scenarios"><span class="header-section-number">11.1</span> Common Debugging Scenarios</a>
+  <ul class="collapse">
+  <li><a href="#syntax-errors" id="toc-syntax-errors" class="nav-link" data-scroll-target="#syntax-errors"><span class="header-section-number">11.1.1</span> Syntax Errors</a></li>
+  <li><a href="#the-hypothesis-testing-approach" id="toc-the-hypothesis-testing-approach" class="nav-link" data-scroll-target="#the-hypothesis-testing-approach"><span class="header-section-number">11.1.2</span> The Hypothesis Testing Approach</a></li>
+  <li><a href="#the-comparative-analysis-approach" id="toc-the-comparative-analysis-approach" class="nav-link" data-scroll-target="#the-comparative-analysis-approach"><span class="header-section-number">11.1.3</span> The Comparative Analysis Approach</a></li>
+  </ul></li>
+  <li><a href="#understanding-error-messages-with-ai" id="toc-understanding-error-messages-with-ai" class="nav-link" data-scroll-target="#understanding-error-messages-with-ai"><span class="header-section-number">11.2</span> Understanding Error Messages with AI</a>
+  <ul class="collapse">
+  <li><a href="#anatomy-of-error-messages" id="toc-anatomy-of-error-messages" class="nav-link" data-scroll-target="#anatomy-of-error-messages"><span class="header-section-number">11.2.1</span> Anatomy of Error Messages</a></li>
+  <li><a href="#common-error-patterns" id="toc-common-error-patterns" class="nav-link" data-scroll-target="#common-error-patterns"><span class="header-section-number">11.2.2</span> Common Error Patterns</a></li>
+  </ul></li>
+  <li><a href="#debugging-strategies-with-ai" id="toc-debugging-strategies-with-ai" class="nav-link" data-scroll-target="#debugging-strategies-with-ai"><span class="header-section-number">11.3</span> Debugging Strategies with AI</a>
+  <ul class="collapse">
+  <li><a href="#rubber-duck-debugging" id="toc-rubber-duck-debugging" class="nav-link" data-scroll-target="#rubber-duck-debugging"><span class="header-section-number">11.3.1</span> Rubber Duck Debugging</a></li>
+  </ul></li>
+  <li><a href="#avoiding-debugging-pitfalls" id="toc-avoiding-debugging-pitfalls" class="nav-link" data-scroll-target="#avoiding-debugging-pitfalls"><span class="header-section-number">11.4</span> Avoiding Debugging Pitfalls</a>
+  <ul class="collapse">
+  <li><a href="#the-xy-problem" id="toc-the-xy-problem" class="nav-link" data-scroll-target="#the-xy-problem"><span class="header-section-number">11.4.1</span> The XY Problem</a></li>
+  <li><a href="#the-correlation-causation-trap" id="toc-the-correlation-causation-trap" class="nav-link" data-scroll-target="#the-correlation-causation-trap"><span class="header-section-number">11.4.2</span> The Correlation ≠ Causation Trap</a></li>
+  <li><a href="#the-bandage-solution" id="toc-the-bandage-solution" class="nav-link" data-scroll-target="#the-bandage-solution"><span class="header-section-number">11.4.3</span> The Bandage Solution</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">11.5</span> Key Takeaways</a></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward"><span class="header-section-number">11.6</span> Moving Forward</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/michael-borck/python-dev-book/edit/main/chapters/11-debugging-with-ai.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/michael-borck/python-dev-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Debugging is often one of the most challenging and time-consuming aspects of programming. AI assistants can be powerful allies in the debugging process, helping identify and fix issues more efficiently than traditional approaches. This chapter explores how to use intentional prompting techniques specifically for debugging tasks.</p>
+<section id="common-debugging-scenarios" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="common-debugging-scenarios"><span class="header-section-number">11.1</span> Common Debugging Scenarios</h2>
+<section id="syntax-errors" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="syntax-errors"><span class="header-section-number">11.1.1</span> Syntax Errors</h3>
+<p>Syntax errors occur when code violates the rules of the programming language. These are typically the easiest errors to fix, as they’re caught by compilers or interpreters before the code runs.</p>
+<p>AI assistants can: - Explain cryptic error messages in plain language - Identify the exact location of syntax errors - Suggest corrections based on context</p>
+<p><strong>Example prompt:</strong></p>
+<pre><code>I'm getting this syntax error in my Python code:
+
+```python
+def calculate_total(items):
+    total = 0
+    for item in items
+        total += item.price
+    return total</code></pre>
+<p>SyntaxError: invalid syntax</p>
+<p>Can you identify what’s wrong and how to fix it?</p>
+<pre><code>
+### Logic Errors
+
+Logic errors occur when the code runs without errors but doesn't produce the expected results. These are often more difficult to identify and fix than syntax errors.
+
+AI assistants can:
+- Trace through code execution step by step
+- Identify flawed assumptions or logical gaps
+- Suggest alternative approaches
+
+**Example prompt:**</code></pre>
+<p>My binary search function seems to work for some cases but fails for others:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binary_search(arr, target):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    right <span class="op">=</span> <span class="bu">len</span>(arr) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> left <span class="op">&lt;=</span> right:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        mid <span class="op">=</span> (left <span class="op">+</span> right) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[mid] <span class="op">==</span> target:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> mid</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> arr[mid] <span class="op">&lt;</span> target:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            left <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It correctly finds 5 in [1, 3, 5, 7, 9], but when I search for 7 in [1, 3, 5, 7, 9], it returns -1 instead of 3. Can you help me find the bug?</p>
+<pre><code>
+### Runtime Errors
+
+Runtime errors occur during program execution and cause the program to terminate unexpectedly. These include exceptions, segmentation faults, and other crashes.
+
+AI assistants can:
+- Analyze error messages and stack traces
+- Identify common causes for specific exceptions
+- Suggest defensive programming techniques to prevent crashes
+
+**Example prompt:**</code></pre>
+<p>My code is throwing the following exception:</p>
+<p>IndexError: list index out of range</p>
+<p>Here’s the relevant function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_data(data_list):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> []</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data_list)):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        result.append(data_list[i] <span class="op">+</span> data_list[i<span class="op">+</span><span class="dv">1</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It crashes when I call it with process_data([1, 2, 3, 4]). Why is this happening and how can I fix it?</p>
+<pre><code>
+### Performance Issues
+
+Performance issues occur when code runs correctly but takes too long to execute or consumes excessive resources.
+
+AI assistants can:
+- Identify performance bottlenecks
+- Suggest algorithmic improvements
+- Recommend more efficient data structures or libraries
+
+**Example prompt:**</code></pre>
+<p>My function to find duplicate values in a list becomes extremely slow with large inputs:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_duplicates(values):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    duplicates <span class="op">=</span> []</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(values)):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="bu">len</span>(values)):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> values[i] <span class="op">==</span> values[j] <span class="kw">and</span> values[i] <span class="kw">not</span> <span class="kw">in</span> duplicates:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                duplicates.append(values[i])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> duplicates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>How can I optimize this to handle lists with thousands of items efficiently?</p>
+<pre><code>
+## Prompt Templates for Debugging
+
+### Error Diagnosis Template
+
+When you encounter an error message:
+</code></pre>
+<p>I’m getting this error message:</p>
+<p>[paste the complete error message including stack trace]</p>
+<p>From this code:</p>
+<pre class="[language]"><code>[paste the relevant code section]</code></pre>
+<ol type="1">
+<li>What is causing this error?</li>
+<li>How can I fix it?</li>
+<li>Is there a better approach to what I’m trying to do?</li>
+</ol>
+<pre><code>
+### Code Review Template
+
+When your code runs but doesn't behave as expected:
+</code></pre>
+<p>My code should [describe expected behavior], but instead it [describe actual behavior]:</p>
+<pre class="[language]"><code>[paste the code]</code></pre>
+<p>Here’s an example of the input: [provide a specific example]</p>
+<p>Expected output: [describe what you expect] Actual output: [describe what actually happens]</p>
+<p>Can you help me identify what’s wrong?</p>
+<pre><code>
+### Step-by-Step Tracing Template
+
+For understanding exactly where logic goes wrong:
+</code></pre>
+<p>Could you help me trace through this function step by step with the input [specific input]?</p>
+<pre class="[language]"><code>[paste function code]</code></pre>
+<p>I’d like to see the value of each variable at each step to understand where my logic is failing.</p>
+<pre><code>
+### Performance Debugging Template
+
+For optimizing slow code:
+</code></pre>
+<p>This function works correctly but becomes slow with larger inputs:</p>
+<pre class="[language]"><code>[paste code]</code></pre>
+<ol type="1">
+<li>What is the time complexity of this function?</li>
+<li>Where are the performance bottlenecks?</li>
+<li>How can I optimize it while maintaining the same functionality?</li>
+</ol>
+<pre><code>
+## Effective Debugging Workflows
+
+### The Divide and Conquer Approach
+
+When debugging complex issues, breaking the problem down is often the most effective strategy:
+
+1. **Isolate the problem**:</code></pre>
+<p>I’m not sure which part of my code is causing the issue. If I comment out the sections marked #A, #B, and #C, does anything stand out as a likely culprit? ```</p>
+<ol start="2" type="1">
+<li><p><strong>Create a minimal reproduction</strong>:</p>
+<pre><code>Here's a simplified version of my code that still produces the error.
+Can you identify the issue in this smaller example?</code></pre></li>
+<li><p><strong>Binary search the code</strong>:</p>
+<pre><code>If I commented out the first half of the function, the error disappears.
+Can you help me narrow down which part of the first half is problematic?</code></pre></li>
+</ol>
+</section>
+<section id="the-hypothesis-testing-approach" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="the-hypothesis-testing-approach"><span class="header-section-number">11.1.2</span> The Hypothesis Testing Approach</h3>
+<p>Debugging by forming and testing specific hypotheses:</p>
+<ol type="1">
+<li><p><strong>Form a hypothesis</strong>:</p>
+<pre><code>I suspect the issue might be related to how I'm handling null values.
+Does that seem like a plausible cause based on the symptoms?</code></pre></li>
+<li><p><strong>Design a test</strong>:</p>
+<pre><code>How can I modify my code to verify whether null values are causing the issue?</code></pre></li>
+<li><p><strong>Interpret results</strong>:</p>
+<pre><code>I added print statements before and after the suspected line,
+and I'm seeing [specific output]. What does this tell us?</code></pre></li>
+</ol>
+</section>
+<section id="the-comparative-analysis-approach" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="the-comparative-analysis-approach"><span class="header-section-number">11.1.3</span> The Comparative Analysis Approach</h3>
+<p>Debugging by comparing working and non-working code:</p>
+<ol type="1">
+<li><p><strong>Identify differences</strong>:</p>
+<pre><code>This code works correctly:
+[working code]
+
+But this similar code fails:
+[failing code]
+
+What key differences explain why one works and the other doesn't?</code></pre></li>
+<li><p><strong>Incremental changes</strong>:</p>
+<pre><code>If I change my code from A to B incrementally, at what point does it break?
+I'll start by changing X and see if that affects the behavior.</code></pre></li>
+<li><p><strong>Reference implementation</strong>:</p>
+<pre><code>Here's my implementation of algorithm X that isn't working:
+[my code]
+
+And here's a reference implementation that works:
+[reference code]
+
+What am I doing differently that could cause my issues?</code></pre></li>
+</ol>
+</section>
+</section>
+<section id="understanding-error-messages-with-ai" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="understanding-error-messages-with-ai"><span class="header-section-number">11.2</span> Understanding Error Messages with AI</h2>
+<p>Error messages can often be cryptic, especially for beginners. AI assistants can translate these messages into actionable information.</p>
+<section id="anatomy-of-error-messages" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="anatomy-of-error-messages"><span class="header-section-number">11.2.1</span> Anatomy of Error Messages</h3>
+<p>When sharing error messages with AI, include:</p>
+<ol type="1">
+<li>The error type/name</li>
+<li>The error message</li>
+<li>The line number or location</li>
+<li>The stack trace (if available)</li>
+<li>The context surrounding the error</li>
+</ol>
+<p><strong>Example prompt:</strong></p>
+<pre><code>I'm getting this error message, but I don't understand what it means:
+
+TypeError: cannot unpack non-iterable int object
+  File "my_script.py", line 42, in process_data
+    key, value = data_point
+  File "my_script.py", line 27, in main
+    results = process_data(points)
+
+The data_point variable is coming from this loop:
+for data_point in processed_points:
+    key, value = data_point
+    # rest of code...
+
+Can you explain what this error means and how to fix it?</code></pre>
+</section>
+<section id="common-error-patterns" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="common-error-patterns"><span class="header-section-number">11.2.2</span> Common Error Patterns</h3>
+<p>AI can help identify patterns in errors that might indicate systemic issues:</p>
+<p><strong>Example prompt:</strong></p>
+<pre><code>I keep getting different errors in different parts of my codebase, but they all seem related to type mismatches. Here are three recent examples:
+
+[Error 1 details]
+[Error 2 details]
+[Error 3 details]
+
+Is there a common root cause that might explain all of these errors? Should I be looking for a specific pattern in my code?</code></pre>
+</section>
+</section>
+<section id="debugging-strategies-with-ai" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="debugging-strategies-with-ai"><span class="header-section-number">11.3</span> Debugging Strategies with AI</h2>
+<section id="rubber-duck-debugging" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="rubber-duck-debugging"><span class="header-section-number">11.3.1</span> Rubber Duck Debugging</h3>
+<p>Rubber duck debugging involves explaining your code line by line, which often helps you spot the issue yourself. AI can serve as an advanced “rubber duck” that can also respond with insights.</p>
+<p><strong>Example prompt:</strong></p>
+<pre><code>I'm going to walk through this function line by line to try to understand why it's not working. Please let me know if you spot any issues in my explanation:
+
+```python
+def merge_sorted_lists(list1, list2):
+    result = []
+    i = j = 0
+    
+    while i &lt; len(list1) and j &lt; len(list2):
+        if list1[i] &lt; list2[j]:
+            result.append(list1[i])
+            i += 1
+        else:
+            result.append(list2[j])
+            j += 1
+    
+    # At this point, either list1 or list2 might have remaining elements
+    # I expect this to add any remaining elements from list1
+    result.extend(list1)
+    
+    # And this should add any remaining elements from list2
+    result.extend(list2)
+    
+    return result</code></pre>
+<p>When I call this with [1, 3, 5] and [2, 4, 6], I expect [1, 2, 3, 4, 5, 6] but get [1, 2, 3, 4, 5, 6, 3, 5, 2, 4, 6]. What am I missing?</p>
+<pre><code>
+### Print Debugging with AI
+
+Print debugging involves adding print statements to track variable values. AI can suggest strategic places to add these statements.
+
+**Example prompt:**</code></pre>
+<p>I suspect my recursive function is not terminating correctly. Where should I add print statements to debug it effectively?</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n<span class="op">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It works for small inputs but crashes with large ones.</p>
+<pre><code>
+### Root Cause Analysis
+
+AI can help trace errors back to their root causes:
+
+**Example prompt:**</code></pre>
+<p>My web application is throwing this error:</p>
+<p>DatabaseError: too many database connections</p>
+<p>This happens sporadically, usually during peak usage hours. The database connection code looks like this:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_db_connection():</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> psycopg2.<span class="ex">connect</span>(DATABASE_URL)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_user_data(user_id):</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    conn <span class="op">=</span> get_db_connection()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    cursor.execute(<span class="st">"SELECT * FROM users WHERE id = </span><span class="sc">%s</span><span class="st">"</span>, (user_id,))</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cursor.fetchone()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What could be the root cause, and how can I fix it?</p>
+<pre><code>
+### Debugging AI-Generated Code
+
+A common scenario is debugging code that AI has generated but contains subtle errors. This situation provides excellent learning opportunities by requiring you to critically analyze and fix issues.
+
+**Example: Debugging a Gradebook Program**
+
+Consider this AI-generated code for a student gradebook:
+
+```python
+students = {
+    "Alice": "85, 90, 78",
+    "Bob": "70, 88, 92"
+}
+
+for name in students:
+    avg = sum(students[name]) / len(students[name])
+    print(f"{name}: {avg}")</code></pre>
+<p><strong>Analysis of Errors:</strong></p>
+<p>This code contains several issues: 1. The scores are stored as strings rather than numbers 2. The <code>sum()</code> function won’t work on strings 3. Using string length for division will give incorrect results</p>
+<p><strong>Effective Debugging Prompt:</strong></p>
+<pre><code>Your code stores scores as strings. Can you fix it so each student has a list of numbers instead?</code></pre>
+<p><strong>AI Response (improved but still with issues):</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>students <span class="op">=</span> {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Alice"</span>: [<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>],</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bob"</span>: [<span class="dv">70</span>, <span class="dv">88</span>, <span class="dv">92</span>]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> students:</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> score <span class="kw">in</span> students[name]:</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> score</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    avg <span class="op">=</span> total <span class="op">/</span> <span class="dv">3</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> average is </span><span class="sc">{</span>avg<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Further Analysis:</strong> The code now works but has a critical flaw: it assumes each student has exactly 3 scores.</p>
+<p><strong>Follow-up Debugging Prompt:</strong></p>
+<pre><code>Can you make a function to calculate the average of any list of scores, instead of assuming 3?</code></pre>
+<p><strong>AI Response (further improved):</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> average(scores):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(scores) <span class="op">/</span> <span class="bu">len</span>(scores)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, scores <span class="kw">in</span> students.items():</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> average: </span><span class="sc">{</span>average(scores)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This iterative debugging process demonstrates key skills: 1. Identifying specific errors in AI-generated code 2. Creating targeted prompts to address those errors 3. Iteratively improving the solution through focused feedback 4. Thinking critically about assumptions and edge cases</p>
+<p>This approach is particularly valuable for learning, as it requires understanding both the problem and the implementation details rather than just accepting whatever code the AI generates.</p>
+</section>
+</section>
+<section id="avoiding-debugging-pitfalls" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="avoiding-debugging-pitfalls"><span class="header-section-number">11.4</span> Avoiding Debugging Pitfalls</h2>
+<section id="the-xy-problem" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="the-xy-problem"><span class="header-section-number">11.4.1</span> The XY Problem</h3>
+<p>The XY Problem occurs when you ask about your attempted solution (Y) rather than your actual problem (X), leading to inefficient debugging. AI can help identify this pattern.</p>
+<p><strong>Wrong approach:</strong></p>
+<pre><code>How do I make this regex work for validating email addresses?
+
+/^[a-zA-Z0-9]+@[a-zA-Z0-9]+$/</code></pre>
+<p><strong>Better approach:</strong></p>
+<pre><code>I need to validate email addresses in my application. 
+I tried using this regex: /^[a-zA-Z0-9]+\\@[a-zA-Z0-9]+$/
+
+But it doesn't handle cases like:
+- Dots in the local part (john.doe\@example.com)
+- Hyphens in domain names (example-site.com)
+- TLDs with more than one segment (.co.uk)
+
+What's the best approach for validating email addresses, considering these requirements?</code></pre>
+</section>
+<section id="the-correlation-causation-trap" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="the-correlation-causation-trap"><span class="header-section-number">11.4.2</span> The Correlation ≠ Causation Trap</h3>
+<p>This occurs when you attribute a bug to something that happened around the same time, but isn’t actually the cause.</p>
+<p><strong>Example:</strong></p>
+<pre><code>After adding a new CSS file to my project, my JavaScript form validation stopped working. 
+Here's the new CSS I added:
+
+[CSS code]
+
+And here's my validation function:
+
+[JS code]
+
+How could the CSS be breaking my JavaScript?</code></pre>
+<p><strong>AI might respond:</strong> &gt; The CSS you’ve added is unlikely to directly break your JavaScript validation. These are separate concerns in web development. Let’s look for other possible causes: &gt; &gt; 1. Did you make any other changes at the same time? &gt; 2. Could there be a JS syntax error that’s preventing execution? &gt; 3. Are you using CSS selectors in your JS that might no longer match? &gt; 4. Did you accidentally change any IDs or classes used by both? &gt; &gt; Let’s examine your JavaScript for the actual issue…</p>
+</section>
+<section id="the-bandage-solution" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="the-bandage-solution"><span class="header-section-number">11.4.3</span> The Bandage Solution</h3>
+<p>This occurs when you fix the symptoms of a bug rather than the underlying cause. AI can help identify deeper issues.</p>
+<p><strong>Example prompt:</strong></p>
+<pre><code>My function sometimes returns NaN, so I added a check to return 0 instead when that happens:
+
+```javascript
+function calculateAverage(numbers) {
+  let sum = 0;
+  for (let i = 0; i &lt; numbers.length; i++) {
+    sum += numbers[i];
+  }
+  let average = sum / numbers.length;
+  
+  // Fix for the NaN issue
+  if (isNaN(average)) {
+    return 0;
+  }
+  
+  return average;
+}</code></pre>
+<p>This fixes the immediate problem, but is there a better approach?</p>
+<pre><code>
+## Case Study: Debugging a Complex Issue
+
+Let's walk through a complete debugging process using AI assistance:
+
+### Initial Problem Statement
+
+**Human prompt:**</code></pre>
+<p>My sorting algorithm isn’t working properly. It’s supposed to sort an array of numbers in ascending order, but some arrays end up partially sorted:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bubble_sort(arr):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(arr)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n <span class="op">-</span> i <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> arr[j] <span class="op">&gt;</span> arr[j <span class="op">+</span> <span class="dv">1</span>]:</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                arr[j], arr[j <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> arr[j <span class="op">+</span> <span class="dv">1</span>], arr[j]</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It works for [5, 3, 8, 1, 2], giving [1, 2, 3, 5, 8]. But for [5, 3, 8, 1, 2, 9, 4], it gives [1, 2, 3, 5, 4, 8, 9]. What’s going wrong?</p>
+<pre><code>
+### Tracing Execution
+
+**AI response:**
+&gt; Let me trace through the bubble sort algorithm step by step with the input [5, 3, 8, 1, 2, 9, 4].
+&gt; 
+&gt; In bubble sort, we compare adjacent elements and swap them if they're in the wrong order. After each complete pass through the array, the largest element "bubbles up" to its correct position.
+&gt; 
+&gt; Let's trace through each pass:
+&gt; 
+&gt; Initial array: [5, 3, 8, 1, 2, 9, 4]
+&gt; 
+&gt; Pass 1 (i=0):
+&gt; - Compare 5 and 3: Swap → [3, 5, 8, 1, 2, 9, 4]
+&gt; - Compare 5 and 8: No swap → [3, 5, 8, 1, 2, 9, 4]
+&gt; - Compare 8 and 1: Swap → [3, 5, 1, 8, 2, 9, 4]
+&gt; - Compare 8 and 2: Swap → [3, 5, 1, 2, 8, 9, 4]
+&gt; - Compare 8 and 9: No swap → [3, 5, 1, 2, 8, 9, 4]
+&gt; - Compare 9 and 4: Swap → [3, 5, 1, 2, 8, 4, 9]
+&gt; 
+&gt; After Pass 1: [3, 5, 1, 2, 8, 4, 9]
+&gt; 
+&gt; Pass 2 (i=1):
+&gt; - Compare 3 and 5: No swap → [3, 5, 1, 2, 8, 4, 9]
+&gt; - Compare 5 and 1: Swap → [3, 1, 5, 2, 8, 4, 9]
+&gt; - Compare 5 and 2: Swap → [3, 1, 2, 5, 8, 4, 9]
+&gt; - Compare 5 and 8: No swap → [3, 1, 2, 5, 8, 4, 9]
+&gt; - Compare 8 and 4: Swap → [3, 1, 2, 5, 4, 8, 9]
+&gt; 
+&gt; After Pass 2: [3, 1, 2, 5, 4, 8, 9]
+&gt; 
+&gt; Wait, I need to review the algorithm. In a correct bubble sort, the largest elements should bubble to the end, and we should get closer to the correct sort with each pass. Let me carefully check your implementation...
+&gt; 
+&gt; I don't see anything wrong with your bubble sort implementation. Let me continue tracing:
+&gt; 
+&gt; Pass 3 (i=2):
+&gt; - Compare 3 and 1: Swap → [1, 3, 2, 5, 4, 8, 9]
+&gt; - Compare 3 and 2: Swap → [1, 2, 3, 5, 4, 8, 9]
+&gt; - Compare 3 and 5: No swap → [1, 2, 3, 5, 4, 8, 9]
+&gt; - Compare 5 and 4: Swap → [1, 2, 3, 4, 5, 8, 9]
+&gt; 
+&gt; After Pass 3: [1, 2, 3, 4, 5, 8, 9]
+&gt; 
+&gt; Wait, this is now correctly sorted! Let me trace one more pass to be sure:
+&gt; 
+&gt; Pass 4 (i=3):
+&gt; - Compare 1 and 2: No swap → [1, 2, 3, 4, 5, 8, 9]
+&gt; - Compare 2 and 3: No swap → [1, 2, 3, 4, 5, 8, 9]
+&gt; - Compare 3 and 4: No swap → [1, 2, 3, 4, 5, 8, 9]
+&gt; 
+&gt; No more swaps are needed. The array is now [1, 2, 3, 4, 5, 8, 9], which is correctly sorted.
+&gt; 
+&gt; It seems the algorithm is working correctly after all. The expected output for [5, 3, 8, 1, 2, 9, 4] should be [1, 2, 3, 4, 5, 8, 9], not [1, 2, 3, 5, 4, 8, 9] as you mentioned.
+&gt; 
+&gt; There may be an issue elsewhere in your code, or perhaps there was a mistake in the observed output. Could you verify the output again, or provide more context about how you're calling and testing this function?
+
+### Debugging the Test Case
+
+**Human prompt:**</code></pre>
+<p>You’re right, I made a mistake in reporting the output. Let me recheck…</p>
+<p>I ran the function again with [5, 3, 8, 1, 2, 9, 4], and now I’m getting [1, 2, 3, 4, 5, 8, 9], which is correct.</p>
+<p>However, I’m running this inside a larger application where I call the function like this:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_data(data_sets):</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> data <span class="kw">in</span> data_sets:</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        sorted_data <span class="op">=</span> bubble_sort(data.copy())</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        results.append(sorted_data)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And I’m still seeing some incorrect sorts in the output. Could there be an issue with how I’m calling it?</p>
+<pre><code>
+### Identifying the Root Cause
+
+**AI response:**
+&gt; Based on your updated information, the bubble sort implementation itself appears to be working correctly. The issue might be in how it's being called or how the data is being processed within your larger application.
+&gt; 
+&gt; Let's analyze the `process_data` function:
+&gt; 
+&gt; ```python
+&gt; def process_data(data_sets):
+&gt;     results = []
+&gt;     for data in data_sets:
+&gt;         sorted_data = bubble_sort(data.copy())
+&gt;         results.append(sorted_data)
+&gt;     return results
+&gt; ```
+&gt; 
+&gt; This function:
+&gt; 1. Takes a list of data sets
+&gt; 2. Creates a copy of each data set
+&gt; 3. Sorts the copy using bubble_sort
+&gt; 4. Appends the sorted data to a results list
+&gt; 5. Returns all results
+&gt; 
+&gt; This approach seems correct. You're creating a copy of each data set before sorting, which is good practice to avoid modifying the original data.
+&gt; 
+&gt; Here are some potential issues to check:
+&gt; 
+&gt; 1. **Data type consistency**: Are all elements in your arrays numbers? Sorting mixed types (like strings and numbers) can lead to unexpected results.
+&gt; 
+&gt; 2. **Mutable objects**: If your arrays contain mutable objects rather than simple numbers, the sorting might be affected by reference issues.
+&gt; 
+&gt; 3. **Preservation of original data**: Double-check that `data.copy()` is creating a proper copy. For nested structures, you might need a deep copy.
+&gt; 
+&gt; 4. **Concurrency issues**: If your application is multi-threaded, there could be race conditions affecting the sorting.
+&gt; 
+&gt; 5. **Data transformation**: Is the data being transformed between the sorting and when you observe the results?
+&gt; 
+&gt; 6. **Visualization/display issue**: Sometimes the issue is not with the sorting but with how results are displayed or accessed.
+&gt; 
+&gt; Can you share:
+&gt; 1. A specific example of a dataset that's being incorrectly sorted in your application
+&gt; 2. How you're verifying the results (e.g., printing them, displaying in UI)
+&gt; 3. Any processing that happens to the results after sorting
+
+### Resolution
+
+**Human prompt:**</code></pre>
+<p>I think I found the issue. In another part of the code, there’s a function that modifies the results after sorting:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> highlight_outliers(data_list):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data_list)):</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Swap positions of certain elements to highlight them</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data_list[i])<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> data_list[i][j] <span class="op">&gt;</span> data_list[i][j<span class="op">+</span><span class="dv">1</span>] <span class="op">*</span> <span class="dv">2</span>:  <span class="co"># Highlight elements 2x larger than next</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                data_list[i][j], data_list[i][j<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> data_list[i][j<span class="op">+</span><span class="dv">1</span>], data_list[i][j]</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is being called on the results from process_data! It’s intentionally un-sorting some elements to highlight outliers, but I forgot it was there.</p>
+<p>Thank you for helping me trace through the algorithm; it confirmed that my bubble sort is correct and led me to look elsewhere for the issue. ```</p>
+</section>
+</section>
+<section id="key-takeaways" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">11.5</span> Key Takeaways</h2>
+<ul>
+<li>Effective debugging with AI requires clear communication about errors and context</li>
+<li>Different debugging scenarios call for different prompting strategies</li>
+<li>Templates can streamline the debugging process for common issues</li>
+<li>Structured debugging approaches like divide-and-conquer and hypothesis testing work well with AI</li>
+<li>Always verify AI’s debugging suggestions with your own testing</li>
+<li>Root cause analysis is more valuable than symptom mitigation</li>
+<li>Debugging is a process of investigation, not just code fixing</li>
+</ul>
+</section>
+<section id="moving-forward" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="moving-forward"><span class="header-section-number">11.6</span> Moving Forward</h2>
+<p>In the next chapter, we’ll explore refactoring strategies with AI assistance, building on the debugging skills we’ve developed here to improve existing code rather than just fixing bugs.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/10-intentional-prompting-patterns.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/12-refactoring-strategies.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intentional Prompting: Mastering the Human-AI Development Process - 5&nbsp; Restate and Identify (Steps 1-2)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/06-work-by-hand.html" rel="next">
+<link href="../chapters/04-six-step-methodology.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-six-step-methodology.html">Methodology</a></li><li class="breadcrumb-item"><a href="../chapters/05-restate-and-identify.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Intentional Prompting: Mastering the Human-AI Development Process</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/michael-borck/python-dev-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ai-revolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The AI Revolution in Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-intentional-prompting-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Principles of Intentional Prompting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Methodology</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-six-step-methodology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-restate-and-identify.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-work-by-hand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-pseudocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-convert-to-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convert to Code (Step 5)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-test-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Patterns &amp; Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-intentional-prompting-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-debugging-with-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-refactoring-strategies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-case-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-scaling-complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scaling to Complex Projects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-teaching-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Teaching and Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-future-directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Future Directions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/prompt-templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Prompt Templates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/common-pitfalls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Common Pitfalls and Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/ai-tool-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">AI Tool Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#techniques-for-problem-restatement" id="toc-techniques-for-problem-restatement" class="nav-link active" data-scroll-target="#techniques-for-problem-restatement"><span class="header-section-number">5.1</span> Techniques for Problem Restatement</a>
+  <ul class="collapse">
+  <li><a href="#why-restatement-matters" id="toc-why-restatement-matters" class="nav-link" data-scroll-target="#why-restatement-matters"><span class="header-section-number">5.1.1</span> Why Restatement Matters</a></li>
+  <li><a href="#effective-restatement-approaches" id="toc-effective-restatement-approaches" class="nav-link" data-scroll-target="#effective-restatement-approaches"><span class="header-section-number">5.1.2</span> Effective Restatement Approaches</a></li>
+  <li><a href="#using-ai-to-enhance-restatement" id="toc-using-ai-to-enhance-restatement" class="nav-link" data-scroll-target="#using-ai-to-enhance-restatement"><span class="header-section-number">5.1.3</span> Using AI to Enhance Restatement</a></li>
+  </ul></li>
+  <li><a href="#clearly-defining-inputs-and-outputs" id="toc-clearly-defining-inputs-and-outputs" class="nav-link" data-scroll-target="#clearly-defining-inputs-and-outputs"><span class="header-section-number">5.2</span> Clearly Defining Inputs and Outputs</a>
+  <ul class="collapse">
+  <li><a href="#why-inputoutput-specification-matters" id="toc-why-inputoutput-specification-matters" class="nav-link" data-scroll-target="#why-inputoutput-specification-matters"><span class="header-section-number">5.2.1</span> Why Input/Output Specification Matters</a></li>
+  <li><a href="#elements-of-complete-io-specifications" id="toc-elements-of-complete-io-specifications" class="nav-link" data-scroll-target="#elements-of-complete-io-specifications"><span class="header-section-number">5.2.2</span> Elements of Complete I/O Specifications</a></li>
+  <li><a href="#documenting-io-with-examples" id="toc-documenting-io-with-examples" class="nav-link" data-scroll-target="#documenting-io-with-examples"><span class="header-section-number">5.2.3</span> Documenting I/O With Examples</a></li>
+  <li><a href="#using-ai-to-explore-edge-cases" id="toc-using-ai-to-explore-edge-cases" class="nav-link" data-scroll-target="#using-ai-to-explore-edge-cases"><span class="header-section-number">5.2.4</span> Using AI to Explore Edge Cases</a></li>
+  </ul></li>
+  <li><a href="#prompting-techniques-for-requirement-clarification" id="toc-prompting-techniques-for-requirement-clarification" class="nav-link" data-scroll-target="#prompting-techniques-for-requirement-clarification"><span class="header-section-number">5.3</span> Prompting Techniques for Requirement Clarification</a>
+  <ul class="collapse">
+  <li><a href="#the-five-whys-technique" id="toc-the-five-whys-technique" class="nav-link" data-scroll-target="#the-five-whys-technique"><span class="header-section-number">5.3.1</span> The Five Whys Technique</a></li>
+  <li><a href="#stakeholder-perspective-prompting" id="toc-stakeholder-perspective-prompting" class="nav-link" data-scroll-target="#stakeholder-perspective-prompting"><span class="header-section-number">5.3.2</span> Stakeholder Perspective Prompting</a></li>
+  <li><a href="#requirement-expansion" id="toc-requirement-expansion" class="nav-link" data-scroll-target="#requirement-expansion"><span class="header-section-number">5.3.3</span> Requirement Expansion</a></li>
+  <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis"><span class="header-section-number">5.3.4</span> Comparative Analysis</a></li>
+  </ul></li>
+  <li><a href="#practical-exercise-restate-and-identify-in-action" id="toc-practical-exercise-restate-and-identify-in-action" class="nav-link" data-scroll-target="#practical-exercise-restate-and-identify-in-action"><span class="header-section-number">5.4</span> Practical Exercise: Restate and Identify in Action</a>
+  <ul class="collapse">
+  <li><a href="#step-1-restate-the-problem" id="toc-step-1-restate-the-problem" class="nav-link" data-scroll-target="#step-1-restate-the-problem"><span class="header-section-number">5.4.1</span> Step 1: Restate the Problem</a></li>
+  <li><a href="#step-2-identify-input-and-output" id="toc-step-2-identify-input-and-output" class="nav-link" data-scroll-target="#step-2-identify-input-and-output"><span class="header-section-number">5.4.2</span> Step 2: Identify Input and Output</a></li>
+  </ul></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward"><span class="header-section-number">5.5</span> Moving Forward</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/michael-borck/python-dev-book/edit/main/chapters/05-restate-and-identify.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/michael-borck/python-dev-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The first two steps of the six-step methodology—restating the problem and identifying inputs and outputs—set the foundation for everything that follows. This critical preparation phase ensures you fully understand what you’re trying to solve before diving into implementation.</p>
+<section id="techniques-for-problem-restatement" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="techniques-for-problem-restatement"><span class="header-section-number">5.1</span> Techniques for Problem Restatement</h2>
+<section id="why-restatement-matters" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="why-restatement-matters"><span class="header-section-number">5.1.1</span> Why Restatement Matters</h3>
+<p>Restating a problem in your own words serves several important purposes:</p>
+<ol type="1">
+<li><strong>Clarifies understanding:</strong> The process of reformulating forces you to grapple with the problem’s core elements</li>
+<li><strong>Identifies ambiguities:</strong> Areas you struggle to restate clearly often reveal hidden assumptions or unclear requirements</li>
+<li><strong>Provides ownership:</strong> Restating moves you from passive recipient to active problem-solver</li>
+<li><strong>Creates a reference point:</strong> Your restatement becomes a touchstone to check your solution against</li>
+</ol>
+</section>
+<section id="effective-restatement-approaches" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="effective-restatement-approaches"><span class="header-section-number">5.1.2</span> Effective Restatement Approaches</h3>
+<section id="the-eli5-method-explain-like-im-five" class="level4" data-number="5.1.2.1">
+<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="the-eli5-method-explain-like-im-five"><span class="header-section-number">5.1.2.1</span> The ELI5 Method (Explain Like I’m Five)</h4>
+<p>Simplify the problem to its most fundamental elements, as if explaining to someone with no technical background:</p>
+<p><strong>Original:</strong> “Implement a function to find the shortest path between two nodes in a weighted directed graph using Dijkstra’s algorithm.”</p>
+<p><strong>ELI5 Restatement:</strong> “I need to find the fastest route between two points on a map where some routes are quicker than others.”</p>
+</section>
+<section id="the-components-breakdown" class="level4" data-number="5.1.2.2">
+<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="the-components-breakdown"><span class="header-section-number">5.1.2.2</span> The Components Breakdown</h4>
+<p>Identify and separate the main components of the problem:</p>
+<p><strong>Original:</strong> “Build a cache that stores the results of expensive function calls and returns the cached result when the same inputs occur again.”</p>
+<p><strong>Components Restatement:</strong> - “I need to store function results along with their inputs” - “When a function is called, I need to check if we’ve seen these inputs before” - “If we have seen the inputs, return the stored result instead of recalculating” - “If we haven’t seen the inputs, calculate, store, and return the result”</p>
+</section>
+<section id="the-constraints-highlight" class="level4" data-number="5.1.2.3">
+<h4 data-number="5.1.2.3" class="anchored" data-anchor-id="the-constraints-highlight"><span class="header-section-number">5.1.2.3</span> The Constraints Highlight</h4>
+<p>Explicitly call out all constraints and requirements:</p>
+<p><strong>Original:</strong> “Create a username validation function for a web form.”</p>
+<p><strong>Constraints Restatement:</strong> - “Usernames must be 3-20 characters long” - “Only alphanumeric characters, hyphens, and underscores are allowed” - “Cannot start or end with a hyphen or underscore” - “Must be case-insensitive (uppercase/lowercase doesn’t matter)” - “Cannot contain reserved keywords from this list…”</p>
+</section>
+<section id="the-inverse-problem" class="level4" data-number="5.1.2.4">
+<h4 data-number="5.1.2.4" class="anchored" data-anchor-id="the-inverse-problem"><span class="header-section-number">5.1.2.4</span> The Inverse Problem</h4>
+<p>State what the solution is NOT supposed to do:</p>
+<p><strong>Original:</strong> “Implement user authentication for the application.”</p>
+<p><strong>Inverse Restatement:</strong> - “This is NOT about creating user accounts or registration” - “This is NOT about password reset functionality” - “This is NOT about authorization (what users can do)” - “This IS about verifying a user’s identity based on credentials”</p>
+</section>
+</section>
+<section id="using-ai-to-enhance-restatement" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="using-ai-to-enhance-restatement"><span class="header-section-number">5.1.3</span> Using AI to Enhance Restatement</h3>
+<p>AI assistants can help refine your problem restatements in several ways:</p>
+<section id="restatement-verification" class="level4" data-number="5.1.3.1">
+<h4 data-number="5.1.3.1" class="anchored" data-anchor-id="restatement-verification"><span class="header-section-number">5.1.3.1</span> Restatement Verification</h4>
+<p>After restating the problem yourself, ask the AI to verify your understanding:</p>
+<pre><code>I'm working on this problem: [original problem statement]
+
+I've restated it as: [your restatement]
+
+Have I missed anything important or misunderstood any aspect of the problem?</code></pre>
+</section>
+<section id="assumptions-identification" class="level4" data-number="5.1.3.2">
+<h4 data-number="5.1.3.2" class="anchored" data-anchor-id="assumptions-identification"><span class="header-section-number">5.1.3.2</span> Assumptions Identification</h4>
+<p>AI can help uncover hidden assumptions in the problem:</p>
+<pre><code>What assumptions might I be making about this problem that aren't explicitly stated?</code></pre>
+</section>
+<section id="edge-case-exploration" class="level4" data-number="5.1.3.3">
+<h4 data-number="5.1.3.3" class="anchored" data-anchor-id="edge-case-exploration"><span class="header-section-number">5.1.3.3</span> Edge Case Exploration</h4>
+<p>AI can help identify boundary conditions and special cases:</p>
+<pre><code>What edge cases should I consider for this problem?</code></pre>
+</section>
+<section id="domain-specific-context" class="level4" data-number="5.1.3.4">
+<h4 data-number="5.1.3.4" class="anchored" data-anchor-id="domain-specific-context"><span class="header-section-number">5.1.3.4</span> Domain-Specific Context</h4>
+<p>For problems in unfamiliar domains, AI can provide context:</p>
+<pre><code>Could you explain any domain-specific considerations I should keep in mind when solving this problem?</code></pre>
+</section>
+</section>
+</section>
+<section id="clearly-defining-inputs-and-outputs" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="clearly-defining-inputs-and-outputs"><span class="header-section-number">5.2</span> Clearly Defining Inputs and Outputs</h2>
+<p>The second step of the methodology focuses on establishing precise expectations for what goes into your solution and what comes out.</p>
+<section id="why-inputoutput-specification-matters" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="why-inputoutput-specification-matters"><span class="header-section-number">5.2.1</span> Why Input/Output Specification Matters</h3>
+<p>Clearly defining inputs and outputs:</p>
+<ol type="1">
+<li><strong>Creates a contract:</strong> Establishes exactly what your solution promises to deliver</li>
+<li><strong>Guides testing:</strong> Forms the basis for comprehensive test cases</li>
+<li><strong>Simplifies debugging:</strong> Makes it clear when the solution is working incorrectly</li>
+<li><strong>Facilitates integration:</strong> Makes it easier to incorporate your solution into larger systems</li>
+</ol>
+</section>
+<section id="elements-of-complete-io-specifications" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="elements-of-complete-io-specifications"><span class="header-section-number">5.2.2</span> Elements of Complete I/O Specifications</h3>
+<section id="for-inputs" class="level4" data-number="5.2.2.1">
+<h4 data-number="5.2.2.1" class="anchored" data-anchor-id="for-inputs"><span class="header-section-number">5.2.2.1</span> For Inputs:</h4>
+<ul>
+<li><strong>Data types:</strong> The expected types of each input parameter</li>
+<li><strong>Value ranges:</strong> Acceptable ranges or constraints for input values</li>
+<li><strong>Required vs.&nbsp;optional:</strong> Which inputs can be omitted with default values</li>
+<li><strong>Format requirements:</strong> Any specific formatting expected (e.g., date formats)</li>
+<li><strong>Size constraints:</strong> Limitations on input size (e.g., maximum string length)</li>
+</ul>
+</section>
+<section id="for-outputs" class="level4" data-number="5.2.2.2">
+<h4 data-number="5.2.2.2" class="anchored" data-anchor-id="for-outputs"><span class="header-section-number">5.2.2.2</span> For Outputs:</h4>
+<ul>
+<li><strong>Return type:</strong> The data type of the returned value</li>
+<li><strong>Success indicators:</strong> How successful operation is communicated</li>
+<li><strong>Error handling:</strong> How errors are communicated (exceptions, error codes, etc.)</li>
+<li><strong>Special values:</strong> Any special return values and their meaning</li>
+<li><strong>Side effects:</strong> Any state changes or external effects besides the return value</li>
+</ul>
+</section>
+</section>
+<section id="documenting-io-with-examples" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="documenting-io-with-examples"><span class="header-section-number">5.2.3</span> Documenting I/O With Examples</h3>
+<p>Examples can clarify I/O specifications better than abstract descriptions:</p>
+<pre><code>Function: calculate_shipping_cost(weight, distance, express=False)
+
+Inputs:
+- weight: A positive float representing item weight in kilograms
+- distance: A positive float representing distance in kilometers
+- express: Optional boolean flag for express shipping (default: False)
+
+Outputs:
+- A float representing the shipping cost in dollars
+- If input parameters are invalid, raises ValueError
+
+Examples:
+- calculate_shipping_cost(2.5, 100) → 12.50
+- calculate_shipping_cost(2.5, 100, express=True) → 25.00
+- calculate_shipping_cost(-1, 100) → ValueError("Weight must be positive")</code></pre>
+</section>
+<section id="using-ai-to-explore-edge-cases" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="using-ai-to-explore-edge-cases"><span class="header-section-number">5.2.4</span> Using AI to Explore Edge Cases</h3>
+<p>AI assistants excel at identifying edge cases and boundary conditions that might affect your I/O specification.</p>
+<section id="input-edge-cases" class="level4" data-number="5.2.4.1">
+<h4 data-number="5.2.4.1" class="anchored" data-anchor-id="input-edge-cases"><span class="header-section-number">5.2.4.1</span> Input Edge Cases</h4>
+<p>Ask the AI to help identify input edge cases:</p>
+<pre><code>What are potential edge cases for these inputs?
+- weight: A positive float representing item weight in kilograms
+- distance: A positive float representing distance in kilometers
+- express: Optional boolean flag for express shipping</code></pre>
+<p>This might reveal considerations like: - Zero weight or distance - Extremely large weights or distances - Non-numeric inputs - Negative values - Special shipping conditions</p>
+</section>
+<section id="output-edge-cases" class="level4" data-number="5.2.4.2">
+<h4 data-number="5.2.4.2" class="anchored" data-anchor-id="output-edge-cases"><span class="header-section-number">5.2.4.2</span> Output Edge Cases</h4>
+<p>Similarly, explore edge cases for outputs:</p>
+<pre><code>What are potential edge cases for the output of this shipping cost calculator?</code></pre>
+<p>This might reveal considerations like: - Minimum shipping costs - Free shipping thresholds - Rounding rules - Currency formatting - Maximum possible costs</p>
+</section>
+<section id="error-condition-exploration" class="level4" data-number="5.2.4.3">
+<h4 data-number="5.2.4.3" class="anchored" data-anchor-id="error-condition-exploration"><span class="header-section-number">5.2.4.3</span> Error Condition Exploration</h4>
+<p>Use AI to explore potential error conditions:</p>
+<pre><code>What error conditions should I handle in this shipping cost calculator?</code></pre>
+<p>This might reveal considerations like: - Invalid input types - Values outside acceptable ranges - Unavailable shipping routes - Rate limit restrictions</p>
+</section>
+</section>
+</section>
+<section id="prompting-techniques-for-requirement-clarification" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="prompting-techniques-for-requirement-clarification"><span class="header-section-number">5.3</span> Prompting Techniques for Requirement Clarification</h2>
+<p>When requirements are unclear or incomplete, AI can help explore the problem space through directed prompting.</p>
+<section id="the-five-whys-technique" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="the-five-whys-technique"><span class="header-section-number">5.3.1</span> The Five Whys Technique</h3>
+<p>Repeatedly ask “why” to dig deeper into requirements:</p>
+<pre><code>The requirement is to "implement a user profile page."
+
+Why does the user need a profile page?
+[AI response]
+
+Why is that important for the user?
+[AI response]
+
+Why can't we achieve that with the existing functionality?</code></pre>
+<p>This technique helps uncover the underlying goals behind requirements.</p>
+</section>
+<section id="stakeholder-perspective-prompting" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="stakeholder-perspective-prompting"><span class="header-section-number">5.3.2</span> Stakeholder Perspective Prompting</h3>
+<p>Ask the AI to consider requirements from different perspectives:</p>
+<pre><code>How might different users view this profile page requirement differently?
+
+- From an end user's perspective: ...
+- From an administrator's perspective: ...
+- From a security perspective: ...
+- From a performance perspective: ...</code></pre>
+</section>
+<section id="requirement-expansion" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="requirement-expansion"><span class="header-section-number">5.3.3</span> Requirement Expansion</h3>
+<p>Ask the AI to expand terse requirements into detailed specifications:</p>
+<pre><code>The requirement is: "Add sorting functionality to the user table."
+
+Can you expand this into a comprehensive specification including:
+- Which columns should be sortable
+- Default sort order
+- How sort state should be preserved
+- Performance considerations for large datasets
+- UI indicators for sort direction</code></pre>
+</section>
+<section id="comparative-analysis" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="comparative-analysis"><span class="header-section-number">5.3.4</span> Comparative Analysis</h3>
+<p>Use AI to compare different interpretations of ambiguous requirements:</p>
+<pre><code>The requirement "ensure the application is responsive" could be interpreted in two ways:
+1. The UI should adapt to different screen sizes
+2. The application should respond quickly to user interactions
+
+Can you compare these interpretations and their implications for implementation?</code></pre>
+</section>
+</section>
+<section id="practical-exercise-restate-and-identify-in-action" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="practical-exercise-restate-and-identify-in-action"><span class="header-section-number">5.4</span> Practical Exercise: Restate and Identify in Action</h2>
+<p>Let’s apply Steps 1 and 2 to a sample problem:</p>
+<blockquote class="blockquote">
+<p>Original Requirement: “Create a function that converts dates between different formats.”</p>
+</blockquote>
+<section id="step-1-restate-the-problem" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="step-1-restate-the-problem"><span class="header-section-number">5.4.1</span> Step 1: Restate the Problem</h3>
+<p><strong>Using Components Breakdown:</strong></p>
+<ul>
+<li>“I need to parse dates from various input formats”</li>
+<li>“I need to convert parsed dates into specified output formats”</li>
+<li>“I need to handle potential errors in the input formats”</li>
+<li>“I need to ensure the conversion preserves the same date and time”</li>
+</ul>
+<p><strong>Using Constraints Highlight:</strong></p>
+<ul>
+<li>“The function should accept a string representing a date”</li>
+<li>“The function should accept a source format specification”</li>
+<li>“The function should accept a target format specification”</li>
+<li>“The function should return the date in the target format”</li>
+<li>“The function should raise appropriate errors for invalid inputs”</li>
+</ul>
+<p><strong>AI Verification Prompt:</strong></p>
+<pre><code>I'm working on a function that converts dates between different formats.
+
+I've restated it as:
+- A function that takes a date string, source format, and target format
+- Parses the date according to the source format
+- Returns the same date formatted according to the target format
+- Handles errors for invalid dates or formats
+
+Have I missed anything important in my restatement?</code></pre>
+<p><strong>AI Response:</strong> &gt; Your restatement covers the main aspects well, but here are a few additional considerations: &gt; &gt; - Time zones: How should the function handle time zone information? Should it preserve, convert, or ignore time zones? &gt; - Locale-specific formatting: Dates can be formatted differently in different locales (e.g., month names in different languages) &gt; - Ambiguous dates: How to handle dates like “01/02/2023” which could be January 2nd or February 1st depending on region &gt; - Partial dates: Should the function support dates with missing components (e.g., year only, month and year only)? &gt; - Format specifications: Will you use standard format strings (like those in Python’s datetime), or custom specifications? &gt; &gt; These considerations can greatly affect the scope and complexity of your function.</p>
+</section>
+<section id="step-2-identify-input-and-output" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="step-2-identify-input-and-output"><span class="header-section-number">5.4.2</span> Step 2: Identify Input and Output</h3>
+<p><strong>Input Specification:</strong> - <code>date_str</code>: A string representing a date in the source format - <code>source_format</code>: A string specifying the format of the input date - <code>target_format</code>: A string specifying the desired output format - <code>timezone</code>: (Optional) A string representing the timezone of the input date</p>
+<p><strong>Output Specification:</strong> - On success: A string representing the same date in the target format - On error: Raises appropriate exceptions with clear error messages</p>
+<p><strong>Examples:</strong> - <code>convert_date("2023-04-01", "%Y-%m-%d", "%m/%d/%Y")</code> → <code>"04/01/2023"</code> - <code>convert_date("April 1, 2023", "%B %d, %Y", "%Y-%m-%d")</code> → <code>"2023-04-01"</code> - <code>convert_date("invalid", "%Y-%m-%d", "%m/%d/%Y")</code> → <code>ValueError("Unable to parse date")</code></p>
+<p><strong>Edge Case Exploration Prompt:</strong></p>
+<pre><code>What edge cases should I consider for a date format conversion function with these inputs?
+- date_str: A string representing a date
+- source_format: The format of the input date
+- target_format: The desired output format</code></pre>
+<p><strong>AI Response:</strong> &gt; Here are important edge cases to consider: &gt; &gt; <strong>Input Date String Edge Cases:</strong> &gt; - Empty string &gt; - Dates with two-digit years (ambiguity between centuries) &gt; - Dates with missing components (e.g., no year specified) &gt; - Dates with extra information (whitespace, additional text) &gt; - Dates with time components when only date is expected &gt; &gt; <strong>Format Specification Edge Cases:</strong> &gt; - Empty format strings &gt; - Invalid format specifiers &gt; - Format requires information not present in the input date &gt; - Mismatched formats (e.g., time format for date-only string) &gt; &gt; <strong>Calendar/Time Edge Cases:</strong> &gt; - Leap years and February 29 &gt; - Daylight saving time transitions &gt; - Dates before the Unix epoch &gt; - Very old or future dates &gt; - Non-existent dates (e.g., November 31) &gt; - Dates from different calendar systems &gt; &gt; <strong>Locale-Specific Edge Cases:</strong> &gt; - Month/day order ambiguity (MM/DD vs DD/MM) &gt; - Language-specific month and day names &gt; - Different separators in different locales &gt; &gt; <strong>Technical Edge Cases:</strong> &gt; - Performance with very large dates &gt; - Thread safety if applicable &gt; - Memory usage concerns</p>
+</section>
+</section>
+<section id="moving-forward" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="moving-forward"><span class="header-section-number">5.5</span> Moving Forward</h2>
+<p>With a clear problem restatement and detailed input/output specifications, you’ve built a solid foundation for the remaining steps of the methodology. You can now:</p>
+<ol type="1">
+<li>Work through examples by hand with confidence that you understand the problem</li>
+<li>Develop pseudocode that addresses the complete requirements</li>
+<li>Implement a solution that handles all identified edge cases</li>
+<li>Test against the comprehensive I/O specification you’ve developed</li>
+</ol>
+<p>In the next chapter, we’ll explore Step 3: Working the problem by hand with concrete examples.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/04-six-step-methodology.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/06-work-by-hand.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

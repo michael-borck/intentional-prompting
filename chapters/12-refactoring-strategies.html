@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intentional Prompting: Mastering the Human-AI Development Process - 12&nbsp; Refactoring Strategies</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/13-case-studies.html" rel="next">
+<link href="../chapters/11-debugging-with-ai.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/10-intentional-prompting-patterns.html">Patterns &amp; Practices</a></li><li class="breadcrumb-item"><a href="../chapters/12-refactoring-strategies.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Intentional Prompting: Mastering the Human-AI Development Process</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/michael-borck/python-dev-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ai-revolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The AI Revolution in Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-intentional-prompting-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Principles of Intentional Prompting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Methodology</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-six-step-methodology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-restate-and-identify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-work-by-hand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-pseudocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-convert-to-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convert to Code (Step 5)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-test-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Patterns &amp; Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-intentional-prompting-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-debugging-with-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-refactoring-strategies.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-case-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-scaling-complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scaling to Complex Projects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-teaching-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Teaching and Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-future-directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Future Directions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/prompt-templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Prompt Templates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/common-pitfalls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Common Pitfalls and Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/ai-tool-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">AI Tool Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#when-and-why-to-refactor" id="toc-when-and-why-to-refactor" class="nav-link active" data-scroll-target="#when-and-why-to-refactor"><span class="header-section-number">12.1</span> When and Why to Refactor</a>
+  <ul class="collapse">
+  <li><a href="#recognizing-refactoring-opportunities" id="toc-recognizing-refactoring-opportunities" class="nav-link" data-scroll-target="#recognizing-refactoring-opportunities"><span class="header-section-number">12.1.1</span> Recognizing Refactoring Opportunities</a></li>
+  <li><a href="#case-study-2-reducing-duplication" id="toc-case-study-2-reducing-duplication" class="nav-link" data-scroll-target="#case-study-2-reducing-duplication"><span class="header-section-number">12.1.2</span> Case Study 2: Reducing Duplication</a></li>
+  </ul></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">12.2</span> Key Takeaways</a></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward"><span class="header-section-number">12.3</span> Moving Forward</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/michael-borck/python-dev-book/edit/main/chapters/12-refactoring-strategies.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/michael-borck/python-dev-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Refactoring—improving code structure without changing its external behavior—is a critical skill for maintaining healthy, adaptable software. AI assistants can be powerful allies in identifying refactoring opportunities and implementing improvements. This chapter explores intentional approaches to refactoring with AI assistance.</p>
+<section id="when-and-why-to-refactor" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="when-and-why-to-refactor"><span class="header-section-number">12.1</span> When and Why to Refactor</h2>
+<section id="recognizing-refactoring-opportunities" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="recognizing-refactoring-opportunities"><span class="header-section-number">12.1.1</span> Recognizing Refactoring Opportunities</h3>
+<p>Refactoring is most valuable in specific situations:</p>
+<ol type="1">
+<li><strong>Code smells</strong> - Patterns in code that indicate deeper problems</li>
+<li><strong>Technical debt</strong> - Accumulated design or implementation shortcuts</li>
+<li><strong>Changing requirements</strong> - Evolving needs that strain existing designs</li>
+<li><strong>Performance bottlenecks</strong> - Areas where optimization is needed</li>
+<li><strong>Duplication</strong> - Repeated code that could be consolidated</li>
+<li><strong>Complexity</strong> - Overly complicated logic that’s difficult to understand</li>
+</ol>
+<p>AI assistants excel at identifying these opportunities, especially when prompted to look for specific issues.</p>
+<p><strong>Example prompt:</strong></p>
+<pre><code>Here's a section of our codebase that's becoming difficult to maintain:
+
+```python
+def process_customer_data(customer):
+    # Calculate base price
+    if customer.tier == 'premium':
+        base_price = 99.99
+    elif customer.tier == 'standard':
+        base_price = 49.99
+    elif customer.tier == 'basic':
+        base_price = 19.99
+    else:
+        base_price = 29.99
+    
+    # Apply discounts
+    if customer.years &gt; 5:
+        discount = 0.15
+    elif customer.years &gt; 2:
+        discount = 0.10
+    elif customer.is_first_responder:
+        discount = 0.20
+    elif customer.is_teacher:
+        discount = 0.10
+    else:
+        discount = 0
+    
+    # Calculate final price
+    final_price = base_price * (1 - discount)
+    
+    # Generate output data
+    result = {
+        'customer_id': customer.id,
+        'name': customer.name,
+        'email': customer.email,
+        'price': final_price,
+        'discount': discount,
+        'tier': customer.tier,
+    }
+    
+    return result</code></pre>
+<p>Can you identify refactoring opportunities in this code? What code smells do you notice?</p>
+<pre><code>
+### The Business Case for Refactoring
+
+Refactoring is sometimes seen as unnecessary by non-technical stakeholders. AI can help articulate the business value:
+
+**Example prompt:**</code></pre>
+<p>I need to make a case to my manager for refactoring our payment processing module. The current code works, but it’s difficult to maintain and extend.</p>
+<p>How can I effectively communicate the business value of this refactoring effort? What specific metrics or outcomes should I highlight?</p>
+<pre><code>
+## AI-Assisted Code Improvements
+
+### Identifying Refactoring Targets
+
+AI can analyze code to identify specific improvement opportunities:
+
+**Example prompt:**</code></pre>
+<p>Could you analyze this function and suggest potential refactoring improvements? Focus on maintainability, readability, and adherence to best practices.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="bu">List</span><span class="op">&lt;</span>Transaction<span class="op">&gt;</span> <span class="fu">getTransactions</span><span class="op">(</span><span class="bu">String</span> userId<span class="op">,</span> <span class="bu">Date</span> startDate<span class="op">,</span> <span class="bu">Date</span> endDate<span class="op">,</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="bu">String</span> category<span class="op">,</span> <span class="bu">String</span> merchantName<span class="op">,</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="bu">Double</span> minAmount<span class="op">,</span> <span class="bu">Double</span> maxAmount<span class="op">,</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="dt">boolean</span> includeDeclined<span class="op">,</span> <span class="bu">String</span> sortBy<span class="op">,</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="bu">String</span> sortDirection<span class="op">,</span> <span class="dt">int</span> pageSize<span class="op">,</span> <span class="dt">int</span> pageNum<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">List</span><span class="op">&lt;</span>Transaction<span class="op">&gt;</span> results <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Connection</span> conn <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">PreparedStatement</span> stmt <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">ResultSet</span> rs <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        conn <span class="op">=</span> dataSource<span class="op">.</span><span class="fu">getConnection</span><span class="op">();</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">StringBuilder</span> sql <span class="op">=</span> <span class="kw">new</span> <span class="bu">StringBuilder</span><span class="op">(</span><span class="st">"SELECT * FROM transactions WHERE user_id = ?"</span><span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">List</span><span class="op">&lt;</span><span class="bu">Object</span><span class="op">&gt;</span> params <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        params<span class="op">.</span><span class="fu">add</span><span class="op">(</span>userId<span class="op">);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>startDate <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            sql<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">" AND transaction_date &gt;= ?"</span><span class="op">);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            params<span class="op">.</span><span class="fu">add</span><span class="op">(</span>startDate<span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>endDate <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            sql<span class="op">.</span><span class="fu">append</span><span class="op">(</span><span class="st">" AND transaction_date &lt;= ?"</span><span class="op">);</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            params<span class="op">.</span><span class="fu">add</span><span class="op">(</span>endDate<span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">// 30+ more lines of similar parameter handling...</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Pagination and sorting logic</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">// More database handling code...</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>rs<span class="op">.</span><span class="fu">next</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Transform ResultSet to Transaction objects</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>            <span class="co">// 20+ lines of mapping code...</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>            results<span class="op">.</span><span class="fu">add</span><span class="op">(</span>transaction<span class="op">);</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">SQLException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        logger<span class="op">.</span><span class="fu">error</span><span class="op">(</span><span class="st">"Database error"</span><span class="op">,</span> e<span class="op">);</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">finally</span> <span class="op">{</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Close resources</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>rs <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span> rs<span class="op">.</span><span class="fu">close</span><span class="op">();</span> <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">SQLException</span> e<span class="op">)</span> <span class="op">{</span> logger<span class="op">.</span><span class="fu">error</span><span class="op">(</span><span class="st">"Error closing ResultSet"</span><span class="op">,</span> e<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stmt <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span> stmt<span class="op">.</span><span class="fu">close</span><span class="op">();</span> <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">SQLException</span> e<span class="op">)</span> <span class="op">{</span> logger<span class="op">.</span><span class="fu">error</span><span class="op">(</span><span class="st">"Error closing Statement"</span><span class="op">,</span> e<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>conn <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span> <span class="op">{</span> conn<span class="op">.</span><span class="fu">close</span><span class="op">();</span> <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">SQLException</span> e<span class="op">)</span> <span class="op">{</span> logger<span class="op">.</span><span class="fu">error</span><span class="op">(</span><span class="st">"Error closing Connection"</span><span class="op">,</span> e<span class="op">);</span> <span class="op">}</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results<span class="op">;</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>
+### Suggesting Improved Designs
+
+AI can propose architectural improvements:
+
+**Example prompt:**</code></pre>
+<p>I have a monolithic class that handles user authentication, profile management, and notification preferences. It’s become unwieldy at 500+ lines.</p>
+<p>Based on the SOLID principles, how should I refactor this into more focused classes? What would the new class structure look like?</p>
+<pre><code>
+### Implementing Specific Refactorings
+
+AI can implement common refactoring patterns:
+
+**Example prompt:**</code></pre>
+<p>I’d like to apply the “Extract Method” refactoring to this code:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateTotalPrice</span>(items<span class="op">,</span> customer) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> subtotal <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> item <span class="kw">of</span> items) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    subtotal <span class="op">+=</span> item<span class="op">.</span><span class="at">price</span> <span class="op">*</span> item<span class="op">.</span><span class="at">quantity</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> tax <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (customer<span class="op">.</span><span class="at">state</span> <span class="op">===</span> <span class="st">'CA'</span>) {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> subtotal <span class="op">*</span> <span class="fl">0.0725</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (customer<span class="op">.</span><span class="at">state</span> <span class="op">===</span> <span class="st">'NY'</span>) {</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> subtotal <span class="op">*</span> <span class="fl">0.045</span><span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (customer<span class="op">.</span><span class="at">state</span> <span class="op">===</span> <span class="st">'TX'</span>) {</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> subtotal <span class="op">*</span> <span class="fl">0.0625</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    tax <span class="op">=</span> subtotal <span class="op">*</span> <span class="fl">0.05</span><span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> shipping <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (subtotal <span class="op">&gt;=</span> <span class="dv">100</span>) {</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    shipping <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (customer<span class="op">.</span><span class="at">isPremium</span>) {</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    shipping <span class="op">=</span> <span class="fl">5.99</span><span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    shipping <span class="op">=</span> <span class="fl">10.99</span><span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> subtotal <span class="op">+</span> tax <span class="op">+</span> shipping<span class="op">;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Please extract methods for calculating the subtotal, tax, and shipping.</p>
+<pre><code>
+## Measuring Impact of Refactoring
+
+Refactoring should produce measurable improvements. AI can help identify metrics and assess results.
+
+### Quantitative Metrics
+
+**Example prompt:**</code></pre>
+<p>I’m planning to refactor our API request handling code. What quantitative metrics should I measure before and after refactoring to demonstrate the impact?</p>
+<pre><code>
+AI might suggest:
+
+- **Performance metrics**: Response time, throughput, resource utilization
+- **Code metrics**: Cyclomatic complexity, lines of code, method length
+- **Testing metrics**: Test coverage, test execution time
+- **Maintenance metrics**: Time to implement new features, bug fix duration
+- **Error rates**: Exceptions, crashes, incorrect results
+
+### Qualitative Assessment
+
+**Example prompt:**</code></pre>
+<p>Beyond quantitative metrics, what qualitative factors should I consider when evaluating the success of my refactoring efforts?</p>
+<pre><code>
+AI might suggest:
+
+- **Developer feedback**: Team assessment of code clarity and maintainability
+- **Onboarding impact**: How quickly new team members understand the code
+- **Flexibility**: Ease of implementing new requirements
+- **Documentation needs**: Reduction in necessary explanation
+- **Knowledge distribution**: Less reliance on specific team members
+
+## Maintaining Functionality During Refactoring
+
+One of the most critical aspects of refactoring is preserving existing behavior.
+
+### Test-Driven Refactoring
+
+**Example prompt:**</code></pre>
+<p>I want to refactor this payment processing function, but I need to ensure I don’t break existing functionality. What testing approach would you recommend?</p>
+<p>Here’s the current function:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_payment(order_id, card_details, amount):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Implementation details...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What types of tests should I write before refactoring, and how should I structure the refactoring process to minimize risk?</p>
+<pre><code>
+### Incremental Refactoring Approaches
+
+**Example prompt:**</code></pre>
+<p>I need to refactor a large legacy class (800+ lines) that handles multiple responsibilities. What’s the most effective step-by-step approach to break this down safely?</p>
+<pre><code>
+AI might suggest:
+
+1. **Create a comprehensive test suite** first
+2. **Identify clear boundaries** between responsibilities
+3. **Extract one responsibility at a time**, starting with the most independent
+4. **Introduce interfaces** to define clear contracts
+5. **Refactor clients** to use the new interfaces
+6. **Run tests after each incremental change**
+
+## Case Studies
+
+### Case Study 1: Simplifying Complex Conditionals
+
+**Original Code:**
+
+```javascript
+function calculateDiscount(customer, order) {
+  let discount = 0;
+  
+  if (customer.type === 'regular') {
+    if (order.total &gt; 100) {
+      if (customer.years &gt; 2) {
+        discount = 0.15;
+      } else {
+        discount = 0.10;
+      }
+    } else if (order.total &gt; 50) {
+      if (customer.years &gt; 2) {
+        discount = 0.10;
+      } else {
+        discount = 0.05;
+      }
+    }
+  } else if (customer.type === 'premium') {
+    if (order.total &gt; 100) {
+      discount = 0.20;
+    } else if (order.total &gt; 50) {
+      discount = 0.15;
+    } else {
+      discount = 0.10;
+    }
+  } else if (customer.type === 'vip') {
+    discount = 0.25;
+  }
+  
+  if (order.items.length &gt; 10) {
+    discount += 0.05;
+  }
+  
+  return discount;
+}</code></pre>
+<p><strong>Refactoring Request:</strong></p>
+<p><strong>Human prompt:</strong></p>
+<pre><code>This discount calculation function has become difficult to understand and maintain due to nested conditionals. How would you refactor it to improve readability and maintainability?</code></pre>
+<p><strong>AI response:</strong> &gt; I’ll refactor this function to simplify the nested conditionals using a few strategies: &gt; &gt; 1. Use early returns for special cases &gt; 2. Extract specialized functions for different customer types &gt; 3. Use lookup tables for rules-based logic &gt; 4. Implement a more declarative approach &gt; &gt; Here’s the refactored version: &gt; &gt; <code>javascript &gt; function calculateDiscount(customer, order) { &gt;   // Start with base discount and add volume discount later if applicable &gt;   const baseDiscount = calculateBaseDiscount(customer, order); &gt;   const volumeDiscount = order.items.length &gt; 10 ? 0.05 : 0; &gt;    &gt;   return baseDiscount + volumeDiscount; &gt; } &gt;  &gt; function calculateBaseDiscount(customer, order) { &gt;   // Special case for VIP customers &gt;   if (customer.type === 'vip') { &gt;     return 0.25; &gt;   } &gt;    &gt;   // Use lookup table for discount rules &gt;   const discountRules = { &gt;     regular: { &gt;       tier1: { threshold: 100, loyal: 0.15, new: 0.10 }, &gt;       tier2: { threshold: 50, loyal: 0.10, new: 0.05 }, &gt;       tier3: { threshold: 0, loyal: 0, new: 0 } &gt;     }, &gt;     premium: { &gt;       tier1: { threshold: 100, discount: 0.20 }, &gt;       tier2: { threshold: 50, discount: 0.15 }, &gt;       tier3: { threshold: 0, discount: 0.10 } &gt;     } &gt;   }; &gt;    &gt;   // Handle regular customers &gt;   if (customer.type === 'regular') { &gt;     const isLoyal = customer.years &gt; 2; &gt;     const customerRates = discountRules.regular; &gt;      &gt;     if (order.total &gt; customerRates.tier1.threshold) { &gt;       return isLoyal ? customerRates.tier1.loyal : customerRates.tier1.new; &gt;     } else if (order.total &gt; customerRates.tier2.threshold) { &gt;       return isLoyal ? customerRates.tier2.loyal : customerRates.tier2.new; &gt;     } &gt;     return 0; &gt;   } &gt;    &gt;   // Handle premium customers &gt;   if (customer.type === 'premium') { &gt;     const premiumRates = discountRules.premium; &gt;      &gt;     if (order.total &gt; premiumRates.tier1.threshold) { &gt;       return premiumRates.tier1.discount; &gt;     } else if (order.total &gt; premiumRates.tier2.threshold) { &gt;       return premiumRates.tier2.discount; &gt;     } &gt;     return premiumRates.tier3.discount; &gt;   } &gt;    &gt;   // Default case - no discount &gt;   return 0; &gt; } &gt;</code> &gt; &gt; Benefits of this refactoring: &gt; &gt; 1. <strong>Improved readability</strong>: The main function is now much shorter and clearer &gt; 2. <strong>Separation of concerns</strong>: Different discount calculations are separated &gt; 3. <strong>Configurability</strong>: Discount rules are organized in a data structure that could easily be moved to a configuration file &gt; 4. <strong>Maintainability</strong>: Adding new customer types or rules is more straightforward &gt; 5. <strong>Testability</strong>: Each function can be tested independently &gt; &gt; For even further improvement, you could refactor this to use a more object-oriented approach with strategy patterns, or use a rules engine for complex discount logic.</p>
+</section>
+<section id="case-study-2-reducing-duplication" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="case-study-2-reducing-duplication"><span class="header-section-number">12.1.2</span> Case Study 2: Reducing Duplication</h3>
+<p><strong>Original Code:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UserService:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_user_by_id(<span class="va">self</span>, user_id):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        connection <span class="op">=</span> database.<span class="ex">connect</span>()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        cursor <span class="op">=</span> connection.cursor()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        cursor.execute(<span class="st">"SELECT * FROM users WHERE id = </span><span class="sc">%s</span><span class="st">"</span>, (user_id,))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> cursor.fetchone()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        cursor.close()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        connection.close()</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> result:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">'id'</span>: result[<span class="dv">0</span>],</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">'username'</span>: result[<span class="dv">1</span>],</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">'email'</span>: result[<span class="dv">2</span>],</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">'created_at'</span>: result[<span class="dv">3</span>]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_user_by_email(<span class="va">self</span>, email):</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        connection <span class="op">=</span> database.<span class="ex">connect</span>()</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>        cursor <span class="op">=</span> connection.cursor()</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        cursor.execute(<span class="st">"SELECT * FROM users WHERE email = </span><span class="sc">%s</span><span class="st">"</span>, (email,))</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> cursor.fetchone()</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        cursor.close()</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        connection.close()</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> result:</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                <span class="st">'id'</span>: result[<span class="dv">0</span>],</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>                <span class="st">'username'</span>: result[<span class="dv">1</span>],</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">'email'</span>: result[<span class="dv">2</span>],</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">'created_at'</span>: result[<span class="dv">3</span>]</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_user_by_username(<span class="va">self</span>, username):</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>        connection <span class="op">=</span> database.<span class="ex">connect</span>()</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>        cursor <span class="op">=</span> connection.cursor()</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>        cursor.execute(<span class="st">"SELECT * FROM users WHERE username = </span><span class="sc">%s</span><span class="st">"</span>, (username,))</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> cursor.fetchone()</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        cursor.close()</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>        connection.close()</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> result:</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">'id'</span>: result[<span class="dv">0</span>],</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">'username'</span>: result[<span class="dv">1</span>],</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>                <span class="st">'email'</span>: result[<span class="dv">2</span>],</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>                <span class="st">'created_at'</span>: result[<span class="dv">3</span>]</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Refactoring Request:</strong></p>
+<p><strong>Human prompt:</strong></p>
+<pre><code>This UserService class has significant duplication in its methods. How would you refactor it to reduce repetition while maintaining the same functionality?</code></pre>
+<p><strong>AI response:</strong> &gt; There’s significant duplication in this <code>UserService</code> class. The three methods follow the same pattern but just differ in the query condition. Let’s refactor to eliminate this duplication: &gt; &gt; <code>python &gt; class UserService: &gt;     def __get_user_by_query(self, query, params): &gt;         """ &gt;         Private helper method to execute a query and return user data. &gt;          &gt;         Args: &gt;             query: SQL query with placeholders &gt;             params: Parameters to substitute in the query &gt;              &gt;         Returns: &gt;             User dict or None if not found &gt;         """ &gt;         connection = None &gt;         cursor = None &gt;          &gt;         try: &gt;             connection = database.connect() &gt;             cursor = connection.cursor() &gt;             cursor.execute(query, params) &gt;             result = cursor.fetchone() &gt;              &gt;             if result: &gt;                 return { &gt;                     'id': result[0], &gt;                     'username': result[1], &gt;                     'email': result[2], &gt;                     'created_at': result[3] &gt;                 } &gt;             return None &gt;              &gt;         finally: &gt;             # Ensure resources are closed even if an exception occurs &gt;             if cursor: &gt;                 cursor.close() &gt;             if connection: &gt;                 connection.close() &gt;      &gt;     def get_user_by_id(self, user_id): &gt;         """Get a user by their ID.""" &gt;         return self.__get_user_by_query( &gt;             "SELECT * FROM users WHERE id = %s",  &gt;             (user_id,) &gt;         ) &gt;      &gt;     def get_user_by_email(self, email): &gt;         """Get a user by their email address.""" &gt;         return self.__get_user_by_query( &gt;             "SELECT * FROM users WHERE email = %s",  &gt;             (email,) &gt;         ) &gt;      &gt;     def get_user_by_username(self, username): &gt;         """Get a user by their username.""" &gt;         return self.__get_user_by_query( &gt;             "SELECT * FROM users WHERE username = %s",  &gt;             (username,) &gt;         ) &gt;</code> &gt; &gt; Key improvements in this refactoring: &gt; &gt; 1. <strong>Extracted common code</strong> into a private helper method <code>__get_user_by_query</code> &gt; 2. <strong>Improved error handling</strong> with a try/finally block to ensure resources are properly closed &gt; 3. <strong>Added docstrings</strong> to improve code documentation &gt; 4. <strong>Made public methods concise</strong> and focused on their specific responsibilities &gt; 5. <strong>Reduced duplication</strong> significantly - the code is now much more maintainable &gt; &gt; Further improvements could include: &gt; &gt; - Creating a User model class instead of returning dictionaries &gt; - Using a context manager or connection pool for database connections &gt; - Adding proper exception handling and logging &gt; - Implementing a data access layer or repository pattern &gt; &gt; This refactoring maintains exactly the same functionality while making the code much more maintainable.</p>
+</section>
+</section>
+<section id="key-takeaways" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">12.2</span> Key Takeaways</h2>
+<ul>
+<li>Refactoring is about improving code structure without changing functionality</li>
+<li>AI assistants excel at identifying refactoring opportunities and suggesting improvements</li>
+<li>Measure the impact of refactoring with both quantitative and qualitative metrics</li>
+<li>Preserve functionality during refactoring through comprehensive testing</li>
+<li>Common refactoring patterns like extracting methods and simplifying conditionals can be effectively implemented with AI assistance</li>
+<li>Incremental, test-driven approaches minimize risk during refactoring</li>
+</ul>
+</section>
+<section id="moving-forward" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="moving-forward"><span class="header-section-number">12.3</span> Moving Forward</h2>
+<p>In the next chapter, we’ll explore case studies that demonstrate the complete intentional prompting methodology in real-world situations, including both debugging and refactoring as part of larger development efforts.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/11-debugging-with-ai.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/13-case-studies.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

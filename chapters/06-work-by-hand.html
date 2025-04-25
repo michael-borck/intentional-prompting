@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Intentional Prompting: Mastering the Human-AI Development Process - 6&nbsp; Work by Hand (Step 3)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/07-pseudocode.html" rel="next">
+<link href="../chapters/05-restate-and-identify.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-six-step-methodology.html">Methodology</a></li><li class="breadcrumb-item"><a href="../chapters/06-work-by-hand.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Intentional Prompting: Mastering the Human-AI Development Process</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/michael-borck/python-dev-book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="../Intentional-Prompting--Mastering-the-Human-AI-Development-Process.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-ai-revolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The AI Revolution in Programming</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-intentional-prompting-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Principles of Intentional Prompting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Methodology</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-six-step-methodology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The Six-Step Programming Methodology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-restate-and-identify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-work-by-hand.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-pseudocode.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-convert-to-code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Convert to Code (Step 5)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-test-with-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Test with Data (Step 6)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Patterns &amp; Practices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-intentional-prompting-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Intentional Prompting Patterns</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-debugging-with-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Debugging with AI</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-refactoring-strategies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Refactoring Strategies</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-case-studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Case Studies</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Advanced Topics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-scaling-complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scaling to Complex Projects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-teaching-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Teaching and Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-future-directions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Future Directions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Acknowledgments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/prompt-templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Prompt Templates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/common-pitfalls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Common Pitfalls and Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/ai-tool-comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">AI Tool Comparison</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-importance-of-manual-examples" id="toc-the-importance-of-manual-examples" class="nav-link active" data-scroll-target="#the-importance-of-manual-examples"><span class="header-section-number">6.1</span> The Importance of Manual Examples</a>
+  <ul class="collapse">
+  <li><a href="#why-work-by-hand" id="toc-why-work-by-hand" class="nav-link" data-scroll-target="#why-work-by-hand"><span class="header-section-number">6.1.1</span> Why Work By Hand?</a></li>
+  <li><a href="#mental-models-vs.-pattern-matching" id="toc-mental-models-vs.-pattern-matching" class="nav-link" data-scroll-target="#mental-models-vs.-pattern-matching"><span class="header-section-number">6.1.2</span> Mental Models vs.&nbsp;Pattern Matching</a></li>
+  </ul></li>
+  <li><a href="#tracing-algorithms-step-by-step" id="toc-tracing-algorithms-step-by-step" class="nav-link" data-scroll-target="#tracing-algorithms-step-by-step"><span class="header-section-number">6.2</span> Tracing Algorithms Step by Step</a>
+  <ul class="collapse">
+  <li><a href="#the-tracing-process" id="toc-the-tracing-process" class="nav-link" data-scroll-target="#the-tracing-process"><span class="header-section-number">6.2.1</span> The Tracing Process</a></li>
+  <li><a href="#visualization-techniques" id="toc-visualization-techniques" class="nav-link" data-scroll-target="#visualization-techniques"><span class="header-section-number">6.2.2</span> Visualization Techniques</a></li>
+  </ul></li>
+  <li><a href="#testing-assumptions" id="toc-testing-assumptions" class="nav-link" data-scroll-target="#testing-assumptions"><span class="header-section-number">6.3</span> Testing Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#assumption-categories" id="toc-assumption-categories" class="nav-link" data-scroll-target="#assumption-categories"><span class="header-section-number">6.3.1</span> Assumption Categories</a></li>
+  <li><a href="#the-what-if-technique" id="toc-the-what-if-technique" class="nav-link" data-scroll-target="#the-what-if-technique"><span class="header-section-number">6.3.2</span> The “What If?” Technique</a></li>
+  </ul></li>
+  <li><a href="#sharing-your-manual-work-with-ai" id="toc-sharing-your-manual-work-with-ai" class="nav-link" data-scroll-target="#sharing-your-manual-work-with-ai"><span class="header-section-number">6.4</span> Sharing Your Manual Work with AI</a>
+  <ul class="collapse">
+  <li><a href="#verification-of-manual-solutions" id="toc-verification-of-manual-solutions" class="nav-link" data-scroll-target="#verification-of-manual-solutions"><span class="header-section-number">6.4.1</span> Verification of Manual Solutions</a></li>
+  <li><a href="#exploring-alternative-approaches" id="toc-exploring-alternative-approaches" class="nav-link" data-scroll-target="#exploring-alternative-approaches"><span class="header-section-number">6.4.2</span> Exploring Alternative Approaches</a></li>
+  <li><a href="#identifying-edge-cases" id="toc-identifying-edge-cases" class="nav-link" data-scroll-target="#identifying-edge-cases"><span class="header-section-number">6.4.3</span> Identifying Edge Cases</a></li>
+  </ul></li>
+  <li><a href="#practical-exercise-working-by-hand" id="toc-practical-exercise-working-by-hand" class="nav-link" data-scroll-target="#practical-exercise-working-by-hand"><span class="header-section-number">6.5</span> Practical Exercise: Working By Hand</a>
+  <ul class="collapse">
+  <li><a href="#chosen-example-babad" id="toc-chosen-example-babad" class="nav-link" data-scroll-target="#chosen-example-babad"><span class="header-section-number">6.5.1</span> Chosen Example: “babad”</a></li>
+  <li><a href="#edge-case-empty-string" id="toc-edge-case-empty-string" class="nav-link" data-scroll-target="#edge-case-empty-string"><span class="header-section-number">6.5.2</span> Edge Case: Empty String</a></li>
+  <li><a href="#edge-case-single-character" id="toc-edge-case-single-character" class="nav-link" data-scroll-target="#edge-case-single-character"><span class="header-section-number">6.5.3</span> Edge Case: Single Character</a></li>
+  <li><a href="#edge-case-all-same-characters" id="toc-edge-case-all-same-characters" class="nav-link" data-scroll-target="#edge-case-all-same-characters"><span class="header-section-number">6.5.4</span> Edge Case: All Same Characters</a></li>
+  <li><a href="#edge-case-no-palindromes-longer-than-1" id="toc-edge-case-no-palindromes-longer-than-1" class="nav-link" data-scroll-target="#edge-case-no-palindromes-longer-than-1"><span class="header-section-number">6.5.5</span> Edge Case: No Palindromes Longer Than 1</a></li>
+  <li><a href="#validating-our-approach-with-ai" id="toc-validating-our-approach-with-ai" class="nav-link" data-scroll-target="#validating-our-approach-with-ai"><span class="header-section-number">6.5.6</span> Validating Our Approach with AI</a></li>
+  </ul></li>
+  <li><a href="#insights-from-working-by-hand" id="toc-insights-from-working-by-hand" class="nav-link" data-scroll-target="#insights-from-working-by-hand"><span class="header-section-number">6.6</span> Insights from Working By Hand</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways"><span class="header-section-number">6.7</span> Key Takeaways</a></li>
+  <li><a href="#moving-forward" id="toc-moving-forward" class="nav-link" data-scroll-target="#moving-forward"><span class="header-section-number">6.8</span> Moving Forward</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/michael-borck/python-dev-book/edit/main/chapters/06-work-by-hand.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/michael-borck/python-dev-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Work by Hand (Step 3)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Step 3 of the six-step methodology—working through examples by hand—is often the most tempting to skip, especially with AI assistance. Yet it remains one of the most valuable practices for deeply understanding a problem and its solution.</p>
+<section id="the-importance-of-manual-examples" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="the-importance-of-manual-examples"><span class="header-section-number">6.1</span> The Importance of Manual Examples</h2>
+<section id="why-work-by-hand" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="why-work-by-hand"><span class="header-section-number">6.1.1</span> Why Work By Hand?</h3>
+<p>Working through examples manually before coding serves several critical purposes:</p>
+<ol type="1">
+<li><strong>Builds intuition</strong> about how the solution should behave</li>
+<li><strong>Reveals hidden complexity</strong> that might not be apparent in the problem description</li>
+<li><strong>Creates test cases</strong> that can validate your eventual code</li>
+<li><strong>Identifies edge cases</strong> that require special handling</li>
+<li><strong>Provides a reference implementation</strong> against which to check automated solutions</li>
+</ol>
+<p>This step is especially important in the age of AI coding assistants. When AI can generate code instantly, manually working through examples becomes the primary way to maintain a deep understanding of the solutions you implement.</p>
+</section>
+<section id="mental-models-vs.-pattern-matching" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="mental-models-vs.-pattern-matching"><span class="header-section-number">6.1.2</span> Mental Models vs.&nbsp;Pattern Matching</h3>
+<p>There are two fundamentally different ways to solve programming problems:</p>
+<p><strong>Pattern matching</strong> involves recognizing a problem as similar to something you’ve seen before and applying a known solution template. This approach is quick but shallow—it doesn’t build transferable understanding.</p>
+<p><strong>Mental modeling</strong> involves constructing a detailed understanding of the problem dynamics and working through how a solution would operate step by step. This approach builds deeper understanding that transfers to novel problems.</p>
+<p>AI excels at pattern matching but struggles with novel problems that require creative mental models. By working problems by hand, you develop the mental modeling skills that complement AI’s pattern-matching strengths.</p>
+</section>
+</section>
+<section id="tracing-algorithms-step-by-step" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="tracing-algorithms-step-by-step"><span class="header-section-number">6.2</span> Tracing Algorithms Step by Step</h2>
+<section id="the-tracing-process" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="the-tracing-process"><span class="header-section-number">6.2.1</span> The Tracing Process</h3>
+<p>Tracing an algorithm involves simulating its execution with concrete inputs, tracking the state changes at each step:</p>
+<ol type="1">
+<li>Choose representative input values</li>
+<li>Initialize variables as they would be in the algorithm</li>
+<li>Follow the logic step by step, recording state changes</li>
+<li>Note intermediate values at key points</li>
+<li>Verify the final output matches expectations</li>
+</ol>
+<p>This process mirrors what a debugger does but happens in your mind or on paper, building a deeper understanding of the algorithm’s behavior.</p>
+</section>
+<section id="visualization-techniques" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="visualization-techniques"><span class="header-section-number">6.2.2</span> Visualization Techniques</h3>
+<p>Different problems benefit from different visualization approaches:</p>
+<section id="tabular-traces" class="level4" data-number="6.2.2.1">
+<h4 data-number="6.2.2.1" class="anchored" data-anchor-id="tabular-traces"><span class="header-section-number">6.2.2.1</span> Tabular Traces</h4>
+<p>For iterative algorithms, use a table where: - Each row represents one iteration - Columns show the values of key variables - Special columns can highlight important conditions or state changes</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Iteration</th>
+<th>Current Value</th>
+<th>Accumulator</th>
+<th>Condition Check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>5</td>
+<td>5</td>
+<td>5 &gt; 0? Yes</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>9</td>
+<td>4 &gt; 0? Yes</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+<td>12</td>
+<td>3 &gt; 0? Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="state-diagrams" class="level4" data-number="6.2.2.2">
+<h4 data-number="6.2.2.2" class="anchored" data-anchor-id="state-diagrams"><span class="header-section-number">6.2.2.2</span> State Diagrams</h4>
+<p>For algorithms that manipulate data structures, draw the structure at key points:</p>
+<pre><code>Initial array: [5, 3, 8, 2, 1]
+
+After first partition:
+[2, 3, 1] 5 [8]
+
+After recursive calls:
+[1] 2 [3] 5 [8]</code></pre>
+</section>
+<section id="flow-traces" class="level4" data-number="6.2.2.3">
+<h4 data-number="6.2.2.3" class="anchored" data-anchor-id="flow-traces"><span class="header-section-number">6.2.2.3</span> Flow Traces</h4>
+<p>For complex conditional logic, trace the path through the algorithm:</p>
+<pre><code>Input: x = 5
+1. Is x &lt; 0? No
+2. Is x even? No
+3. Execute odd-number logic...
+4. Return result: 16</code></pre>
+</section>
+</section>
+</section>
+<section id="testing-assumptions" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="testing-assumptions"><span class="header-section-number">6.3</span> Testing Assumptions</h2>
+<p>Working by hand is the perfect opportunity to test your assumptions about the problem and solution approach.</p>
+<section id="assumption-categories" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="assumption-categories"><span class="header-section-number">6.3.1</span> Assumption Categories</h3>
+<p>Be explicit about testing these types of assumptions:</p>
+<section id="data-assumptions" class="level4" data-number="6.3.1.1">
+<h4 data-number="6.3.1.1" class="anchored" data-anchor-id="data-assumptions"><span class="header-section-number">6.3.1.1</span> Data Assumptions</h4>
+<ul>
+<li>Valid input ranges</li>
+<li>Expected data formats</li>
+<li>Special values (null, empty, extreme values)</li>
+<li>Size limitations</li>
+</ul>
+</section>
+<section id="algorithmic-assumptions" class="level4" data-number="6.3.1.2">
+<h4 data-number="6.3.1.2" class="anchored" data-anchor-id="algorithmic-assumptions"><span class="header-section-number">6.3.1.2</span> Algorithmic Assumptions</h4>
+<ul>
+<li>Time and space complexity requirements</li>
+<li>Order sensitivity (does order matter?)</li>
+<li>Uniqueness requirements (are duplicates allowed?)</li>
+<li>Stability expectations (preserving order of equal elements)</li>
+</ul>
+</section>
+<section id="output-assumptions" class="level4" data-number="6.3.1.3">
+<h4 data-number="6.3.1.3" class="anchored" data-anchor-id="output-assumptions"><span class="header-section-number">6.3.1.3</span> Output Assumptions</h4>
+<ul>
+<li>Expected format of results</li>
+<li>Handling of error conditions</li>
+<li>Ties or multiple valid answers</li>
+</ul>
+</section>
+</section>
+<section id="the-what-if-technique" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="the-what-if-technique"><span class="header-section-number">6.3.2</span> The “What If?” Technique</h3>
+<p>For each assumption, ask “What if this assumption is violated?” and trace through an example:</p>
+<ul>
+<li>What if the input is empty?</li>
+<li>What if values are negative?</li>
+<li>What if there are duplicate entries?</li>
+<li>What if the input is already sorted?</li>
+</ul>
+<p>This process helps identify edge cases that your solution must handle.</p>
+</section>
+</section>
+<section id="sharing-your-manual-work-with-ai" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sharing-your-manual-work-with-ai"><span class="header-section-number">6.4</span> Sharing Your Manual Work with AI</h2>
+<p>Although working by hand is a primarily human activity, AI can still play a valuable role in the process.</p>
+<section id="verification-of-manual-solutions" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="verification-of-manual-solutions"><span class="header-section-number">6.4.1</span> Verification of Manual Solutions</h3>
+<p>After working through examples yourself, use AI to verify your approach:</p>
+<pre><code>I've worked through this sorting algorithm example by hand:
+
+Input: [5, 3, 8, 2, 1]
+
+Step 1: Choose pivot 5
+Step 2: Partition into [3, 2, 1] and [8]
+Step 3: Recursively sort [3, 2, 1] -&gt; [1, 2, 3]
+Step 4: Recursively sort [8] -&gt; [8]
+Step 5: Combine into [1, 2, 3, 5, 8]
+
+Did I follow the quicksort algorithm correctly? Are there any mistakes in my manual trace?</code></pre>
+</section>
+<section id="exploring-alternative-approaches" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="exploring-alternative-approaches"><span class="header-section-number">6.4.2</span> Exploring Alternative Approaches</h3>
+<p>AI can suggest different ways to approach the manual solution:</p>
+<pre><code>I'm solving this graph traversal problem by using depth-first search and manually tracing through the example. Are there other approaches I should consider working through by hand to better understand the problem?</code></pre>
+</section>
+<section id="identifying-edge-cases" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="identifying-edge-cases"><span class="header-section-number">6.4.3</span> Identifying Edge Cases</h3>
+<p>AI can help identify edge cases to trace manually:</p>
+<pre><code>I've traced through the standard case for this binary search algorithm. What edge cases should I work through by hand to ensure I understand all aspects of the algorithm?</code></pre>
+</section>
+</section>
+<section id="practical-exercise-working-by-hand" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="practical-exercise-working-by-hand"><span class="header-section-number">6.5</span> Practical Exercise: Working By Hand</h2>
+<p>Let’s apply Step 3 to our ongoing example problem:</p>
+<blockquote class="blockquote">
+<p>Write a function to find the longest palindromic substring in a given string.</p>
+</blockquote>
+<section id="chosen-example-babad" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="chosen-example-babad"><span class="header-section-number">6.5.1</span> Chosen Example: “babad”</h3>
+<p>Let’s trace through the process of finding the longest palindromic substring:</p>
+<ol type="1">
+<li>Start with the input string: “babad”</li>
+<li>Examine each potential center position:</li>
+</ol>
+<p>For single-character centers (odd-length palindromes): - Center at ‘b’ (index 0): - Check “b” -&gt; palindrome of length 1 - Check “ba” -&gt; not a palindrome</p>
+<ul>
+<li>Center at ‘a’ (index 1):
+<ul>
+<li>Check “a” -&gt; palindrome of length 1</li>
+<li>Check “bab” -&gt; palindrome of length 3</li>
+<li>Check “babα” (out of bounds) -&gt; stop</li>
+</ul></li>
+<li>Center at ‘b’ (index 2):
+<ul>
+<li>Check “b” -&gt; palindrome of length 1</li>
+<li>Check “aba” -&gt; palindrome of length 3</li>
+<li>Check “babα” (out of bounds) -&gt; stop</li>
+</ul></li>
+<li>Center at ‘a’ (index 3):
+<ul>
+<li>Check “a” -&gt; palindrome of length 1</li>
+<li>Check “bad” -&gt; not a palindrome</li>
+</ul></li>
+<li>Center at ‘d’ (index 4):
+<ul>
+<li>Check “d” -&gt; palindrome of length 1</li>
+<li>Check “ad” -&gt; not a palindrome</li>
+</ul></li>
+</ul>
+<p>For two-character centers (even-length palindromes): - Between ‘b’ and ‘a’ (indices 0-1): - Check “ba” -&gt; not a palindrome</p>
+<ul>
+<li>Between ‘a’ and ‘b’ (indices 1-2):
+<ul>
+<li>Check “ab” -&gt; not a palindrome</li>
+</ul></li>
+<li>Between ‘b’ and ‘a’ (indices 2-3):
+<ul>
+<li>Check “ba” -&gt; not a palindrome</li>
+</ul></li>
+<li>Between ‘a’ and ‘d’ (indices 3-4):
+<ul>
+<li>Check “ad” -&gt; not a palindrome</li>
+</ul></li>
+</ul>
+<p>From our manual trace, we can see that the longest palindromic substrings are “bab” and “aba”, both of length 3.</p>
+</section>
+<section id="edge-case-empty-string" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="edge-case-empty-string"><span class="header-section-number">6.5.2</span> Edge Case: Empty String</h3>
+<p>Input: “” Result: “” (empty string)</p>
+</section>
+<section id="edge-case-single-character" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="edge-case-single-character"><span class="header-section-number">6.5.3</span> Edge Case: Single Character</h3>
+<p>Input: “a” Result: “a” (the character itself)</p>
+</section>
+<section id="edge-case-all-same-characters" class="level3" data-number="6.5.4">
+<h3 data-number="6.5.4" class="anchored" data-anchor-id="edge-case-all-same-characters"><span class="header-section-number">6.5.4</span> Edge Case: All Same Characters</h3>
+<p>Input: “aaaaa” Result: “aaaaa” (the entire string)</p>
+</section>
+<section id="edge-case-no-palindromes-longer-than-1" class="level3" data-number="6.5.5">
+<h3 data-number="6.5.5" class="anchored" data-anchor-id="edge-case-no-palindromes-longer-than-1"><span class="header-section-number">6.5.5</span> Edge Case: No Palindromes Longer Than 1</h3>
+<p>Input: “abcd” Result: “a” (any single character)</p>
+</section>
+<section id="validating-our-approach-with-ai" class="level3" data-number="6.5.6">
+<h3 data-number="6.5.6" class="anchored" data-anchor-id="validating-our-approach-with-ai"><span class="header-section-number">6.5.6</span> Validating Our Approach with AI</h3>
+<p><strong>Human prompt:</strong></p>
+<pre><code>I've manually traced through finding the longest palindromic substring in "babad" by checking each possible center position and expanding outward. I found that "bab" and "aba" are both valid answers with length 3.
+
+I also tried these edge cases:
+- Empty string -&gt; ""
+- Single character "a" -&gt; "a"
+- All same characters "aaaaa" -&gt; "aaaaa"
+- No palindromes longer than 1 "abcd" -&gt; "a" (or any single character)
+
+Does my manual approach seem correct? Am I missing any important edge cases?</code></pre>
+<p><strong>AI response:</strong> &gt; Your manual approach of checking each possible center position and expanding outward is exactly right! This is the standard approach for solving this problem efficiently. &gt; &gt; Your edge cases are also well-chosen and cover the important scenarios: &gt; &gt; - Empty string &gt; - Single character &gt; - All same characters (a special case where the entire string is a palindrome) &gt; - No palindromes longer than 1 character &gt; &gt; One additional edge case you might consider: &gt; &gt; - Input with even-length palindromes only, like “abba” where the palindrome doesn’t have a single center character &gt; &gt; But your approach already handles this by checking both single character centers and between-character centers, so it’s just a matter of verifying with an example. &gt; &gt; Your manual working shows a strong understanding of the problem and solution approach!</p>
+</section>
+</section>
+<section id="insights-from-working-by-hand" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="insights-from-working-by-hand"><span class="header-section-number">6.6</span> Insights from Working By Hand</h2>
+<p>By manually tracing through examples, we’ve gained several key insights:</p>
+<ol type="1">
+<li>We need to check both odd-length palindromes (single character center) and even-length palindromes (between character center)</li>
+<li>The process of expanding outward from a center is the same for both cases</li>
+<li>We need to keep track of the longest palindrome found so far</li>
+<li>Boundary checking is important to avoid going out of bounds</li>
+<li>For strings with multiple palindromes of the same length, returning any one is acceptable</li>
+</ol>
+<p>These insights will guide our pseudocode development in the next step.</p>
+</section>
+<section id="key-takeaways" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="key-takeaways"><span class="header-section-number">6.7</span> Key Takeaways</h2>
+<ul>
+<li>Working problems by hand builds a deep understanding that can’t be replicated by simply using AI to generate solutions</li>
+<li>Manual tracing helps identify edge cases and test assumptions</li>
+<li>Different visualization techniques (tables, diagrams, flow traces) suit different types of problems</li>
+<li>AI can complement manual work by verifying solutions and suggesting edge cases</li>
+<li>The insights gained from manual examples inform all subsequent steps of the methodology</li>
+</ul>
+</section>
+<section id="moving-forward" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="moving-forward"><span class="header-section-number">6.8</span> Moving Forward</h2>
+<p>With a solid understanding of the problem gained through manual examples, we’re now ready to develop a structured approach to the solution. In the next chapter, we’ll explore Step 4: Writing pseudocode to outline our solution strategy.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05-restate-and-identify.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Restate and Identify (Steps 1-2)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/07-pseudocode.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Pseudocode (Step 4)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
