@@ -4,14 +4,7 @@
     "href": "index.html",
     "title": "Intentional Prompting: Mastering the Human-AI Development Process",
     "section": "",
-    "text": "Preface\nWelcome to “Intentional Prompting: Mastering the Human-AI Development Process.” This book explores a new paradigm for software development in the age of AI assistants."
-  },
-  {
-    "objectID": "index.html#why-this-book",
-    "href": "index.html#why-this-book",
-    "title": "Intentional Prompting: Mastering the Human-AI Development Process",
-    "section": "Why This Book?",
-    "text": "Why This Book?\nThe rapid integration of AI into software development workflows has fundamentally changed how we write code. Yet most programming education still focuses either on traditional coding techniques or on prompt engineering for AI tools, with little guidance on how to effectively combine human expertise with AI capabilities.\nThis book aims to bridge that gap by presenting a structured methodology for “intentional prompting” - an approach that leverages AI tools while ensuring the human developer remains the architect and decision-maker in the development process."
+    "text": "Preface\nWelcome to “Intentional Prompting: Mastering the Human-AI Development Process.” This book explores a new paradigm for software development in the age of AI assistants.\nProgramming with AI isn’t just about getting code written faster—it’s about thinking differently about the development process itself. By mastering intentional prompting techniques, you’ll be able to:\nLet’s begin this journey together, exploring how human intellect and artificial intelligence can combine to create a programming partnership greater than the sum of its parts. ## Why This Book?\nThe rapid integration of AI into software development workflows has fundamentally changed how we write code. Yet most programming education still focuses either on traditional coding techniques or on prompt engineering for AI tools, with little guidance on how to effectively combine human expertise with AI capabilities.\nThis book aims to bridge that gap by presenting a structured methodology for “intentional prompting” - an approach that leverages AI tools while ensuring the human developer remains the architect and decision-maker in the development process."
   },
   {
     "objectID": "index.html#who-this-book-is-for",
@@ -26,13 +19,6 @@
     "title": "Intentional Prompting: Mastering the Human-AI Development Process",
     "section": "How This Book Is Organized",
     "text": "How This Book Is Organized\nThe book is divided into four parts:\n\nFoundations: Core concepts of intentional prompting and the human-AI partnership\nMethodology: The six-step programming methodology adapted for AI collaboration\nPatterns & Practices: Effective prompting patterns and practical coding examples\nAdvanced Topics: Scaling to complex projects and future directions\n\nEach chapter includes practical examples, exercises, and reflections to help you apply these concepts in your own work."
-  },
-  {
-    "objectID": "index.html#a-new-programming-paradigm",
-    "href": "index.html#a-new-programming-paradigm",
-    "title": "Intentional Prompting: Mastering the Human-AI Development Process",
-    "section": "A New Programming Paradigm",
-    "text": "A New Programming Paradigm\nProgramming with AI isn’t just about getting code written faster—it’s about thinking differently about the development process itself. By mastering intentional prompting techniques, you’ll be able to:\n\nDirect AI tools with precision and purpose\nMaintain control over code quality and architecture\nDeepen your understanding of programming concepts\nSolve complex problems more effectively\n\nLet’s begin this journey together, exploring how human intellect and artificial intelligence can combine to create a programming partnership greater than the sum of its parts."
   },
   {
     "objectID": "chapters/01-introduction.html#a-new-era-of-software-development",
